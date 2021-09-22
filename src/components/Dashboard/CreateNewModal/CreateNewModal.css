@@ -1,0 +1,14 @@
+#dashboard .dashboard--card {
+	width: 20%;
+    background: white;
+}
+#dashboard .dashboard--card .dashboard--card--image-wrapper {
+	height: 150px;
+	width: 100%;
+	background: gray;
+}
+#dashboard .dashboard--card .dashboard--card--content {
+	padding: 16px;
+}
+#dashboard .dashboard--card .dashboard--card--content div {}
+#dashboard .dashboard--card .dashboard--card--content h2 {}

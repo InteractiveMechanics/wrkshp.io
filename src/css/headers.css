@@ -1,0 +1,24 @@
+.header {
+	position: fixed;
+	display: flex;
+	top: 0;
+	width: 100vw;
+	padding: 16px 24px;
+}
+
+.header--group {
+	display: flex;
+}
+.header--group--right {
+	margin-left: auto;
+}
+
+.header--pill {
+	background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 0 8px 0 0;
+}
+.header--pill.no-padding {
+	padding: 0;
+}
