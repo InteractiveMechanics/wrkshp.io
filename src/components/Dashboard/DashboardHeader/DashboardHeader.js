@@ -13,7 +13,12 @@ export function DashboardHeader(props) {
 			</div>
 			<div className="header--pill">
 				<i className="bi-chevron-down"></i>
-				My Organization
+				{ props.currentOrg.name }
+				<i className="bi-three-dots-vertical"></i>
+			</div>
+			<div className="header--pill">
+				<i className="bi-chevron-down"></i>
+				{ props.currentTeam.name }
 				<i className="bi-three-dots-vertical"></i>
 			</div>
 			<div className="header--pill no-padding">

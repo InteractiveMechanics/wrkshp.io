@@ -53,6 +53,7 @@ const resolvers = {
         currentPage: page
       }
     },
+    
     getUsers: async (_, args) => {
       const { _id = null, page = 1, limit = 20 } = args;
 
