@@ -30,51 +30,49 @@ const resolvers = {
     }
   },
 
-  Query: {
-	getOrganizations (parent, args, context, info) {
-        return Organization.find()
-            .then (organization => {
-                return organization.map(r => ({ ...r._doc }))
-            })
-            .catch (err => {
-                console.error(err)
-            })
+  Query: {	
+	getOrganizations: async (_, args) => {
+      const { _id = null, userId = null, page = 1, limit = 20 } = args;
+
+      let searchQuery = {};
+      
+	  if (_id || userId) { searchQuery.$and = [] }
+      	if (_id) { searchQuery.$and.push({ _id: _id }) }
+	  	if (userId) { searchQuery.$and.push({ "users.userId": userId }) }
+            
+      const organizations = await Organization.find(searchQuery)
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .lean();
+
+      const count = await Organization.countDocuments(searchQuery);
+      
+      return {
+        organizations,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page
+      }
     },
-    getOrganizationById (parent, args, context, info) {
-        return Organization.findOne({ _id: args._id })
-            .then (organization => {
-                return { ...organization._doc }
-            })
-            .catch (err => {
-                console.error(err)
-            })
-    },
-    getOrganizationsForUser (parent, args, context, info) {
-	    return Organization.find({"users.userId":args._id})
-	    	.then (organization => {
-		    	return organization.map(r => ({ ...r._doc }))
-	    	})
-	    	.catch (err => {
-                console.error(err)
-            })
-    },
-    getUsers (parent, args, context, info) {
-        return User.find()
-            .then (user => {
-                return user.map(r => ({ ...r._doc }))
-            })
-            .catch (err => {
-                console.error(err)
-            })
-    },
-    getUserById (parent, args, context, info) {
-        return User.findOne({ _id: args._id })
-            .then (user => {
-                return { ...user._doc }
-            })
-            .catch (err => {
-                console.error(err)
-            })
+    getUsers: async (_, args) => {
+      const { _id = null, page = 1, limit = 20 } = args;
+
+      let searchQuery = {};
+      
+	  if (_id) { searchQuery.$and = [] }
+      	if (_id) { searchQuery.$and.push({ _id: _id }) }
+            
+      const users = await User.find(searchQuery)
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .lean();
+
+      const count = await User.countDocuments(searchQuery);
+      
+      return {
+        users,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page
+      }
     },
   },
 };

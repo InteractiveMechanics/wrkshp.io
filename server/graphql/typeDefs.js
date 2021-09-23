@@ -19,7 +19,7 @@ const typeDefs = gql`
 	permission: String!
   }
 
-  type  User {
+  type User {
 	_id: ID!
 	firstName: String!
 	lastName: String!
@@ -33,12 +33,21 @@ const typeDefs = gql`
     teams: [Team]
   }
   
+  type OrganizationResult {
+    organizations: [Organization]
+    currentPage: Int
+    totalPages: Int
+  }
+  
+  type UserResult {
+    users: [User]
+    currentPage: Int
+    totalPages: Int
+  }
+  
   type Query {
-    getOrganizations: [Organization]
-    getOrganizationById (_id: ID): Organization
-    getOrganizationsForUser (_id: ID): [Organization]
-    getUsers: [User]
-    getUserById (_id: ID): User
+    getOrganizations (_id: ID, userId: ID, page: Int, limit: Int): OrganizationResult
+    getUsers (_id: ID, page: Int, limit: Int): UserResult
   }
 `;
 
