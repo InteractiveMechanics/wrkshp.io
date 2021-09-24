@@ -151,9 +151,19 @@ const resolvers = {
 	
 	addUserPermissionToOrganization: async (_, args) => {
 	  const { organizationId, userId, permission } = args;
-		
+	
 	  const organization = await Organization.findById(organizationId);
-	  organization.users.push({ "userId": userId, "permission": permission });	  
+	  const users = organization.users;
+	 
+	  if (users.find(u => u.userId == userId)) {
+		users.find(function(u, index) {
+		  if (u.userId == userId) {
+			users[index].permission = permission;
+		  }
+	    });
+	  } else {
+		users.push({ "userId": userId, "permission": permission });
+	  }
 	  
 	  return organization.save()
 	    .then(savedDoc => {
@@ -170,8 +180,18 @@ const resolvers = {
 	  const organization = await Organization.findOne({ "teams._id": teamId });
 	  const teams = organization.teams;
 	  const team = teams.id(teamId);
-	  team.users.push({ "userId": userId, "permission": permission });	  
+	  const users = team.users;
 	  
+	  if (users.find(u => u.userId == userId)) {
+		users.find(function(u, index) {
+		  if (u.userId == userId) {
+			users[index].permission = permission;
+		  }
+	    });
+	  } else {
+		users.push({ "userId": userId, "permission": permission });
+	  }
+	  	  
 	  return organization.save()
 	    .then(savedDoc => {
 	  	  return { ...savedDoc._doc }
