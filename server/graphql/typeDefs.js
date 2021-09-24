@@ -3,13 +3,13 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type Workshop {
 	_id: ID!
-	name: String
+	name: String!
 	users: [UserPermission]
   }
 
   type Team {
     name: String!
-    visibility: String
+    visibility: String!
     users: [UserPermission]
     workshops: [Workshop]
   }
@@ -21,6 +21,8 @@ const typeDefs = gql`
 
   type User {
 	_id: ID!
+	email: String!
+	password: String!
 	firstName: String
 	lastName: String
 	avatar: String
@@ -28,7 +30,7 @@ const typeDefs = gql`
 
   type Organization {
 	_id: ID!
-    name: String
+    name: String!
     users: [UserPermission]
     teams: [Team]
   }
