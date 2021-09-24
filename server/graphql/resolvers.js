@@ -99,6 +99,22 @@ const resolvers = {
         });
 	},
 	
+	addTeam: async (_, args) => {
+	  const { name, visibility = "public", organizationId, userId } = args;
+	  
+	  const organization = await Organization.findOne({ _id: organizationId });
+	  const newTeam = organization.teams.push({ "name": name, "visibility": visibility }) - 1;
+	  organization.teams[newTeam].users.push({ "userId": userId, "permission": "owner" });
+	  
+	  return organization.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	},
+	
 	addWorkshop: async (_, args) => {
 	  const { name, userId } = args;
 	  

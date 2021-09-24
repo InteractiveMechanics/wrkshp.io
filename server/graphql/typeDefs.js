@@ -52,6 +52,7 @@ const typeDefs = gql`
   
   type Mutation {
 	addOrganization (name: String!, userId: ID!): Organization
+	addTeam (name: String!, visibility: String, organizationId: ID!, userId: ID!): Organization
 	addWorkshop (name: String!, userId: ID!): Workshop
 	
 	addWorkshopToTeam (workshopId: ID!, teamId: ID!): Organization
