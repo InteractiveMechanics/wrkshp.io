@@ -59,6 +59,7 @@ const typeDefs = gql`
 	
 	addWorkshopToTeam (workshopId: ID!, teamId: ID!): Organization
 	addUserPermissionToOrganization (organizationId: ID!, userId: ID!, permission: String!): Organization
+	addUserPermissionToTeam (teamId: ID!, userId: ID!, permission: String!): Organization
   }
 `;
 

@@ -147,11 +147,30 @@ const resolvers = {
         });
 	},
 	
+	// WILL WANT TO MAKE THESE CHECK FOR USERID FIRST, THEN UPDATE OR ADD IN A SINGLE MUTATION
+	
 	addUserPermissionToOrganization: async (_, args) => {
 	  const { organizationId, userId, permission } = args;
 		
 	  const organization = await Organization.findById(organizationId);
 	  organization.users.push({ "userId": userId, "permission": permission });	  
+	  
+	  return organization.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	}, 
+	
+	addUserPermissionToTeam: async (_, args) => {
+	  const { teamId, userId, permission } = args;
+		
+	  const organization = await Organization.findOne({ "teams._id": teamId });
+	  const teams = organization.teams;
+	  const team = teams.id(teamId);
+	  team.users.push({ "userId": userId, "permission": permission });	  
 	  
 	  return organization.save()
 	    .then(savedDoc => {
