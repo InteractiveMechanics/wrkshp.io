@@ -19,14 +19,18 @@ const resolvers = {
 	workshops: (parent, args, context, info) => {
 		const workshopArray = []
 		parent.workshops.map(w => ( workshopArray.push(w._id) ))
-		
-		return Workshop.find({ _id: { $in: [ "613c246820da4678cd3ea5a4" ] }})
-			.then (workshop => {
-				return workshop.map(r => ({ ...r._doc }))
-			})
-			.catch (err => {
-                console.error(err)
-            })
+				
+		if (workshopArray) {
+			return Workshop.find({ _id: { $in: [ ...workshopArray ] }})
+				.then (workshop => {
+					return workshop.map(r => ({ ...r._doc }))
+				})
+				.catch (err => {
+	                console.error(err)
+	            })
+	    } else {
+		    return null;
+	    }
     }
   },
 
@@ -75,6 +79,72 @@ const resolvers = {
         currentPage: page
       }
     },
+  },
+  
+  Mutation: {
+	addOrganization: async (_, args) => {
+	  const { name, userId } = args;
+	  
+	  const organization = await Organization.create({ name: name });
+	  organization.users.push({ "userId": userId, "permission": "owner" });
+	  organization.teams.push({ "name": name + "'s Public Team", "visibility": "public" });
+	  organization.teams[0].users.push({ "userId": userId, "permission": "owner" });
+	  
+	  return organization.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	},
+	
+	addWorkshop: async (_, args) => {
+	  const { name, userId } = args;
+	  
+	  const workshop = await Workshop.create({ name: name });
+	  workshop.users.push({ "userId": userId, "permission": "owner" });
+	  
+	  return workshop.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	},
+	
+	addWorkshopToTeam: async (_, args) => {
+	  const { workshopId, teamId } = args;
+	  	  
+	  const organization = await Organization.findOne({ "teams._id": teamId });
+	  const teams = organization.teams;
+	  const team = teams.id(teamId);
+	  team.workshops.push(workshopId);
+	  	  
+	  return organization.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	},
+	
+	addUserPermissionToOrganization: async (_, args) => {
+	  const { organizationId, userId, permission } = args;
+		
+	  const organization = await Organization.findById(organizationId);
+	  organization.users.push({ "userId": userId, "permission": permission });	  
+	  
+	  return organization.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+          console.error(err)
+        });
+	}
   },
 };
 

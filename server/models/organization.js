@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const { WorkshopSchema } = require('./workshop');
+const { TeamSchema } = require('./team');
 const { UserPermissionSchema } = require('./userPermission');
 
 const OrganizationSchema = new Schema({
@@ -12,22 +12,9 @@ const OrganizationSchema = new Schema({
 	users: {
 		type: [UserPermissionSchema]
 	},
-	teams: [
-		{
-			name: {
-				type: String,
-				required: true
-			},
-			visibility: {
-				type: String,
-				required: true
-			},
-			users: {
-				type: [UserPermissionSchema]
-			},
-			workshops: [WorkshopSchema]
-		}
-	]
+	teams: {
+		type: [TeamSchema]
+	}
 });
 OrganizationSchema.path('_id');
 OrganizationSchema.index({ createdAt: 1, updatedAt: 1 });

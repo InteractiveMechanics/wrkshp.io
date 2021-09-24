@@ -4,15 +4,15 @@ const { Schema } = mongoose
 const UserSchema = new Schema({
 	firstName: { 
 		type: String, 
-		required: true 
+		required: false 
 	},
 	lastName: { 
 		type: String, 
-		required: true 
+		required: false 
 	},
 	avatar: { 
 		type: String, 
-		required: true 
+		required: false 
 	},
 });
 UserSchema.path('_id');

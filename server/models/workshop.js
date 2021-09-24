@@ -6,7 +6,7 @@ const { UserPermissionSchema } = require('./userPermission');
 const WorkshopSchema = new Schema({
 	name: {
 		type: String,
-		required: true
+		required: false
 	},
 	users: [UserPermissionSchema]
 });

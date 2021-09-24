@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type Workshop {
 	_id: ID!
-	name: String!
+	name: String
 	users: [UserPermission]
   }
 
@@ -21,14 +21,14 @@ const typeDefs = gql`
 
   type User {
 	_id: ID!
-	firstName: String!
-	lastName: String!
+	firstName: String
+	lastName: String
 	avatar: String
   }
 
   type Organization {
 	_id: ID!
-    name: String!
+    name: String
     users: [UserPermission]
     teams: [Team]
   }
@@ -48,6 +48,14 @@ const typeDefs = gql`
   type Query {
     getOrganizations (_id: ID, userId: ID, page: Int, limit: Int): OrganizationResult
     getUsers (_id: ID, page: Int, limit: Int): UserResult
+  }
+  
+  type Mutation {
+	addOrganization (name: String!, userId: ID!): Organization
+	addWorkshop (name: String!, userId: ID!): Workshop
+	
+	addWorkshopToTeam (workshopId: ID!, teamId: ID!): Organization
+	addUserPermissionToOrganization (organizationId: ID!, userId: ID!, permission: String!): Organization
   }
 `;
 
