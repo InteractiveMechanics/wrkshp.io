@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery } from "@apollo/client";
 
-import { DashboardHeader, DashboardCard, CreateNewModal } from '../../Dashboard';
+import { DashboardHeader, DashboardCard, DashboardTeamsList, CreateNewModal } from '../../Dashboard';
 
 import './Dashboard.css';
 
@@ -24,6 +24,7 @@ const getOrganizationsForUser = gql`
 	        permission
 	      }
 	      teams {
+		    _id
 	        name
 	        visibility
 	        users {
@@ -82,14 +83,24 @@ export function Dashboard() {
 			currentTeam={currentTeam}
 			
 			setCurrentOrg={setCurrentOrg}
-			setCurrentTeam={setCurrentTeam}
-			setModalVisibility={setModalVisibility} />
+			setCurrentTeam={setCurrentTeam} />
 			
-		<DashboardCard
-			currentTeam={currentTeam} />
+		<main>
+			<DashboardTeamsList
+				currentOrg={currentOrg}
+				currentTeam={currentTeam}
+				
+				setCurrentTeam={setCurrentTeam}
+				setModalVisibility={setModalVisibility} />
+				
+			<DashboardCard
+				currentTeam={currentTeam} />
+		</main>
 			
 		<CreateNewModal
+			currentTeam={currentTeam}
 			modalVisibility={modalVisibility}
+			
 			setModalVisibility={setModalVisibility} />
 	</div>
   );

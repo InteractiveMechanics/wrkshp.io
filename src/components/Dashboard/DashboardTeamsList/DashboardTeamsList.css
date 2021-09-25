@@ -1,0 +1,16 @@
+#dashboard .dashboard--team-list {
+	margin: 24px 0;
+}
+#dashboard .dashboard--team-list li {
+	transition: 0.5s all;
+	margin: 12px 0;
+}
+#dashboard .dashboard--team-list li:hover,
+#dashboard .dashboard--team-list li:focus {
+	color: #008075;
+}
+#dashboard .dashboard--team-list li.active {
+	font-weight: 700;
+	color: #008075;
+	margin-left: 12px;
+}

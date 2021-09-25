@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './DashboardCard.css';
 
 export function DashboardCard(props) {
-  let currentTeam = props.currentTeam;
-  let workshops = props.currentTeam.workshops;
+  const currentTeam = props.currentTeam;
+  const workshops = currentTeam.workshops ? currentTeam.workshops : null;
   
   let cards = '';
   
@@ -31,8 +31,8 @@ export function DashboardCard(props) {
   }
   
   return (
-	<main>
+	<div className="dashboard--card-list">
 		{ cards }
-	</main>
+	</div>
   );
 }

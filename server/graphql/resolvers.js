@@ -79,6 +79,28 @@ const resolvers = {
         currentPage: page
       }
     },
+    
+    getWorkshops: async (_, args) => {
+      const { _id = null, page = 1, limit = 20 } = args;
+
+      let searchQuery = {};
+      
+	  if (_id) { searchQuery.$and = [] }
+      	if (_id) { searchQuery.$and.push({ _id: _id }) }
+            
+      const workshops = await Workshop.find(searchQuery)
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .lean();
+
+      const count = await Workshop.countDocuments(searchQuery);
+      
+      return {
+        workshops,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page
+      }
+    },
   },
   
   Mutation: {
@@ -146,9 +168,7 @@ const resolvers = {
           console.error(err)
         });
 	},
-	
-	// WILL WANT TO MAKE THESE CHECK FOR USERID FIRST, THEN UPDATE OR ADD IN A SINGLE MUTATION
-	
+		
 	addUserPermissionToOrganization: async (_, args) => {
 	  const { organizationId, userId, permission } = args;
 	

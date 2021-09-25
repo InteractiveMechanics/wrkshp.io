@@ -8,6 +8,7 @@ const typeDefs = gql`
   }
 
   type Team {
+	_id: ID!
     name: String!
     visibility: String!
     users: [UserPermission]
@@ -35,6 +36,12 @@ const typeDefs = gql`
     teams: [Team]
   }
   
+  type WorkshopResult {
+    workshops: [Workshop]
+    currentPage: Int
+    totalPages: Int
+  }
+  
   type OrganizationResult {
     organizations: [Organization]
     currentPage: Int
@@ -50,6 +57,7 @@ const typeDefs = gql`
   type Query {
     getOrganizations (_id: ID, userId: ID, page: Int, limit: Int): OrganizationResult
     getUsers (_id: ID, page: Int, limit: Int): UserResult
+    getWorkshops (_id: ID, page: Int, limit: Int): WorkshopResult
   }
   
   type Mutation {
@@ -57,7 +65,7 @@ const typeDefs = gql`
 	addTeam (name: String!, visibility: String, organizationId: ID!, userId: ID!): Organization
 	addWorkshop (name: String!, userId: ID!): Workshop
 	
-	addWorkshopToTeam (workshopId: ID!, teamId: ID!): Organization
+	addWorkshopToTeam (workshopId: ID!, teamId: ID!): Workshop
 	addUserPermissionToOrganization (organizationId: ID!, userId: ID!, permission: String!): Organization
 	addUserPermissionToTeam (teamId: ID!, userId: ID!, permission: String!): Organization
   }

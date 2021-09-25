@@ -1,0 +1,18 @@
+button,
+.btn {
+	border-radius: 99px;
+	background: white;
+	color: #008075;
+	border: none;
+    padding: 8px 14px;
+}
+
+.btn-lg {
+	font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.btn-primary {
+	background: #008075;
+	color: white;
+}
