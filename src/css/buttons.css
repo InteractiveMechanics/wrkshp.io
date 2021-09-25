@@ -5,6 +5,7 @@ button,
 	color: #008075;
 	border: none;
     padding: 8px 14px;
+    font-weight: 700;
 }
 
 .btn-lg {
@@ -15,4 +16,9 @@ button,
 .btn-primary {
 	background: #008075;
 	color: white;
+}
+.btn-outline {
+	background: #ffffff;
+	border: 2px solid #008075;
+	color: #008075;
 }

@@ -1,0 +1,16 @@
+.modal {
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.5);
+    transition: 0.5s all;
+}
+.modal .modal--container {
+	margin: 72px auto;
+    width: 600px;
+    background: white;
+    padding: 24px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}

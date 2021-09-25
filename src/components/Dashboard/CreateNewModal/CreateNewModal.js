@@ -71,10 +71,14 @@ export function CreateNewModal(props) {
   return (
 	<div className={ visiibility }>
 	  <div className="modal--container">
-		<input id="name" type="text" value={name} onChange={handleUpdateName} />
+	  	<h1>Create New Workshop</h1>
+	  	<fieldset>
+	  		<label for="name">Workshop Name</label>
+	  		<input id="name" type="text" value={name} onChange={handleUpdateName} />
+	  	</fieldset>
 		<div className="button-group">
-			<a className="button strong" onClick={insertWorkshop}>Create</a>
-			<a className="button simple" onClick={closeModal}>Cancel</a>
+			<a className="btn btn-primary" onClick={insertWorkshop}>Create</a>
+			<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
 		</div>
 	  </div>
 	</div>
