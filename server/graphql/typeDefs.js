@@ -6,12 +6,28 @@ const typeDefs = gql`
 		name: String!
 		type: String!
 		description: String!
+		suggestedDuration: Int!
   }
+  
+  type AgendaActivity {
+	  _id: ID!
+	  weight: Int!
+	  duration: Int!
+	  activity: Activity!
+	}
+  
+  type Agenda {
+	  _id: ID!
+	  weight: Int!
+	  startTime: String
+	  activities: [AgendaActivity]
+	}
 
   type Workshop {
 		_id: ID!
 		name: String!
 		users: [UserPermission]
+		agenda: [Agenda]
   }
 
   type Team {
@@ -78,11 +94,15 @@ const typeDefs = gql`
 		addOrganization (name: String!, userId: ID!): Organization
 		addTeam (name: String!, visibility: String, organizationId: ID!, userId: ID!): Organization
 		addWorkshop (name: String!, userId: ID!): Workshop
-		addActivity (name: String!, type: String!, description: String!): Activity
+		addActivity (name: String!, type: String!, description: String!, suggestedDuration: Int!): Activity
 	
 		addWorkshopToTeam (workshopId: ID!, teamId: ID!): Workshop
+		addAgendaDayToWorkshop (workshopId: ID!): Workshop
+		addActivityToAgendaDay (agendaDayId: ID!, activityId: ID!): Workshop
+		
 		addUserPermissionToOrganization (organizationId: ID!, userId: ID!, permission: String!): Organization
 		addUserPermissionToTeam (teamId: ID!, userId: ID!, permission: String!): Organization
+		addUserPermissionToWorkshop (workshopId: ID!, userId: ID!, permission: String!): Workshop
   }
 `;
 

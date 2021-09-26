@@ -26,9 +26,9 @@ const activityQueries = {
 
 const activityMutations = {
 	addActivity: async (_, args) => {
-	  const { name, type, description } = args;
+	  const { name, type, description, suggestedDuration } = args;
 	  
-	  const activity = await Activity.create({ name: name, type: type, description: description });
+	  const activity = await Activity.create({ name: name, type: type, description: description, suggestedDuration: suggestedDuration });
 	  
 	  return activity.save()
 	    .then(savedDoc => {

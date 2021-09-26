@@ -77,7 +77,7 @@ const organizationMutations = {
 	},
 		
 	addUserPermissionToOrganization: async (_, args) => {
-	  const { organizationId, userId, permission } = args;
+	  const { organizationId, userId, permission = "readonly" } = args;
 	
 	  const organization = await Organization.findById(organizationId);
 	  const users = organization.users;
@@ -102,7 +102,7 @@ const organizationMutations = {
 	}, 
 	
 	addUserPermissionToTeam: async (_, args) => {
-	  const { teamId, userId, permission } = args;
+	  const { teamId, userId, permission = "readonly" } = args;
 		
 	  const organization = await Organization.findOne({ "teams._id": teamId });
 	  const teams = organization.teams;

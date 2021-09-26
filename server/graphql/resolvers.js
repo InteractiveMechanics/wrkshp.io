@@ -21,6 +21,18 @@ const resolvers = {
     }
   },
   
+  AgendaActivity: {
+		activity: (parent, args, context, info) => {		
+			return Activity.findOne({ _id: parent.activity })
+        .then (activity => {
+          return { ...activity._doc }
+        })
+        .catch (err => {
+          console.error(err)
+        })
+    }
+  },
+  
   Team: {
 		workshops: (parent, args, context, info) => {
 			const workshopArray = []

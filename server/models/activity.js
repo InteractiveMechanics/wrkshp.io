@@ -15,6 +15,10 @@ const ActivitySchema = new Schema({
 		type: String,
 		required: true
 	},
+	suggestedDuration: {
+		type: Number,
+		required: true
+	},
 });
 
 ActivitySchema.path('_id');
