@@ -27,6 +27,14 @@ export function AgendaDay(props) {
   		]
 	});
 	
+	function checkDaysAndRemove() {
+		if (props.daysTotal > 1) {
+			removeAgendaDayFromWorkshop()
+		} else {
+			props.setErrorMsg("Each workshop must have at least one day in the agenda.");
+		}
+	}
+	
   return (
   	<div className="agenda--day">
 	    <div className="draggable"><i className="bi-grip-vertical"></i></div>
@@ -35,7 +43,7 @@ export function AgendaDay(props) {
 	      <div className="button-group">
 	      	<button className="btn btn-sm btn-text-secondary"><i className="bi-calendar2-date"></i> { date }</button>
 					<button className="btn btn-sm btn-text-secondary"><i className="bi-clock"></i> { time }</button>
-					<button className="btn btn-sm btn-text-danger" onClick={removeAgendaDayFromWorkshop}><i className="bi-trash"></i> Delete Day</button>
+					<button className="btn btn-sm btn-text-danger" onClick={checkDaysAndRemove}><i className="bi-trash"></i> Delete Day</button>
 				</div>
 	    </div>
 	    <div className="agenda--day--activity-list">

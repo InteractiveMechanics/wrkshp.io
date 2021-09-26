@@ -4,7 +4,7 @@ export function CollaboratorsModal(props) {
   const visiibility = props.modalVisibility ? "modal" : "modal hidden";
   
   function closeModal() {
-	props.setModalVisibility(false);
+		props.setModalVisibility(false);
   }
   
   return (
@@ -15,9 +15,9 @@ export function CollaboratorsModal(props) {
 	  </div>
 	  <div className="modal--container">
 	  	<h1>Manage Collaborators</h1>
-		<div className="button-group">
-			<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
-		</div>
+			<div className="button-group">
+				<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
+			</div>
 	  </div>
 	</div>
   );

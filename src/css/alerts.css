@@ -1,0 +1,21 @@
+.alert {
+	background: #008075;
+	color: white;
+	padding: 16px;
+	border-radius: 6px;
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.alert button {
+	background: none;
+  color: white;
+  padding: 0;
+  font-size: 1.125rem;
+}
+
+.alert.alert-error {
+	background-color: #E35A25;
+}
+
