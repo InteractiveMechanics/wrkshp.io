@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export function WorkshopHeader() {  
+export function WorkshopHeader(props) {
+  const workshop = props.workshop;
+	
   return (
 	<header id="workshop--header" className="header">
 		<div className="header--group">
 			<div className="header--pill">
 				<Link to="/dashboard"><i className="bi-chevron-left"></i></Link>
-				Workshop Title
+				{ workshop.name }
 				<i className="bi-three-dots-vertical"></i>
 			</div>
 		</div>

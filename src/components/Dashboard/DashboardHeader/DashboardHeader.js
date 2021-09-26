@@ -18,6 +18,7 @@ export function DashboardHeader(props) {
 		function(org, index) { 
 			if (org._id == e.target.id) {
 				props.setCurrentOrg(orgs[index]);
+				props.setCurrentTeam(orgs[index].teams[0]);
 			}
 		}
 	);

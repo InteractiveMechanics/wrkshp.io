@@ -30,12 +30,10 @@ export default function App() {
 			<Route path="/dashboard">
 				<Dashboard />
 			</Route>
-			<Route path="/workshop/:id/agenda">
-	        	<Agenda />
-	        </Route>
 	        <Route path="/workshop/:id">
 	        	<Workshop />
 	        </Route>
+	        
 			<Footer />
 		</Router>
 	</ApolloProvider>
