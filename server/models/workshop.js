@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const { UserPermissionSchema } = require('./userPermission');
+const { AgendaDaySchema } = require('./AgendaDay');
 
 const WorkshopSchema = new Schema({
 	name: {
 		type: String,
 		required: false
 	},
-	users: [UserPermissionSchema]
+	users: [UserPermissionSchema],
+	agenda: [AgendaDaySchema]
 });
 
 WorkshopSchema.path('_id');
