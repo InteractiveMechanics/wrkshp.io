@@ -106,6 +106,13 @@ const workshopMutations = {
 	    .catch (err => {
         console.error(err)
       });
+	},
+	
+	deleteWorkshop: async(_, args) => {
+		const { _id } = args;
+		
+		const workshop = await Workshop.findOneAndDelete({ "_id": _id });
+		return workshop.save();
 	}
 }
 
