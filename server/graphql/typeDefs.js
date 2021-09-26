@@ -105,6 +105,7 @@ const typeDefs = gql`
 		addUserPermissionToWorkshop (workshopId: ID!, userId: ID!, permission: String!): Workshop
 		
 		deleteWorkshop (_id: ID!): Workshop
+		deleteAgendaDayFromWorkshop (_id: ID!): Workshop
   }
 `;
 

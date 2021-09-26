@@ -1,10 +1,31 @@
 import React, { useState } from 'react';
+import { gql, useMutation } from "@apollo/client";
 import { convertDate, convertTime } from '../../../utils/datetime';
 
+const deleteAgendaDayFromWorkshop = gql`
+	mutation deleteAgendaDayFromWorkshop($_id: ID!) {
+	  deleteAgendaDayFromWorkshop(_id: $_id) {
+	    _id
+	  }
+	}
+`;
+
 export function AgendaDay(props) {
+	const _id = props.day._id;
 	const timestamp = props.day.startTime;
 	const date = convertDate(timestamp);
 	const time = convertTime(timestamp);
+	
+	const [removeAgendaDayFromWorkshop, { data, loading, error }] = useMutation(
+  	deleteAgendaDayFromWorkshop,
+  	{
+  		variables: {
+  			_id: _id,
+  		},
+  		refetchQueries: [
+  			'getWorkshops'
+  		]
+	});
 	
   return (
   	<div className="agenda--day">
@@ -14,7 +35,7 @@ export function AgendaDay(props) {
 	      <div className="button-group">
 	      	<button className="btn btn-sm btn-text-secondary"><i className="bi-calendar2-date"></i> { date }</button>
 					<button className="btn btn-sm btn-text-secondary"><i className="bi-clock"></i> { time }</button>
-					<button className="btn btn-sm btn-text-danger"><i className="bi-trash"></i> Delete Day</button>
+					<button className="btn btn-sm btn-text-danger" onClick={removeAgendaDayFromWorkshop}><i className="bi-trash"></i> Delete Day</button>
 				</div>
 	    </div>
 	    <div className="agenda--day--activity-list">

@@ -113,7 +113,19 @@ const workshopMutations = {
 		
 		const workshop = await Workshop.findOneAndDelete({ "_id": _id });
 		return workshop.save();
-	}
+	},
+	
+	deleteAgendaDayFromWorkshop: async(_, args) => {
+		const { _id } = args;
+		
+		const workshop = await Workshop.findOne({ "agenda._id": _id });
+		const agendaDays = workshop.agenda;
+	  const day = agendaDays.id(_id);
+	  
+	  day.remove();
+		
+		return workshop.save();
+	},
 }
 
 module.exports = { workshopQueries, workshopMutations };
