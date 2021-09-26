@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 
-import './Agenda.css';
-
-export function Agenda() {  
+export function AgendaDay(props) {
   return (
-	<main className="agenda">
-	  <h1>Agenda</h1>
-	  <div className="agenda--day">
+  	<div className="agenda--day">
 	    <div className="draggable"><i className="bi-grip-vertical"></i></div>
 	    <div className="agenda--day--header">
 	      <h2>Day 1</h2>
@@ -38,6 +34,5 @@ export function Agenda() {
 	    	</div>
 	    </div>
 	  </div>
-	</main>
   );
 }

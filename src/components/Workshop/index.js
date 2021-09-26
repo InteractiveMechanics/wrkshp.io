@@ -1,5 +1,6 @@
 import { WorkshopHeader } from './WorkshopHeader/WorkshopHeader'
 import { WorkshopMain } from './WorkshopMain/WorkshopMain'
-import { Agenda } from './Agenda/Agenda'
+import { AgendaMain } from './AgendaMain/AgendaMain'
+import { AgendaDay } from './AgendaDay/AgendaDay'
 
-export { WorkshopHeader, WorkshopMain, Agenda }
+export { WorkshopHeader, WorkshopMain, AgendaMain, AgendaDay }
