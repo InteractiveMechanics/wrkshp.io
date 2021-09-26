@@ -61,11 +61,11 @@ export function CreateNewModal(props) {
   );
   
   function handleUpdateName(e) {
-	setName(e.target.value);
+		setName(e.target.value);
   }
   
   function closeModal() {
-	props.setModalVisibility(false);
+		props.setModalVisibility(false);
   }
   
   return (

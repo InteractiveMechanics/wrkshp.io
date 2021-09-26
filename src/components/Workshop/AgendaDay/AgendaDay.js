@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
+import { convertDate, convertTime } from '../../../utils/datetime';
 
 export function AgendaDay(props) {
+	const timestamp = props.day.startTime;
+	const date = convertDate(timestamp);
+	const time = convertTime(timestamp);
+	
   return (
   	<div className="agenda--day">
 	    <div className="draggable"><i className="bi-grip-vertical"></i></div>
 	    <div className="agenda--day--header">
-	      <h2>Day 1</h2>
+	      <h2>Day {props.dayCount}</h2>
 	      <div className="button-group">
-	      	<button className="btn btn-sm btn-text-secondary"><i className="bi-calendar2-date"></i> Jan. 1, 2022</button>
-		  	<button className="btn btn-sm btn-text-secondary"><i className="bi-clock"></i> 9:00AM EDT</button>
-		  	<button className="btn btn-sm btn-text-danger"><i className="bi-trash"></i> Delete Day</button>
-		  </div>
+	      	<button className="btn btn-sm btn-text-secondary"><i className="bi-calendar2-date"></i> { date }</button>
+					<button className="btn btn-sm btn-text-secondary"><i className="bi-clock"></i> { time }</button>
+					<button className="btn btn-sm btn-text-danger"><i className="bi-trash"></i> Delete Day</button>
+				</div>
 	    </div>
 	    <div className="agenda--day--activity-list">
 	    	<div className="agenda--day--activities">

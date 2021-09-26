@@ -24,6 +24,23 @@ const getWorkshops = gql`
 	        }
 	        permission
 	      }
+	      agenda {
+		      _id
+		      weight
+		      startTime
+		      activities {
+			      _id
+			      weight
+			      duration
+			      activity {
+				      _id
+				      name
+				      type
+				      description
+				      suggestedDuration
+				    }
+			    }
+		    }
 	    }
 	    currentPage
 	    totalPages
