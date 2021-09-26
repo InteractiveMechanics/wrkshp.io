@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { gql, useQuery } from "@apollo/client";
 import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 
+import { CollaboratorsModal } from '../../Collaborators';
 import { WorkshopHeader, Agenda, WorkshopMain } from '../../Workshop';
 
 import './Workshop.css';
@@ -31,6 +32,8 @@ const getWorkshops = gql`
 `;
 
 export function Workshop() {
+  const [ modalVisibility, setModalVisibility ] = useState(false);
+	
   let { path, url } = useRouteMatch();
   let { id } = useParams();
     
@@ -49,7 +52,9 @@ export function Workshop() {
 	<Switch>  
 	  <div id="workshop">
 		<WorkshopHeader
-			workshop={data.getWorkshops.workshops[0]} />
+			workshop={data.getWorkshops.workshops[0]}
+			
+			setModalVisibility={setModalVisibility} />
 		
 		<Route exact path={path}>
 			<WorkshopMain />
@@ -57,6 +62,11 @@ export function Workshop() {
 		<Route path={`${path}/agenda`}>
         	<Agenda />
         </Route>
+        
+        <CollaboratorsModal 
+        	modalVisibility={modalVisibility}
+			
+			setModalVisibility={setModalVisibility} />
 	  </div>
 	</Switch>
   );

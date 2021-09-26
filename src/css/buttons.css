@@ -7,18 +7,53 @@ button,
     padding: 8px 14px;
     font-weight: 700;
 }
-
+.btn-sm {
+	font-size: 0.75rem;
+    padding: 6px 10px;
+}
 .btn-lg {
 	font-size: 1rem;
     padding: 10px 20px;
 }
 
+
 .btn-primary {
 	background: #008075;
 	color: white;
 }
-.btn-outline {
+.btn-secondary {
+	background: #666666;
+	color: white;
+}
+.btn-danger {
+	background: #E35A25;
+	color: white;
+}
+
+
+.btn-outline-primary {
 	background: #ffffff;
 	border: 2px solid #008075;
 	color: #008075;
+}
+.btn-outline-secondary {
+	background: #ffffff;
+	border: 2px solid #666666;
+	color: #666666;
+}
+.btn-outline-danger {
+	background: #ffffff;
+	border: 2px solid #E35A25;
+	color: #E35A25;
+}
+
+
+.btn-text-primary {
+	color: #008075;
+}
+.btn-text-secondary {
+	color: #666666;
+}
+.btn-text-danger {
+	color: #E35A25;
 }
