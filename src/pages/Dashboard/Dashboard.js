@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import { GetOrganizationsForUser } from '../../../adapters/dashboard';
-import { DashboardHeader, DashboardCard, DashboardTeamsList, CreateNewModal } from '../../Dashboard';
+import { GetOrganizationsForUser } from '../../adapters/dashboard';
+import { DashboardHeader, DashboardCard, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
 
 import './Dashboard.css';
 

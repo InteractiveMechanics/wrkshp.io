@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
 
-import { AgendaDay } from '../../Workshop';
-import { ErrorMessage } from '../../Alerts';
+import { AgendaDay } from '../../Agenda';
+import { ErrorMessage } from '../../General';
 import { AddAgendaDayToWorkshop } from '../../../adapters/agenda';
 
 import './AgendaMain.css';

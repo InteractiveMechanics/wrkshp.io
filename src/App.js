@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 
-import { Login, Register, Dashboard, Footer, Workshop } from "./components/Layout";
+import { Footer } from "./components/General";
+import { Login, Register, Dashboard, Workshop, Agenda } from "./pages";
 
 import './App.css';
 
@@ -30,10 +31,14 @@ export default function App() {
 			<Route path="/dashboard">
 				<Dashboard />
 			</Route>
-	        <Route path="/workshop/:id">
-	        	<Workshop />
-	        </Route>
-	        
+			<Switch>
+				<Route path="/workshop/:id/agenda">
+	      	<Agenda />
+				</Route>
+				<Route path="/workshop/:id">
+					<Workshop />
+				</Route>
+			</Switch>
 			<Footer />
 		</Router>
 	</ApolloProvider>

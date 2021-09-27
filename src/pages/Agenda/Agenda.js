@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 
-import { GetWorkshops } from '../../../adapters/workshop';
-import { CollaboratorsModal } from '../../Collaborators';
-import { WorkshopHeader, AgendaMain, WorkshopMain } from '../../Workshop';
+import { GetWorkshops } from '../../adapters/workshop';
+import { WorkshopHeader } from '../../components/Workshop';
+import { CollaboratorsModal } from '../../components/General';
+import { AgendaMain, AgendaDay } from '../../components/Agenda';
 
-import './Workshop.css';
+import './Agenda.css';
 
 const page = 1;
 const limit = 1;
 
-export function Workshop() {
+export function Agenda() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
 	
   let { path, url } = useRouteMatch();
@@ -28,25 +29,17 @@ export function Workshop() {
   }	
     
   return (
-	<Switch>  
 	  <div id="workshop">
 			<WorkshopHeader
 				workshop={data.getWorkshops.workshops[0]}
 				setModalVisibility={setModalVisibility} />
 		
-			<Route exact path={path}>
-				<WorkshopMain />
-			</Route>
-			
-			<Route path={`${path}/agenda`}>
-      	<AgendaMain
-      		workshop={data.getWorkshops.workshops[0]} />
-			</Route>
+			<AgendaMain
+				workshop={data.getWorkshops.workshops[0]} />
         
       <CollaboratorsModal 
         modalVisibility={modalVisibility}
 				setModalVisibility={setModalVisibility} />
 	  </div>
-	</Switch>
   );
 }
