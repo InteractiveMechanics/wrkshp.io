@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export function CollaboratorsModal(props) {
   const visiibility = props.modalVisibility ? "modal" : "modal hidden";
@@ -16,7 +16,7 @@ export function CollaboratorsModal(props) {
 	  <div className="modal--container">
 	  	<h1>Manage Collaborators</h1>
 			<div className="button-group">
-				<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
+				<button className="btn btn-outline" onClick={closeModal}>Cancel</button>
 			</div>
 	  </div>
 	</div>

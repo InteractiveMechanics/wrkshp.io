@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 
-import { Login, Register, Agenda, Dashboard, Footer, Workshop } from "./components/Layout";
+import { Login, Register, Dashboard, Footer, Workshop } from "./components/Layout";
 
 import './App.css';
 

@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
-import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+
+import { AddWorkshop, AddWorkshopToTeam } from '../../../adapters/dashboard';
 
 import './CreateNewModal.css';
 
 const userId = "614354c98fd4395885f2b145";
-
-const addWorkshop = gql`
-  mutation addWorkshop($name: String!, $userId: ID!) {
-  	addWorkshop(name: $name, userId: $userId) {
-      _id
-    }
-  }
-`;
-const addWorkshopToTeam = gql`
-  mutation addWorkshopToTeam($workshopId: ID!, $teamId: ID!) {
-  	addWorkshopToTeam(workshopId: $workshopId, teamId: $teamId) {
-      _id
-    }
-  }
-`;
 
 export function CreateNewModal(props) {
   const [ name, setName ] = useState('');
@@ -29,36 +15,28 @@ export function CreateNewModal(props) {
   const teamId = props.currentTeam._id;
   let history = useHistory();
   
-  const [insertWorkshop, { data, loading, error }] = useMutation(
-  	addWorkshop,
-  	{
-  		variables: {
-  			name: name,
-  			userId: userId
-  		},
-  		onCompleted: function(data) {
-	  		setWorkshopId(data.addWorkshop._id);
-	  		insertWorkshopToTeam();
-  		}
-	}
-  );
   
-  const [insertWorkshopToTeam, { data2, loading2, error2 }] = useMutation(
-  	addWorkshopToTeam,
-  	{
-  		variables: {
-  			workshopId: workshopId,
-  			teamId: teamId
-  		},
-  		refetchQueries: [
-  			'getOrganizationsForUser'
-  		],
-  		onCompleted: function(data) {
-	  		const path = "/workshop/" + data.addWorkshopToTeam._id + "/agenda";
-	  		history.push(path)
-  		}
+  let AddWorkshopVariables = {
+		name: name,
+		userId: userId
 	}
-  );
+  let AddWorkshopCompleted = function(data) {
+		setWorkshopId(data.addWorkshop._id);
+		insertWorkshopToTeam();
+	}
+  const [insertWorkshop, { data, loading, error }] = AddWorkshop(AddWorkshopVariables, AddWorkshopCompleted);
+  
+  
+  let AddWorkshopToTeamVariables = {
+  	workshopId: workshopId,
+  	teamId: teamId
+  }
+  let AddWorkshopToTeamCompleted = function() {
+		const path = "/workshop/" + workshopId + "/agenda";
+		history.push(path)
+	}
+	const [insertWorkshopToTeam, { data2, loading2, error2 }] = AddWorkshopToTeam(AddWorkshopToTeamVariables, AddWorkshopToTeamCompleted);
+  
   
   function handleUpdateName(e) {
 		setName(e.target.value);
@@ -76,7 +54,7 @@ export function CreateNewModal(props) {
 	  </div>
 	  <div className="modal--container">
 	  	<fieldset>
-	  		<label for="name">Workshop Name</label>
+	  		<label htmlFor="name">Workshop Name</label>
 	  		<input id="name" type="text" value={name} onChange={handleUpdateName} />
 	  	</fieldset>
 			<div className="button-group">

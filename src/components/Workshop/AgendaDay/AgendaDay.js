@@ -1,30 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
+
 import { convertDate, convertTime } from '../../../utils/datetime';
-
-const deleteAgendaDayFromWorkshop = gql`
-	mutation deleteAgendaDayFromWorkshop($_id: ID!) {
-	  deleteAgendaDayFromWorkshop(_id: $_id) {
-	    _id
-	  }
-	}
-`;
-
-const addActivityToAgendaDay = gql`
-	mutation addActivityToAgendaDay($agendaDayId: ID!, $activityId: ID!) {
-	  addActivityToAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
-	    _id
-	  }
-	}
-`;
-
-const deleteActivityToAgendaDay = gql`
-	mutation deleteActivityToAgendaDay($agendaDayId: ID!, $activityId: ID!) {
-	  deleteActivityFromAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
-	    _id
-	  }
-	}
-`;
+import { AddActivityToAgendaDay, DeleteAgendaDayFromWorkshop, DeleteActivityFromAgendaDay } from '../../../adapters/agenda';
 
 export function AgendaDay(props) {
 	const day = props.day;
@@ -34,28 +12,11 @@ export function AgendaDay(props) {
 	
 	const [ activityId, setActivityId ] = useState('');
 	
-	const [removeAgendaDayFromWorkshop, { data, loading, error }] = useMutation(
-  	deleteAgendaDayFromWorkshop,
-  	{
-  		variables: {
-  			_id: day._id,
-  		},
-  		refetchQueries: [
-  			'getWorkshops'
-  		]
-	});
+	let deleteAgendaDayFromWorkshopVariables = { _id: day._id }
+	const [removeAgendaDayFromWorkshop, { data, loading, error }] = DeleteAgendaDayFromWorkshop(deleteAgendaDayFromWorkshopVariables, function() {});
 	
-	const [insertActivityToAgendaDay, { data2, loading2, error2 }] = useMutation(
-  	addActivityToAgendaDay,
-  	{
-  		variables: {
-	  		agendaDayId: day._id,
-  			activityId: activityId,
-  		},
-  		refetchQueries: [
-  			'getWorkshops'
-  		]
-	});
+	let addActivityToAgendaDayVariables = { agendaDayId: day._id, activityId: activityId };
+	const [insertActivityToAgendaDay, { data2, loading2, error2 }] = AddActivityToAgendaDay(addActivityToAgendaDayVariables, function() {});
 	
 	useEffect(() => {
 		if (activityId != ''){
@@ -114,17 +75,8 @@ export function AgendaDayActivity(props) {
 	const activity = props.activity;
 	const details = activity.activity;
 		
-	const [removeActivityToAgendaDay, { data, loading, error }] = useMutation(
-  	deleteActivityToAgendaDay,
-  	{
-  		variables: {
-  			agendaDayId: day._id,
-  			activityId: activity._id
-  		},
-  		refetchQueries: [
-  			'getWorkshops'
-  		]
-	});
+	let variables = { agendaDayId: day._id, activityId: activity._id }
+	const [removeActivityFromAgendaDay, { data, loading, error }] = DeleteActivityFromAgendaDay(variables, function() {}); 
 	
 	function changeDuration() {
 
@@ -146,7 +98,7 @@ export function AgendaDayActivity(props) {
   			<p>{details.description}</p>
   			<div className="button-group">
 				<button className="btn btn-sm btn-text-secondary"><i className="bi-gear-fill"></i> Edit Settings</button>
-				<button className="btn btn-sm btn-text-danger" onClick={removeActivityToAgendaDay}><i className="bi-trash"></i> Delete Activity</button>
+				<button className="btn btn-sm btn-text-danger" onClick={removeActivityFromAgendaDay}><i className="bi-trash"></i> Delete Activity</button>
 			</div>
   		</div>
   	</div>

@@ -1,0 +1,89 @@
+import { gql, useMutation } from "@apollo/client";
+
+export function AddAgendaDayToWorkshop(variables, onCompleted) {
+	const addAgendaDayToWorkshop = gql`
+	  mutation addAgendaDayToWorkshop($workshopId: ID!) {
+		  addAgendaDayToWorkshop(workshopId: $workshopId) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [insertAgendaDayToWorkshop, { data, loading, error }] = useMutation(
+  	addAgendaDayToWorkshop,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [insertAgendaDayToWorkshop, { data, loading, error }];
+}
+
+export function AddActivityToAgendaDay(variables, onCompleted) {
+	const addActivityToAgendaDay = gql`
+		mutation addActivityToAgendaDay($agendaDayId: ID!, $activityId: ID!) {
+		  addActivityToAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [insertActivityToAgendaDay, { data, loading, error }] = useMutation(
+  	addActivityToAgendaDay,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [insertActivityToAgendaDay, { data, loading, error }];
+}
+
+export function DeleteAgendaDayFromWorkshop(variables, onCompleted) {
+	const deleteAgendaDayFromWorkshop = gql`
+		mutation deleteAgendaDayFromWorkshop($_id: ID!) {
+		  deleteAgendaDayFromWorkshop(_id: $_id) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [removeAgendaDayFromWorkshop, { data, loading, error }] = useMutation(
+  	deleteAgendaDayFromWorkshop,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [removeAgendaDayFromWorkshop, { data, loading, error }];
+}
+
+export function DeleteActivityFromAgendaDay(variables, onCompleted) {
+	const deleteActivityFromAgendaDay = gql`
+		mutation deleteActivityFromAgendaDay($agendaDayId: ID!, $activityId: ID!) {
+		  deleteActivityFromAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [removeActivityFromAgendaDay, { data, loading, error }] = useMutation(
+  	deleteActivityFromAgendaDay,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [removeActivityFromAgendaDay, { data, loading, error }];
+}

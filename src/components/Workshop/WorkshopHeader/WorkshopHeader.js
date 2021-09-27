@@ -5,9 +5,9 @@ export function WorkshopHeader(props) {
   const workshop = props.workshop;
   
   function triggerCreateModal() {
-	props.setModalVisibility(true);
+		props.setModalVisibility(true);
   }
-	
+  	
   return (
 	<header id="workshop--header" className="header">
 		<div className="header--group">

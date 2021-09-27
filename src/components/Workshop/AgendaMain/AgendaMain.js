@@ -1,33 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
+
 import { AgendaDay } from '../../Workshop';
 import { ErrorMessage } from '../../Alerts';
+import { AddAgendaDayToWorkshop } from '../../../adapters/agenda';
 
 import './AgendaMain.css';
-
-const addAgendaDayToWorkshop = gql`
-  mutation addAgendaDayToWorkshop($workshopId: ID!) {
-	  addAgendaDayToWorkshop(workshopId: $workshopId) {
-	    _id
-	  }
-	}
-`;
 
 export function AgendaMain(props) {
 	const workshop = props.workshop;
 	const agenda = workshop.agenda;
 	const [ errorMsg, setErrorMsg ] = useState();
 	
-	const [insertAgendaDayToWorkshop, { data, loading, error }] = useMutation(
-  	addAgendaDayToWorkshop,
-  	{
-  		variables: {
-  			workshopId: workshop._id,
-  		},
-  		refetchQueries: [
-  			'getWorkshops'
-  		]
-	});
+	let variables = { workshopId: workshop._id };
+	const [insertAgendaDayToWorkshop, { data, loading, error }] = AddAgendaDayToWorkshop(variables, function() {});
   
   let days = '';
   if (agenda) {

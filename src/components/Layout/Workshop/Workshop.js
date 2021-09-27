@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { gql, useQuery } from "@apollo/client";
 import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 
+import { GetWorkshops } from '../../../adapters/workshop';
 import { CollaboratorsModal } from '../../Collaborators';
 import { WorkshopHeader, AgendaMain, WorkshopMain } from '../../Workshop';
 
@@ -10,60 +10,22 @@ import './Workshop.css';
 const page = 1;
 const limit = 1;
 
-const getWorkshops = gql`
-	query getWorkshops($id: ID, $page: Int, $limit: Int) {
-	  getWorkshops(_id: $id, page: $page, limit: $limit) {
-	    workshops {
-	      _id
-	      name
-	      users {
-	        userId {
-	          _id
-	          avatar
-	          firstName
-	        }
-	        permission
-	      }
-	      agenda {
-		      _id
-		      weight
-		      startTime
-		      activities {
-			      _id
-			      weight
-			      duration
-			      activity {
-				      _id
-				      name
-				      type
-				      description
-				      suggestedDuration
-				    }
-			    }
-		    }
-	    }
-	    currentPage
-	    totalPages
-	  }
-	}
-`;
-
 export function Workshop() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
 	
   let { path, url } = useRouteMatch();
   let { id } = useParams();
-    
-  const { loading, error, data } = useQuery(getWorkshops, 
-  	{ variables: { "_id": id, "page": page, "limit": limit } }
-  );
+        
+  let variables = { "id": id, "page": page, "limit": limit };
+  let onCompletedFunction = function(data){};
+  const { loading, error, data } = GetWorkshops(variables, onCompletedFunction);
   
   if (loading) {
-	return "Loading...";
+		return "Loading...";
   }
   if (error) {
     console.log(error);
-  }
+  }	
     
   return (
 	<Switch>  
