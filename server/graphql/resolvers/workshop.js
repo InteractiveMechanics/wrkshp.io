@@ -126,6 +126,19 @@ const workshopMutations = {
 		
 		return workshop.save();
 	},
+	
+	deleteActivityFromAgendaDay: async(_, args) => {
+		const { agendaDayId, activityId } = args;
+		
+		const workshop = await Workshop.findOne({ "agenda.activities._id": activityId });
+		const agendaDays = workshop.agenda;
+	  const day = agendaDays.id(agendaDayId);
+	  const activity = day.activities.id(activityId);
+	  
+	  activity.remove();
+		
+		return workshop.save();
+	},
 }
 
 module.exports = { workshopQueries, workshopMutations };

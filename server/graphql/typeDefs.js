@@ -106,6 +106,7 @@ const typeDefs = gql`
 		
 		deleteWorkshop (_id: ID!): Workshop
 		deleteAgendaDayFromWorkshop (_id: ID!): Workshop
+		deleteActivityFromAgendaDay (agendaDayId: ID!, activityId: ID!): Workshop
   }
 `;
 
