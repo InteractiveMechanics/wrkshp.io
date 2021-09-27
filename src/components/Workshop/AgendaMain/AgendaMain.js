@@ -42,10 +42,6 @@ export function AgendaMain(props) {
 		));
 	}
 	
-	if (errorMsg) {
-		
-	}
-	
   return (
 		<main className="agenda">
 		  <h1>Agenda</h1>
