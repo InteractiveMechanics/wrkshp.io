@@ -3,10 +3,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
 
-@import 'css/reset.css';
-@import 'css/helpers.css';
+@import 'styles/base/reset.css';
+@import 'styles/base/helpers.css';
+@import 'styles/base/buttons.css';
 
-@import 'css/headers.css';
-@import 'css/buttons.css';
-@import 'css/modals.css';
-@import 'css/alerts.css';
+@import 'styles/components/headers.css';
+@import 'styles/components/modals.css';
+@import 'styles/components/alerts.css';
