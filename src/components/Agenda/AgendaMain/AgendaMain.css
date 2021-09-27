@@ -3,6 +3,10 @@
 	padding: 72px 0;
 	margin: 0 auto;
 }
+
+#workshop .agenda .agenda--day-list {
+	position: relative;
+}
 #workshop .agenda .agenda--day {
 	background: white;
 	padding: 24px;

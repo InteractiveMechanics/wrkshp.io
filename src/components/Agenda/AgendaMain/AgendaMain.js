@@ -34,8 +34,10 @@ export function AgendaMain(props) {
 		  <ErrorMessage 
 		  	errorMsg={errorMsg}
 		  	setErrorMsg={setErrorMsg} />
-		  	
-		  { days }
+		  
+		  <div className="agenda--day-list">
+		  	{ days }
+		  </div>
 		  
 		  <button className="btn btn-lg btn-primary" onClick={insertAgendaDayToWorkshop}><i className="bi-plus"></i> Add Day</button>
 		</main>
