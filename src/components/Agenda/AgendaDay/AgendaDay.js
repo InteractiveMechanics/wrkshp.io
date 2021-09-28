@@ -12,6 +12,7 @@ import './AgendaDay.css';
 export function AgendaDay(props) {
 	const day = props.day;
 	const timestamp = props.day.startTime;
+	let totalTime = 0;
 	
 	const [ weight, setWeight ] = useState(day.weight);
 	const [ datetime, setDatetime ] = useState(timestamp);
@@ -35,7 +36,6 @@ export function AgendaDay(props) {
 	}, [activityId]);
 
 	useEffect(() => {
-		console.log(datetime, weight);
 		updateAgendaDay();
 	}, [datetime, weight]);
 	
@@ -54,13 +54,18 @@ export function AgendaDay(props) {
 	
 	let activities = '';
   if (props.day.activities) {
-		activities = props.day.activities.map((activity, index) => (
-			<AgendaActivity
-				key={index}
-				index={index}
-				day={props.day}
-				activity={activity} />
-		));
+		activities = props.day.activities.map((activity, index) => {
+			if (index > 0) { totalTime += activity.duration }
+			return (
+				<AgendaActivity
+					key={index}
+					index={index}
+					day={props.day}
+					startTime={timestamp}
+					totalTime={totalTime}
+					activity={activity} />
+			)
+		});
 	}
 	
 	const Datepicker = React.forwardRef(({ value, onClick }, ref) => (

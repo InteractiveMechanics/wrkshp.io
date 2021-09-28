@@ -106,6 +106,7 @@ const typeDefs = gql`
 		
 		updateWorkshop (_id: ID!, name: String): Workshop
 		updateAgendaDay (_id: ID!, weight: Int, startTime: String): Workshop
+		updateAgendaActivity (agendaDayId: ID!, activityId: ID!, weight: Int, duration: Int): Workshop
 		
 		deleteWorkshop (_id: ID!): Workshop
 		deleteAgendaDayFromWorkshop (_id: ID!): Workshop

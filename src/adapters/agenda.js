@@ -66,6 +66,28 @@ export function UpdateAgendaDay(variables, onCompleted) {
 	return [updateAgendaDay, { data, loading, error }];
 }
 
+export function UpdateAgendaActivity(variables, onCompleted) {
+	const updateAgendaActivityGQL = gql`
+		mutation updateAgendaActivity($agendaDayId: ID!, $activityId: ID!, $weight: Int, $duration: Int) {
+		  updateAgendaActivity(agendaDayId: $agendaDayId, activityId: $activityId, weight: $weight, duration: $duration) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [updateAgendaActivity, { data, loading, error }] = useMutation(
+  	updateAgendaActivityGQL,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [updateAgendaActivity, { data, loading, error }];
+}
+
 export function DeleteAgendaDayFromWorkshop(variables, onCompleted) {
 	const deleteAgendaDayFromWorkshop = gql`
 		mutation deleteAgendaDayFromWorkshop($_id: ID!) {

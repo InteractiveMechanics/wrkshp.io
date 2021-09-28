@@ -134,6 +134,20 @@ const workshopMutations = {
 		return workshop.save();
 	},
 	
+	updateAgendaActivity: async(_, args) => {
+		const { agendaDayId, activityId, weight, duration } = args;
+		
+		const workshop = await Workshop.findOne({ "agenda.activities._id": activityId });
+		const agendaDays = workshop.agenda;
+	  const day = agendaDays.id(agendaDayId);
+	  const activity = day.activities.id(activityId);
+	  	  
+	  if (weight) { activity.weight = weight }
+	  if (duration) { activity.duration = duration }
+	  		
+		return workshop.save();
+	},
+	
 	deleteWorkshop: async(_, args) => {
 		const { _id } = args;
 		
