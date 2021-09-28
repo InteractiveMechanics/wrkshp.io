@@ -1,16 +1,24 @@
-#dashboard .dashboard--team-list {
-	margin: 24px 0;
-}
+#dashboard .dashboard--team-list {}
 #dashboard .dashboard--team-list li {
 	transition: 0.5s all;
-	margin: 12px 0;
+	cursor: pointer;
+	
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 17px;
 }
 #dashboard .dashboard--team-list li:hover,
 #dashboard .dashboard--team-list li:focus {
-	color: #008075;
+	opacity: 0.65;
+	margin-left: 8px;
 }
 #dashboard .dashboard--team-list li.active {
 	font-weight: 700;
 	color: #008075;
-	margin-left: 12px;
+}
+#dashboard .dashboard--team-list li.active:hover,
+#dashboard .dashboard--team-list li.active:focus {
+	margin-left: 0;
+	opacity: 1;
 }

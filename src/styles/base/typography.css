@@ -1,0 +1,27 @@
+h1 {
+	font-size: 2rem;
+  font-weight: 300;
+}
+h2 {
+	font-size: 1.5rem;
+  font-weight: 300;
+}
+h3 {
+	font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 0.875rem;
+}
+h4 {
+	font-size: 1.125rem;
+}
+
+
+.text-muted {
+	color: #666666;
+}
+.text-danger {
+	color: #E35A25;
+}
+.text-warning {
+	color: #FEE375;
+}

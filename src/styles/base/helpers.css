@@ -1,3 +1,93 @@
 .hidden {
 	display: none !important;
 }
+
+.fade {
+	opacity: 0;
+	transition: 0.5s opacity;
+	pointer-events: none;
+}
+.fade.in {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.margin-0 {
+	margin: 0;
+}
+.margin-1x {
+	margin: 8px;
+}
+.margin-2x {
+	margin: 16px;
+}
+.margin-3x {
+	margin: 24px;
+}
+.margin-4x {
+	margin: 32px;
+}
+
+.margin-b-0 {
+	margin-bottom: 0;
+}
+.margin-b-1x {
+	margin-bottom: 8px;
+}
+.margin-b-2x {
+	margin-bottom: 16px;
+}
+.margin-b-3x {
+	margin-bottom: 24px;
+}
+.margin-b-4x {
+	margin-bottom: 32px;
+}
+
+.margin-t-0 {
+	margin-top: 0;
+}
+.margin-t-1x {
+	margin-top: 8px;
+}
+.margin-t-2x {
+	margin-top: 16px;
+}
+.margin-t-3x {
+	margin-top: 24px;
+}
+.margin-t-4x {
+	margin-top: 32px;
+}
+
+.margin-r-0 {
+	margin-right: 0;
+}
+.margin-r-1x {
+	margin-right: 8px;
+}
+.margin-r-2x {
+	margin-right: 16px;
+}
+.margin-r-3x {
+	margin-right: 24px;
+}
+.margin-r-4x {
+	margin-right: 32px;
+}
+
+.margin-l-0 {
+	margin-left: 0;
+}
+.margin-l-1x {
+	margin-left: 8px;
+}
+.margin-l-2x {
+	margin-left: 16px;
+}
+.margin-l-3x {
+	margin-left: 24px;
+}
+.margin-l-4x {
+	margin-left: 32px;
+}

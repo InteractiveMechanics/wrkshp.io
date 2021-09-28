@@ -1,19 +1,27 @@
-button,
 .btn {
 	border-radius: 99px;
 	background: white;
 	color: #008075;
 	border: none;
-    padding: 8px 14px;
-    font-weight: 700;
+  padding: 8px 14px;
+  font-weight: 500;
+  transition: 0.5s all;
+  cursor: pointer;
+  text-decoration: none;
 }
+.btn:hover,
+.btn:focus {
+	background: #f1f2f2;
+	box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
 .btn-sm {
 	font-size: 0.75rem;
-    padding: 6px 10px;
+  padding: 6px 10px;
 }
 .btn-lg {
 	font-size: 1rem;
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 
@@ -21,6 +29,11 @@ button,
 	background: #008075;
 	color: white;
 }
+.btn-primary:hover,
+.btn-primary:focus {
+	background: #02403B;
+}
+
 .btn-secondary {
 	background: #666666;
 	color: white;
@@ -45,6 +58,21 @@ button,
 	background: #ffffff;
 	border: 2px solid #E35A25;
 	color: #E35A25;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+	background: #008075;
+	color: #FFFFFF;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+	background: #666666;
+	color: #FFFFFF;
+}
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+	background: #E35A25;
+	color: #FFFFFF;
 }
 
 

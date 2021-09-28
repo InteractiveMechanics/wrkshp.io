@@ -28,16 +28,10 @@ export default function App() {
 			<Route path="/register">
 				<Register />
 			</Route>
-			<Route path="/dashboard">
-				<Dashboard />
-			</Route>
+			<Route path="/dashboard" render={() => <Dashboard />} />
 			<Switch>
-				<Route path="/workshop/:id/agenda">
-	      	<Agenda />
-				</Route>
-				<Route path="/workshop/:id">
-					<Workshop />
-				</Route>
+				<Route path="/workshop/:id/agenda" render={() => <Agenda />} />
+				<Route path="/workshop/:id" render={() => <Workshop />} />
 			</Switch>
 			<Footer />
 		</Router>

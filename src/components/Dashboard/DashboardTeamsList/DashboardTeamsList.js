@@ -10,8 +10,10 @@ export function DashboardTeamsList(props) {
   
   if (teams) {
 	teamList = teams.map((team) => (
-	  <li key={ team._id } id={ team._id } className={ currentTeam._id == team._id ? "active" : "" } onClick={changeTeam}>
+	  <li key={ team._id } id={ team._id } className={ currentTeam._id == team._id ? "active margin-b-3x" : "margin-b-3x" } onClick={changeTeam}>
 	    { team.name }
+	    { currentTeam._id == team._id ? ( <div className="settings"><i className="bi-three-dots-vertical margin-l-1x"></i></div> ) : "" }
+	    
 	  </li>
 	))
   }
@@ -32,10 +34,10 @@ export function DashboardTeamsList(props) {
   
   return (
 	<nav>
-		<button className="btn btn-primary btn-lg" onClick={triggerCreateModal}><i className="bi-plus"></i> Create New Workshop</button>
+		<button className="btn btn-primary btn-lg margin-b-3x" onClick={triggerCreateModal}><i className="bi-plus-lg margin-r-1x"></i> Create New Workshop</button>
 		
 		<h3>TEAMS</h3>
-		<ul className="dashboard--team-list">
+		<ul className="dashboard--team-list margin-t-3x">
 			{ teamList }
 		</ul>
 	</nav>

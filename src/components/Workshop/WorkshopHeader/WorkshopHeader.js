@@ -13,8 +13,10 @@ export function WorkshopHeader(props) {
 		<div className="header--group">
 			<div className="header--pill">
 				<Link to="/dashboard"><i className="bi-chevron-left"></i></Link>
+			</div>
+			<div className="header--pill">
 				{ workshop.name }
-				<i className="bi-three-dots-vertical"></i>
+				<i className="bi-three-dots-vertical margin-l-1x"></i>
 			</div>
 			<div className="header--pill">
 				<Link to={ "/workshop/" + workshop._id }><i className="bi-ui-checks-grid"></i> Workshop</Link>
@@ -24,7 +26,7 @@ export function WorkshopHeader(props) {
 
 		<div className="header--group header--group--right">
 			<div className="header--pill" onClick={triggerCreateModal}>
-				<i className="bi-person-plus"></i>
+				<i className="bi-person-plus margin-r-1x"></i>
 				Collaborators
 			</div>
 			<div className="header--pill">

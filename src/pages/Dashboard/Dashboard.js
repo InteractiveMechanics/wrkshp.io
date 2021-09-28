@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { usePrevious } from '../../utils/usePrevious';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
 import { DashboardHeader, DashboardCard, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
@@ -15,18 +16,23 @@ export function Dashboard() {
   const [ currentOrg, setCurrentOrg ] = useState({});
   const [ currentTeam, setCurrentTeam ] = useState({});
   
+  const prevOrg = usePrevious(currentOrg);
+  const prevTeam = usePrevious(currentTeam);
+  
   let variables = { "id": id, "userId": userId, "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
   
+  console.log(prevTeam);
+  
   useEffect(() => {
 		if(loading === false && data){
-		  setCurrentOrg(data.getOrganizations.organizations[0]);
+			setCurrentOrg(data.getOrganizations.organizations[0]);
 		  setCurrentTeam(data.getOrganizations.organizations[0].teams[0]);
 		}
   }, [loading, data]);
   
   if (loading) {
-	return "Loading...";
+		return "Loading...";
   }
   if (error) {
     console.log(error);

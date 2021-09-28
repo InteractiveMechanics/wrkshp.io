@@ -13,25 +13,30 @@
 	margin-left: auto;
 }
 
+
 .header--pill-wrapper:hover ul,
 .header--pill-wrapper:focus ul {
 	display: block;
 }
 .header--pill {
 	background: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    margin: 0 8px 0 0;
-    cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 4px;
+  margin: 0 8px 0 0;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 .header--pill.no-padding {
 	padding: 0;
 }
+
+
 .header--pill + ul {
 	position: absolute;
-    box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
-    display: none;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
+  display: none;
 }
+
 .header--pill + ul > li {
 	padding: 12px 16px;
 	border-bottom: 1px solid #f1f2f2;
