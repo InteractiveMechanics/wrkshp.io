@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import { AddWorkshop, AddWorkshopToTeam } from '../../../adapters/dashboard';
+import { AddAgendaDayToWorkshop } from '../../../adapters/agenda';
 
 import './CreateNewModal.css';
 
@@ -32,10 +33,17 @@ export function CreateNewModal(props) {
   	teamId: teamId
   }
   let AddWorkshopToTeamCompleted = function() {
+		insertAgendaDayToWorkshop();
+	}
+	const [insertWorkshopToTeam, { data2, loading2, error2 }] = AddWorkshopToTeam(AddWorkshopToTeamVariables, AddWorkshopToTeamCompleted);
+	
+	
+	let AddAgendaDayToWorkshopVariables = { workshopId: workshopId };
+	let AddAgendaDayToWorkshopCompleted = function() {
 		const path = "/workshop/" + workshopId + "/agenda";
 		history.push(path)
 	}
-	const [insertWorkshopToTeam, { data2, loading2, error2 }] = AddWorkshopToTeam(AddWorkshopToTeamVariables, AddWorkshopToTeamCompleted);
+	const [insertAgendaDayToWorkshop, { data3, loading3, error3 }] = AddAgendaDayToWorkshop(AddAgendaDayToWorkshopVariables, AddAgendaDayToWorkshopCompleted);
   
   
   function handleUpdateName(e) {
