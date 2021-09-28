@@ -48,9 +48,12 @@ const workshopMutations = {
 	  const workshop = await Workshop.findOne({ "_id": workshopId });
 	  const agenda = workshop.agenda;
 	  const count = agenda.length;
-	  const now = Date.now();
 	  
-	  agenda.push({ "weight": count + 1, "startTime": now });
+	  const hour = 3600000
+	  const now = Date.now();
+	  const rounded = count > 0 ? ((Math.round(now / hour) * hour) + (hour * 24 * count)) : ((Math.round(now / hour) * hour) + (hour * 2));
+	  
+	  agenda.push({ "weight": count + 1, "startTime": rounded });
 	  	  
 	  return workshop.save()
 	    .then(savedDoc => {
