@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { GetWorkshops } from '../../adapters/workshop';
 import { WorkshopHeader } from '../../components/Workshop';
 import { CollaboratorsModal } from '../../components/General';
-import { AgendaMain, AgendaDay } from '../../components/Agenda';
+import { AgendaMain } from '../../components/Agenda';
 
 import './Agenda.css';
 
@@ -14,9 +14,7 @@ const limit = 1;
 export function Agenda() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
 	
-  let { path, url } = useRouteMatch();
   let { id } = useParams();
-        
   let variables = { "id": id, "page": page, "limit": limit };
   let onCompletedFunction = function(data){};
   const { loading, error, data } = GetWorkshops(variables, onCompletedFunction);

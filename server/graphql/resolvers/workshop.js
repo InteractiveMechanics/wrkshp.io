@@ -108,6 +108,29 @@ const workshopMutations = {
       });
 	},
 	
+	updateWorkshop: async(_, args) => {
+		const { _id, name } = args;
+		
+		const workshop = await Workshop.findOne({ "_id": _id });
+		
+		if (name) { workshop.name = name }
+		
+		return workshop.save();
+	},
+	
+	updateAgendaDay: async(_, args) => {
+		const { _id, weight, startTime } = args;
+		
+		const workshop = await Workshop.findOne({ "agenda._id": _id });
+		const agendaDays = workshop.agenda;
+	  const day = agendaDays.id(_id);
+	  	  
+	  if (weight) { day.weight = weight }
+	  if (startTime) { day.startTime = startTime }
+	  		
+		return workshop.save();
+	},
+	
 	deleteWorkshop: async(_, args) => {
 		const { _id } = args;
 		

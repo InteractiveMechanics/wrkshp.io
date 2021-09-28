@@ -44,6 +44,28 @@ export function AddActivityToAgendaDay(variables, onCompleted) {
 	return [insertActivityToAgendaDay, { data, loading, error }];
 }
 
+export function UpdateAgendaDay(variables, onCompleted) {
+	const updateAgendaDayGQL = gql`
+		mutation updateAgendaDay($_id: ID!, $weight: Int, $startTime: String) {
+		  updateAgendaDay(_id: $_id, weight: $weight, startTime: $startTime) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [updateAgendaDay, { data, loading, error }] = useMutation(
+  	updateAgendaDayGQL,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [updateAgendaDay, { data, loading, error }];
+}
+
 export function DeleteAgendaDayFromWorkshop(variables, onCompleted) {
 	const deleteAgendaDayFromWorkshop = gql`
 		mutation deleteAgendaDayFromWorkshop($_id: ID!) {

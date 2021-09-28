@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import { AgendaDay } from '../../Agenda';
 import { ErrorMessage } from '../../General';
@@ -28,6 +29,10 @@ export function AgendaMain(props) {
 		));
 	}
 	
+	function onDragEnd(result) {
+		
+	}
+	
   return (
 		<main className="agenda">
 		  <h1>Agenda</h1>
@@ -36,7 +41,10 @@ export function AgendaMain(props) {
 		  	setErrorMsg={setErrorMsg} />
 		  
 		  <div className="agenda--day-list">
-		  	{ days }
+		    <DragDropContext
+		    	onDragEnd={onDragEnd}>
+		  			{ days }
+		  	</DragDropContext>
 		  </div>
 		  
 		  <button className="btn btn-lg btn-primary" onClick={insertAgendaDayToWorkshop}><i className="bi-plus"></i> Add Day</button>
