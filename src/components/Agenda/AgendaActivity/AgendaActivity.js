@@ -4,6 +4,9 @@ import { gql, useMutation } from "@apollo/client";
 import { convertDate, convertTime } from '../../../utils/datetime';
 import { DeleteActivityFromAgendaDay } from '../../../adapters/agenda';
 
+import './AgendaActivity.css';
+
+
 export function AgendaActivity(props) {
 	const day = props.day;
 	const activity = props.activity;

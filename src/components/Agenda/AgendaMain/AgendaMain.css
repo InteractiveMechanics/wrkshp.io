@@ -7,9 +7,3 @@
 #workshop .agenda .agenda--day-list {
 	position: relative;
 }
-#workshop .agenda .agenda--day {
-	background: white;
-	padding: 24px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-#workshop .agenda .agenda--day .agenda--day--header {}

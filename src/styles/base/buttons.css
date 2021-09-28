@@ -85,3 +85,10 @@
 .btn-text-danger {
 	color: #E35A25;
 }
+
+.react-datepicker-wrapper {
+	width: auto;
+}
+.react-datepicker__tab-loop {
+	margin: 0 !important;
+}

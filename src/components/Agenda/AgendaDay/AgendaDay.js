@@ -6,6 +6,8 @@ import { convertDate, convertTime } from '../../../utils/datetime';
 import { AddActivityToAgendaDay, UpdateAgendaDay, DeleteAgendaDayFromWorkshop } from '../../../adapters/agenda';
 import { AgendaActivity } from '../../Agenda';
 
+import './AgendaDay.css';
+
 
 export function AgendaDay(props) {
 	const day = props.day;
@@ -96,7 +98,7 @@ export function AgendaDay(props) {
 	    <div className="agenda--day--activity-list">
 	    	{ activities }
 	    </div>
-	    <div className="agenda--day--activity-buttons button-group">
+	    <div className="agenda--day--activity-buttons button-group centered">
 	    	<button className="btn btn-primary"><i className="bi-plus"></i> Add Activity</button>
 	    	<button className="btn btn-outline-primary" onClick={addBreak}><i className="bi-cup"></i> Add Break</button>
 	    	<button className="btn btn-outline-primary hidden"><i className="bi-tv"></i> Add Presentation</button>

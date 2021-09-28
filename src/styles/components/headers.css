@@ -4,6 +4,7 @@
 	top: 0;
 	width: 100vw;
 	padding: 16px 24px;
+	z-index: 9;
 }
 
 .header--group {
@@ -25,6 +26,14 @@
   margin: 0 8px 0 0;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  height: 40px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header--pill.square {
+	width: 42px;
 }
 .header--pill.no-padding {
 	padding: 0;

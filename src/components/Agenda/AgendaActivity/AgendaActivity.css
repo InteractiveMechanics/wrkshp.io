@@ -1,0 +1,6 @@
+#workshop .agenda .agenda--day .agenda--day--activity-list .agenda--day--activity {
+	margin: 0 0 16px 32px;
+  padding: 16px;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+}

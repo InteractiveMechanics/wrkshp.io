@@ -25,7 +25,7 @@ export function AgendaMain(props) {
 				daysTotal={agenda.length}
 				dayCount={index + 1}
 				
-				setErrorMsg={setErrorMsg} /> 
+				setErrorMsg={setErrorMsg} />
 		));
 	}
 	
@@ -35,7 +35,7 @@ export function AgendaMain(props) {
 	
   return (
 		<main className="agenda">
-		  <h1>Agenda</h1>
+		  <h1 className="margin-b-2x">Agenda</h1>
 		  <ErrorMessage 
 		  	errorMsg={errorMsg}
 		  	setErrorMsg={setErrorMsg} />
@@ -47,7 +47,9 @@ export function AgendaMain(props) {
 		  	</DragDropContext>
 		  </div>
 		  
-		  <button className="btn btn-lg btn-primary" onClick={insertAgendaDayToWorkshop}><i className="bi-plus"></i> Add Day</button>
+		  <div className="button-group centered">
+		  	<button className="btn btn-lg btn-primary" onClick={insertAgendaDayToWorkshop}><i className="bi-plus-lg margin-r-1x"></i> Add Day</button>
+		  </div>
 		</main>
   );
 }
