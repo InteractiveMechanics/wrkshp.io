@@ -29,11 +29,17 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		          _id
 		          name
 		          users {
-				    userId {
-	                  _id
-	                }
-	                permission
+								userId {
+	                _id
 	              }
+	              permission
+	            }
+	            agenda {
+		            startTime
+		            activities {
+			          	duration  
+			          }
+		          }
 		        }
 		      }
 		    }

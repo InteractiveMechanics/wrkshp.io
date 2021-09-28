@@ -13,11 +13,12 @@
   border-radius: 9px;
   overflow: hidden;
   background: white;
-  transition: 0.5s box-shadow;
+  transition: 0.5s all;
 }
 #dashboard .dashboard--card:hover,
 #dashboard .dashboard--card:focus {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 20%);
+	transform: translateY(-8px);
 }
 
 #dashboard .dashboard--card .dashboard--card--image-wrapper {
@@ -28,10 +29,17 @@
 #dashboard .dashboard--card .dashboard--card--content {
 	padding: 24px;
 }
+
 #dashboard .dashboard--card .dashboard--card--content .dashboard--card--header {
 	display: flex;
 	justify-content: space-between;
 }
+#dashboard .dashboard--card .dashboard--card--content .dashboard--card--header h4 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 #dashboard .dashboard--card .dashboard--card--content .dashboard--card--metadata {
 	font-size: 0.875rem;
 }

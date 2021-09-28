@@ -5,6 +5,7 @@
 	border: none;
   padding: 8px 14px;
   font-weight: 500;
+  font-size: 0.875;
   transition: 0.5s all;
   cursor: pointer;
   text-decoration: none;
@@ -17,6 +18,7 @@
 
 .btn-sm {
 	font-size: 0.75rem;
+	font-weight: 700;
   padding: 6px 10px;
 }
 .btn-lg {
@@ -27,20 +29,35 @@
 
 .btn-primary {
 	background: #008075;
+	border: 2px solid #008075;
 	color: white;
 }
 .btn-primary:hover,
 .btn-primary:focus {
 	background: #02403B;
+	border: 2px solid #02403B;
 }
 
 .btn-secondary {
-	background: #666666;
+	background: #666;
+	border: 2px solid #666;
 	color: white;
 }
+.btn-secondary:hover,
+.btn-secondary:focus {
+	background: #444;
+	border: 2px solid #444;
+}
+
 .btn-danger {
 	background: #E35A25;
+	border: 2px solid #E35A25;
 	color: white;
+}
+.btn-danger:hover,
+.btn-danger:focus {
+	background: #96331F;
+	border: 2px solid #96331F;
 }
 
 
@@ -49,25 +66,27 @@
 	border: 2px solid #008075;
 	color: #008075;
 }
-.btn-outline-secondary {
-	background: #ffffff;
-	border: 2px solid #666666;
-	color: #666666;
-}
-.btn-outline-danger {
-	background: #ffffff;
-	border: 2px solid #E35A25;
-	color: #E35A25;
-}
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
 	background: #008075;
 	color: #FFFFFF;
 }
+
+.btn-outline-secondary {
+	background: #ffffff;
+	border: 2px solid #666666;
+	color: #666666;
+}
 .btn-outline-secondary:hover,
 .btn-outline-secondary:focus {
 	background: #666666;
 	color: #FFFFFF;
+}
+
+.btn-outline-danger {
+	background: #ffffff;
+	border: 2px solid #E35A25;
+	color: #E35A25;
 }
 .btn-outline-danger:hover,
 .btn-outline-danger:focus {

@@ -11,9 +11,11 @@ export function WorkshopHeader(props) {
   return (
 	<header id="workshop--header" className="header">
 		<div className="header--group">
-			<div className="header--pill square">
-				<Link to="/dashboard"><i className="bi-chevron-left"></i></Link>
-			</div>
+			<Link to="/dashboard">
+				<div className="header--pill square">
+					<i className="bi-chevron-left"></i>
+				</div>
+			</Link>
 			<div className="header--pill">
 				{ workshop.name }
 				<i className="bi-three-dots-vertical margin-l-1x"></i>
