@@ -1,7 +1,7 @@
 .collaborators--list {}
 .collaborators--list .collaborators--list-item {
 	display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 .collaborators--list .collaborators--list-item .collaborator--details {

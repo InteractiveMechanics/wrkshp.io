@@ -104,9 +104,9 @@ export function AgendaDay(props) {
 	    	{ activities }
 	    </div>
 	    <div className="agenda--day--activity-buttons button-group centered">
-	    	<button className="btn btn-primary"><i className="bi-plus"></i> Add Activity</button>
-	    	<button className="btn btn-outline-primary" onClick={addBreak}><i className="bi-cup"></i> Add Break</button>
-	    	<button className="btn btn-outline-primary hidden"><i className="bi-tv"></i> Add Presentation</button>
+	    	<button className="btn btn-primary"><i className="bi-plus-lg margin-r-1x"></i> Add Activity</button>
+	    	<button className="btn btn-outline-primary" onClick={addBreak}><i className="bi-cup margin-r-1x"></i> Add Break</button>
+	    	<button className="btn btn-outline-primary hidden"><i className="bi-tv margin-r-1x"></i> Add Presentation</button>
 	    </div>
 	  </div>
   );

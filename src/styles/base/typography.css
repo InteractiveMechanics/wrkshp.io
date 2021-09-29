@@ -16,6 +16,14 @@ h4 {
 }
 
 
+.text-sm {
+	font-size: 85%;
+}
+
+.text-italic {
+	font-style: italic;
+}
+
 .text-muted {
 	color: #666666;
 }

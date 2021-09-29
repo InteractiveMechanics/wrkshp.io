@@ -18,6 +18,7 @@ export function AgendaActivity(props) {
 	const [ duration, setDuration ] = useState(props.activity.duration);
 	
 	useEffect(() => {
+		if (duration == "NaN" || "" || null) { setDuration(0) }
 		updateAgendaActivity();
 	}, [duration]);
 	
@@ -44,7 +45,7 @@ export function AgendaActivity(props) {
   			<div className="agenda--activity--start-time">{ convertTime(totalTime) }</div>
   			<fieldset>
   				<button className="btn btn-sm btn-text-secondary" onClick={decrementDuration}><i className="bi-dash-circle"></i></button>
-  				<input type="text" value={duration} onChange={changeDuration} min="1" />
+  				<input type="text" value={duration} onChange={changeDuration} min="0" />
 					<button className="btn btn-sm btn-text-secondary" onClick={incrementDuration}><i className="bi-plus-circle"></i></button>
 				</fieldset>
   		</div>
