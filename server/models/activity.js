@@ -19,7 +19,7 @@ const ActivitySchema = new Schema({
 		type: Number,
 		required: true
 	},
-});
+}, { timestamps: true });
 
 ActivitySchema.path('_id');
 ActivitySchema.index({ createdAt: 1, updatedAt: 1 });

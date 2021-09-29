@@ -12,6 +12,6 @@ const UserPermissionSchema = new Schema({
 		required: true,
 		enum: ['owner', 'manager', 'facilitator', 'participant', 'readonly']
 	}
-});
+}, { timestamps: true });
 
 module.exports = { UserPermissionSchema };

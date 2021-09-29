@@ -15,7 +15,7 @@ const OrganizationSchema = new Schema({
 	teams: {
 		type: [TeamSchema]
 	}
-});
+}, { timestamps: true });
 OrganizationSchema.path('_id');
 OrganizationSchema.index({ createdAt: 1, updatedAt: 1 });
 

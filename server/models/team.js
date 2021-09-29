@@ -24,6 +24,6 @@ const TeamSchema = new Schema({
 			required: true
 		}
 	]
-});
+}, { timestamps: true });
 
 module.exports = { TeamSchema };

@@ -12,7 +12,12 @@ const AgendaDaySchema = new Schema({
 		type: String,
 		required: true
 	},
+	status: {
+		type: String,
+		required: true,
+		enum: ["not-started", "in-progress", "completed"]
+	},
 	activities: [AgendaActivitySchema]
-});
+}, { timestamps: true });
 
 module.exports = { AgendaDaySchema };

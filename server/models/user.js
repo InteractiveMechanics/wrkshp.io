@@ -22,7 +22,7 @@ const UserSchema = new Schema({
 		type: String, 
 		required: false
 	},
-});
+}, { timestamps: true });
 UserSchema.path('_id');
 UserSchema.index({ createdAt: 1, updatedAt: 1 });
 

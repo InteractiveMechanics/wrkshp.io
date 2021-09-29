@@ -9,9 +9,14 @@ const WorkshopSchema = new Schema({
 		type: String,
 		required: false
 	},
+	status: {
+		type: String,
+		required: true,
+		enum: ["not-started", "in-progress", "completed", "archived"]
+	},
 	users: [UserPermissionSchema],
 	agenda: [AgendaDaySchema]
-});
+}, { timestamps: true });
 
 WorkshopSchema.path('_id');
 WorkshopSchema.index({ createdAt: 1, updatedAt: 1 });
