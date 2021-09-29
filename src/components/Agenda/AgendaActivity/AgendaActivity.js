@@ -32,7 +32,11 @@ export function AgendaActivity(props) {
 		setDuration(parseInt(duration) + 5);
 	}
 	function decrementDuration() {
-		setDuration(parseInt(duration) - 5);
+		if (duration >= 5) {
+			setDuration(parseInt(duration) - 5);
+		} else {
+			setDuration(0);
+		}
 	}
 	function changeDuration(e) {
 		setDuration(parseInt(e.target.value));
