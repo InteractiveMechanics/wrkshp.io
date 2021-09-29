@@ -36,7 +36,9 @@ export function Agenda() {
 				workshop={data.getWorkshops.workshops[0]} />
         
       <CollaboratorsModal 
+      	users={data.getWorkshops.workshops[0].users}
         modalVisibility={modalVisibility}
+        
 				setModalVisibility={setModalVisibility} />
 	  </div>
   );

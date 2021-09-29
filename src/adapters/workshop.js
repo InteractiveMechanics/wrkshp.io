@@ -12,6 +12,8 @@ export function GetWorkshops(variables, onCompleted) {
 		          _id
 		          avatar
 		          firstName
+		          lastName
+		          email
 		        }
 		        permission
 		      }

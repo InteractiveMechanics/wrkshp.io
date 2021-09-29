@@ -34,7 +34,9 @@ export function Workshop() {
 			<WorkshopMain />
         
       <CollaboratorsModal 
+      	users={data.getWorkshops.workshops[0].users}
         modalVisibility={modalVisibility}
+        
 				setModalVisibility={setModalVisibility} />
 	  </div>
   );

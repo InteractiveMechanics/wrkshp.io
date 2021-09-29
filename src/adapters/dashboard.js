@@ -11,6 +11,9 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		        userId {
 		          _id
 		          avatar
+		          firstName
+		          lastName
+		          email
 		        }
 		        permission
 		      }
@@ -22,6 +25,9 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		          userId {
 		            _id
 		            avatar
+		            firstName
+		            lastName
+		            email
 		          }
 		          permission
 		        }
@@ -31,6 +37,10 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		          users {
 								userId {
 	                _id
+	                avatar
+									firstName
+									lastName
+									email
 	              }
 	              permission
 	            }

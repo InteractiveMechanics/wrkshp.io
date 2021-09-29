@@ -1,0 +1,26 @@
+.collaborators--list {}
+.collaborators--list .collaborators--list-item {
+	display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.collaborators--list .collaborators--list-item .collaborator--details {
+	display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.collaborators--list .collaborators--list-item .collaborator--details .avatar {
+	width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 99px;
+}
+.collaborators--list .collaborators--list-item .collaborator--details .avatar img {
+	max-width: 100%;
+}
+.collaborators--list .collaborators--list-item .collaborator--details .name {}
+
+.collaborators--list .collaborators--list-item .collaborator--role {}
+.collaborators--list .collaborators--list-item .collaborator--role select {}
+
+.collaborators--list .collaborators--list-item .collaborator--actions {}
