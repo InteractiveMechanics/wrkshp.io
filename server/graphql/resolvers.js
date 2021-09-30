@@ -1,3 +1,6 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+
 const { Organization } = require('../models/organization');
 const { User } = require('../models/user');
 const { Workshop } = require('../models/workshop');
@@ -57,6 +60,11 @@ const resolvers = {
 	  ...userQueries,
 	  ...workshopQueries,
 	  ...activityQueries,
+	  
+	  viewer: async (parent, args, { user }) => {
+		  const u = await User.findOne({ _id: user.sub });
+		  return { ...u._doc }
+	  },
   },
   
   Mutation: {
@@ -64,6 +72,17 @@ const resolvers = {
 		...userMutations,
 		...workshopMutations,
 		...activityMutations,
+		
+		login: async (parent, { email, password }) => {			
+			const { _id } = await User.findOne({ email: email, password: password });
+			const id = _id.toString();
+			
+			return jwt.sign(
+				{ "http://localhost:4000/graphql": { id } },
+				process.env.JWT_SECRET,
+				{ algorithm: "HS256", subject: id, expiresIn: "1d" }
+			);
+    },
   },
 };
 

@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 	type Activity {
@@ -82,12 +82,14 @@ const typeDefs = gql`
     currentPage: Int
     totalPages: Int
   }
-  
+
   type Query {
     getOrganizations (_id: ID, userId: ID, page: Int, limit: Int): OrganizationResult
     getUsers (_id: ID, page: Int, limit: Int): UserResult
     getWorkshops (_id: ID, page: Int, limit: Int): WorkshopResult
     getActivities (_id: ID, page: Int, limit: Int): ActivityResult
+    
+    viewer: User!
   }
   
   type Mutation {
@@ -111,6 +113,8 @@ const typeDefs = gql`
 		deleteWorkshop (_id: ID!): Workshop
 		deleteAgendaDayFromWorkshop (_id: ID!): Workshop
 		deleteActivityFromAgendaDay (agendaDayId: ID!, activityId: ID!): Workshop
+		
+		login(email: String!, password: String!): String
   }
 `;
 

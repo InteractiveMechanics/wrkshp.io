@@ -8,12 +8,12 @@ import { Login, Register, Dashboard, Workshop, Agenda } from "./pages";
 import './App.css';
 
 const link = createHttpLink({
-  uri: 'http://localhost:4000/',
+  uri: 'http://localhost:4000/graphql',
   credentials: 'same-origin'
 });
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache(),
   link
 });
