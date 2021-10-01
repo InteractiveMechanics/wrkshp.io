@@ -47,7 +47,7 @@ export function AgendaActivity(props) {
   		<div className="draggable"><i className="bi-grip-vertical"></i></div>
   		<div className="agenda--activity--time">
   			<div className="agenda--activity--start-time">{ convertTime(totalTime) }</div>
-  			<fieldset>
+  			<fieldset className="inline">
   				<button className="btn btn-sm btn-text-secondary" onClick={decrementDuration}><i className="bi-dash-circle"></i></button>
   				<input type="text" value={duration} onChange={changeDuration} min="0" />
 					<button className="btn btn-sm btn-text-secondary" onClick={incrementDuration}><i className="bi-plus-circle"></i></button>
