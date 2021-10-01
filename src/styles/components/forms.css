@@ -1,0 +1,7 @@
+fieldset {
+	display: flex;
+  flex-direction: column;
+}
+fieldset.inline {
+	flex-direction: row;
+}

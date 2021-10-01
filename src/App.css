@@ -10,8 +10,11 @@
 @import 'styles/base/layout.css';
 @import 'styles/base/buttons.css';
 @import 'styles/base/typography.css';
+@import 'styles/base/inputs.css';
 
 @import 'styles/components/headers.css';
 @import 'styles/components/modals.css';
 @import 'styles/components/alerts.css';
 @import 'styles/components/button-group.css';
+@import 'styles/components/dropdowns.css';
+@import 'styles/components/forms.css';

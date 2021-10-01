@@ -11,6 +11,7 @@ const typeDefs = gql`
   
   type AgendaActivity {
 	  _id: ID!
+	  status: String!
 	  weight: Int!
 	  duration: Int!
 	  activity: Activity!
@@ -18,6 +19,7 @@ const typeDefs = gql`
   
   type Agenda {
 	  _id: ID!
+	  status: String!
 	  weight: Int!
 	  startTime: String
 	  activities: [AgendaActivity]
@@ -25,6 +27,7 @@ const typeDefs = gql`
 
   type Workshop {
 		_id: ID!
+		status: String!
 		name: String!
 		users: [UserPermission]
 		agenda: [Agenda]

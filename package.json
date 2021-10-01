@@ -32,6 +32,8 @@
     "start-backend": "node server/index.js",
     "start": "npm-run-all -p start-frontend start-backend",
     "build": "react-scripts build",
+    "clean": "rm -rf node_modules", 
+		"reinstall": "npm run clean && npm install", 
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

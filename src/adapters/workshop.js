@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 export function GetWorkshops(variables, onCompleted) {
 	const getWorkshops = gql`
@@ -7,6 +7,7 @@ export function GetWorkshops(variables, onCompleted) {
 		    workshops {
 		      _id
 		      name
+		      status
 		      users {
 		        userId {
 		          _id
@@ -19,10 +20,12 @@ export function GetWorkshops(variables, onCompleted) {
 		      }
 		      agenda {
 			      _id
+			      status
 			      weight
 			      startTime
 			      activities {
 				      _id
+				      status
 				      weight
 				      duration
 				      activity {

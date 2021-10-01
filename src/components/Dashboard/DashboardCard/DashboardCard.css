@@ -21,10 +21,45 @@
 	transform: translateY(-8px);
 }
 
+
+#dashboard .dashboard--card.empty {
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+#dashboard .dashboard--card.empty:after {
+	content: '';
+	opacity: 0;
+	background-image: url('../../../assets/card_background.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	transition: 0.5s all;
+	position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+#dashboard .dashboard--card.empty:hover,
+#dashboard .dashboard--card.empty:empty {
+	color: white;
+}
+#dashboard .dashboard--card.empty:hover:after,
+#dashboard .dashboard--card.empty:empty:after {
+	opacity: 1;
+}
+#dashboard .dashboard--card.empty i {
+	font-size: 3rem;
+}
+
+
 #dashboard .dashboard--card .dashboard--card--image-wrapper {
 	height: 150px;
 	width: 100%;
 	background: gray;
+	position: relative;
 }
 #dashboard .dashboard--card .dashboard--card--content {
 	padding: 24px;
@@ -42,4 +77,14 @@
 
 #dashboard .dashboard--card .dashboard--card--content .dashboard--card--metadata {
 	font-size: 0.875rem;
+}
+
+
+#dashboard .dashboard--card .dashboard--card--image-wrapper .settings {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+#dashboard .dashboard--card .dashboard--card--image-wrapper .settings:hover ul {
+	display: block;
 }

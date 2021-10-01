@@ -37,7 +37,7 @@ export function DashboardHeader(props) {
 					<i className="bi-chevron-down margin-r-1x"></i>
 					{ props.currentOrg.name }
 				</div>
-				<ul>
+				<ul className="dropdown">
 					{ orgList }
 				</ul>
 			</div>
@@ -47,10 +47,16 @@ export function DashboardHeader(props) {
 			</div>
 		</div>
 		<div className="header--group header--group--right">
-			<div className="header--pill">
-				<i className="bi-person-fill margin-r-1x"></i>
-				Michael
-				<i className="bi-three-dots-vertical margin-l-1x"></i>
+			<div className="header--pill-wrapper">
+				<div className="header--pill">
+					<i className="bi-person-fill margin-r-1x"></i>
+					Michael
+					<i className="bi-three-dots-vertical margin-l-1x"></i>
+				</div>
+				<ul className="dropdown right">
+					<li>My Account</li>
+					<li>Logout</li>
+				</ul>
 			</div>
 		</div>
 	</header>

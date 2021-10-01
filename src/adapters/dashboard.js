@@ -62,7 +62,8 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 	const { loading, error, data } = useQuery(getOrganizationsForUser, 
   	{ 
 	  	variables: variables,
-	  	onCompleted: onCompleted
+	  	onCompleted: onCompleted,
+	  	pollInterval: 5000,
 	  }
   );
   

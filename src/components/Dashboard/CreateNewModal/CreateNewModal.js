@@ -51,6 +51,7 @@ export function CreateNewModal(props) {
   }
   
   function closeModal() {
+	  setName('');
 		props.setModalVisibility(false);
   }
   
@@ -61,13 +62,17 @@ export function CreateNewModal(props) {
 			<button className="modal--close" onClick={closeModal}><i className="bi-x-circle"></i></button>
 	  </div>
 	  <div className="modal--container">
-	  	<fieldset>
-	  		<label htmlFor="name">Workshop Name</label>
+	  	<fieldset className="margin-b-2x">
+	  		<label htmlFor="name" className="required">Workshop Name</label>
 	  		<input id="name" type="text" value={name} onChange={handleUpdateName} />
 	  	</fieldset>
-			<div className="button-group">
-				<a className="btn btn-primary" onClick={insertWorkshop}>Create</a>
+	  	<fieldset className="margin-b-2x">
+	  		<label htmlFor="name" className="required">Workshop Description</label>
+	  		<input id="name" type="text" value={name} onChange={handleUpdateName} />
+	  	</fieldset>
+			<div className="button-group right">
 				<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
+				<a className="btn btn-primary" onClick={insertWorkshop}>Create</a>
 			</div>
 	  </div>
 	</div>

@@ -30,7 +30,7 @@ const workshopMutations = {
 	addWorkshop: async (_, args) => {
 	  const { name, userId } = args;
 	  
-	  const workshop = await Workshop.create({ name: name });
+	  const workshop = await Workshop.create({ name: name, status: "not-started" });
 	  workshop.users.push({ "userId": userId, "permission": "owner" });
 	  
 	  return workshop.save()
@@ -53,7 +53,7 @@ const workshopMutations = {
 	  const now = Date.now();
 	  const rounded = count > 0 ? ((Math.round(now / hour) * hour) + (hour * 24 * count)) : ((Math.round(now / hour) * hour) + (hour * 2));
 	  
-	  agenda.push({ "weight": count + 1, "startTime": rounded });
+	  agenda.push({ "weight": count + 1, "startTime": rounded, "status": "not-started" });
 	  	  
 	  return workshop.save()
 	    .then(savedDoc => {
@@ -75,7 +75,7 @@ const workshopMutations = {
 	  const activities = day.activities;
 	  const count = activities.length;
 	  
-	  activities.push({ "weight": count + 1, "duration": activity.suggestedDuration, "activity": activityId});
+	  activities.push({ "weight": count + 1, "duration": activity.suggestedDuration, "activity": activityId, "status": "not-started" });
 	  	  
 	  return workshop.save()
 	    .then(savedDoc => {

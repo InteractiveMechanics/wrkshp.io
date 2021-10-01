@@ -1,4 +1,10 @@
-#dashboard {}
+#dashboard {
+	background: url('../../assets/blob_large-hero.svg');
+	min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position: 200% -500%;
+}
 #dashboard main {	
 	display: flex;
   flex-wrap: wrap;
