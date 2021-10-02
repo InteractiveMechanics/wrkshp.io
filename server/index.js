@@ -31,6 +31,7 @@ async function startApolloServer() {
   const app = express();
   const httpServer = http.createServer(app);
   
+  /*
   app.use(
 	  expressJwt({
 		  secret: process.env.JWT_SECRET,
@@ -38,6 +39,7 @@ async function startApolloServer() {
 		  credentialsRequired: false
 	  })
   );
+  */
   
   const schema = makeExecutableSchema({ typeDefs, resolvers });
   const server = new ApolloServer({ 
