@@ -19,3 +19,18 @@
 #workshop .agenda .agenda--day .agenda--day--activity-list {
   position: relative;
 }
+
+#workshop .agenda .activities--popup {
+	position: absolute;
+  display: flex;
+  background: white;
+  top: 100%;
+  margin-top: 10px;
+  padding: 16px;
+  z-index: 9;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.25);
+}
+#workshop .agenda .activities--popup .activities--popup--col {
+	margin: 0 8px;
+	text-align: left;
+}

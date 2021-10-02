@@ -14,9 +14,12 @@ export function AgendaDay(props) {
 	const timestamp = props.day.startTime;
 	let totalTime = 0;
 	
+	const [ popupVisibility, setPopupVisibility ] = useState(false);
 	const [ weight, setWeight ] = useState(day.weight);
 	const [ datetime, setDatetime ] = useState(timestamp);
 	const [ activityId, setActivityId ] = useState('');
+	
+	const visibility = popupVisibility ? "activities--popup fade in" : "activities--popup fade";
 	
 	let deleteAgendaDayFromWorkshopVariables = { _id: day._id }
 	const [removeAgendaDayFromWorkshop, { data, loading, error }] = DeleteAgendaDayFromWorkshop(deleteAgendaDayFromWorkshopVariables, function() {});
@@ -47,15 +50,24 @@ export function AgendaDay(props) {
 		}
 	}
 	
-	function addBreak() {
-		setActivityId("61507edcb2924f8affee9bc5");
+	function addActivity(e) {
+		setActivityId(e.target.id);
+		setPopupVisibility(false);
 	}
+	
+	function toggleActivitiesPopup() {
+		if (popupVisibility) {
+			setPopupVisibility(false);
+		} else {
+			setPopupVisibility(true);
+		}
+  }
 	
 	
 	let activities = '';
   if (props.day.activities) {
 		activities = props.day.activities.map((activity, index) => {
-			if (index > 0) { totalTime += activity.duration }
+			totalTime += activity.duration;
 			return (
 				<AgendaActivity
 					key={index}
@@ -104,9 +116,20 @@ export function AgendaDay(props) {
 	    	{ activities }
 	    </div>
 	    <div className="agenda--day--activity-buttons button-group centered">
-	    	<button className="btn btn-primary"><i className="bi-plus-lg margin-r-1x"></i> Add Activity</button>
-	    	<button className="btn btn-outline-primary" onClick={addBreak}><i className="bi-cup margin-r-1x"></i> Add Break</button>
+	    	<button className="btn btn-primary" onClick={toggleActivitiesPopup}><i className="bi-plus-lg margin-r-1x"></i> Add Activity</button>
+	    	<button className="btn btn-outline-primary" id="61507edcb2924f8affee9bc5" onClick={addActivity}><i className="bi-cup margin-r-1x"></i> Add Break</button>
 	    	<button className="btn btn-outline-primary hidden"><i className="bi-tv margin-r-1x"></i> Add Presentation</button>
+	    	
+	    	<div className={visibility}>
+	    		<div className="activities--popup--col">
+	    			<h5 className="margin-b-1x">Ideation</h5>
+	    			<span id="61507f3fb2924f8affee9bc8" onClick={addActivity}>Brainstorm</span>
+	    		</div>
+	    		<div className="activities--popup--col">
+	    			<h5 className="margin-b-1x">Icebreakers</h5>
+	    			<span>Two Truths & A Lie</span>
+	    		</div>
+	    	</div>
 	    </div>
 	  </div>
   );
