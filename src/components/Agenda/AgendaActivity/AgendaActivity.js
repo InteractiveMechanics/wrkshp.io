@@ -16,6 +16,7 @@ export function AgendaActivity(props) {
 	const details = activity.activity;
 	
 	const [ duration, setDuration ] = useState(props.activity.duration);
+	const [ decrementDisabled, setDecrementDisabled ] = useState(false);
 	
 	useEffect(() => {
 		if (duration == "NaN" || "" || null) { setDuration(0) }
@@ -40,6 +41,11 @@ export function AgendaActivity(props) {
 	}
 	function changeDuration(e) {
 		setDuration(parseInt(e.target.value));
+		if (duration <= 5) {
+			setDecrementDisabled(true);
+		} else {
+			setDecrementDisabled(false);
+		}
 	}
 	
 	return (
@@ -48,7 +54,7 @@ export function AgendaActivity(props) {
   		<div className="agenda--activity--time">
   			<div className="agenda--activity--start-time">{ convertTime(totalTime) }</div>
   			<fieldset className="inline">
-  				<button className="btn btn-sm btn-icon" onClick={decrementDuration}><i className="bi-dash-circle"></i></button>
+  				<button className="btn btn-sm btn-icon" onClick={decrementDuration} disabled={decrementDisabled}><i className="bi-dash-circle"></i></button>
   				<input type="text" value={duration} onChange={changeDuration} min="0" />
 					<button className="btn btn-sm btn-icon" onClick={incrementDuration}><i className="bi-plus-circle"></i></button>
 				</fieldset>

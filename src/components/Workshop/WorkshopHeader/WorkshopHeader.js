@@ -31,7 +31,7 @@ export function WorkshopHeader(props) {
 			</div>
 			<div className="header--pill" onClick={triggerCreateModal}>
 				<i className="bi-person-plus margin-r-1x"></i>
-				Collaborators
+				Share
 			</div>
 			<div className="header--pill square">
 				<i className="bi-question-circle"></i>

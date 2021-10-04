@@ -31,7 +31,8 @@ export function Workshop() {
 				workshop={data.getWorkshops.workshops[0]}
 				setModalVisibility={setModalVisibility} />
 		
-			<WorkshopMain />
+			<WorkshopMain
+				workshop={data.getWorkshops.workshops[0]} />
         
       <CollaboratorsModal 
       	users={data.getWorkshops.workshops[0].users}

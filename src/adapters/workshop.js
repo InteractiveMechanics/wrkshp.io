@@ -45,7 +45,10 @@ export function GetWorkshops(variables, onCompleted) {
 	`;
 	
 	const { loading, error, data } = useQuery(getWorkshops, 
-  	{ variables: variables }
+  	{ 
+	  	variables: variables,
+	  	pollInterval: 5000,
+	  }
   );
   
   return { loading, error, data };
