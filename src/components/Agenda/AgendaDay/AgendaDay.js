@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
+import { DragDropContext } from 'react-beautiful-dnd';
 import DatePicker from "react-datepicker";
 
 import { convertDate, convertTime } from '../../../utils/datetime';
@@ -112,10 +113,11 @@ export function AgendaDay(props) {
 					<button className="btn btn-sm btn-text-danger" onClick={checkDaysAndRemove}><i className="bi-trash"></i> Delete Day</button>
 				</div>
 	    </div>
-	    <div className="agenda--day--activity-list">
 	    
-	    	{ activities }
-	    </div>
+			<div className="agenda--day--activity-list">
+				{ activities }
+			</div>
+	    
 	    <div className="agenda--day--activity-buttons button-group centered">
 	    	<button className="btn btn-primary" onClick={toggleActivitiesPopup}><i className="bi-plus-lg margin-r-1x"></i> Add Activity</button>
 	    	<button className="btn btn-outline-primary" id="61507edcb2924f8affee9bc5" onClick={addActivity}><i className="bi-cup margin-r-1x"></i> Add Break</button>

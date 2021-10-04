@@ -27,7 +27,7 @@ export function AgendaMain(props) {
 				setErrorMsg={setErrorMsg} />
 		));
 	}
-	
+
   return (
 		<main className="agenda">
 		  <h1 className="margin-b-2x">Agenda</h1>
