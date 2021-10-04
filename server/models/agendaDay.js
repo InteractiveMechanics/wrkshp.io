@@ -9,7 +9,7 @@ const AgendaDaySchema = new Schema({
 		required: true
 	},
 	startTime: {
-		type: String,
+		type: Date,
 		required: true
 	},
 	status: {

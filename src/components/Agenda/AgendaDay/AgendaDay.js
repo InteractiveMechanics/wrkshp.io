@@ -113,6 +113,7 @@ export function AgendaDay(props) {
 				</div>
 	    </div>
 	    <div className="agenda--day--activity-list">
+	    
 	    	{ activities }
 	    </div>
 	    <div className="agenda--day--activity-buttons button-group centered">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
-import { DragDropContext } from 'react-beautiful-dnd';
 
 import { AgendaDay } from '../../Agenda';
 import { ErrorMessage } from '../../General';
@@ -18,7 +17,7 @@ export function AgendaMain(props) {
   
   let days = '';
   if (agenda) {
-		days = agenda.map((day, index) => ( 
+		days = agenda.map((day, index) => (
 			<AgendaDay
 				key={index}
 				day={day}
@@ -29,10 +28,6 @@ export function AgendaMain(props) {
 		));
 	}
 	
-	function onDragEnd(result) {
-		
-	}
-	
   return (
 		<main className="agenda">
 		  <h1 className="margin-b-2x">Agenda</h1>
@@ -41,10 +36,7 @@ export function AgendaMain(props) {
 		  	setErrorMsg={setErrorMsg} />
 		  
 		  <div className="agenda--day-list">
-		    <DragDropContext
-		    	onDragEnd={onDragEnd}>
-		  			{ days }
-		  	</DragDropContext>
+		  	{ days }
 		  </div>
 		  
 		  <div className="button-group centered">
