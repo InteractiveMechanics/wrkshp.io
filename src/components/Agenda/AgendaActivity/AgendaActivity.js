@@ -18,19 +18,27 @@ export function AgendaActivity(props) {
 	const [ duration, setDuration ] = useState(props.activity.duration);
 	const [ decrementDisabled, setDecrementDisabled ] = useState(false);
 	
+	
+	let updateAgendaActivityVariables = { agendaDayId: day._id, activityId: activity._id, weight: props.activity.weight, duration: duration }
+	const [updateAgendaActivity] = UpdateAgendaActivity(updateAgendaActivityVariables, function() {});
+		
+	let deleteActivityFromAgendaDayVariables = { agendaDayId: day._id, activityId: activity._id }
+	const [deleteActivityFromAgendaDay] = DeleteActivityFromAgendaDay(deleteActivityFromAgendaDayVariables, function() {}); 
+	
+	
 	useEffect(() => {
 		if (duration == "NaN" || "" || null) { setDuration(0) }
 		updateAgendaActivity();
 	}, [duration]);
 	
-	let updateAgendaActivityVariables = { agendaDayId: day._id, activityId: activity._id, weight: props.activity.weight, duration: duration }
-	const [updateAgendaActivity, { data, loading, error }] = UpdateAgendaActivity(updateAgendaActivityVariables, function() {});
-		
-	let deleteActivityFromAgendaDayVariables = { agendaDayId: day._id, activityId: activity._id }
-	const [removeActivityFromAgendaDay, { data2, loading2, error2 }] = DeleteActivityFromAgendaDay(deleteActivityFromAgendaDayVariables, function() {}); 
+	useEffect(() => {
+		setDuration(props.activity.duration);
+	}, [props.activity.duration]);
 	
+		
 	function incrementDuration() {
 		setDuration(parseInt(duration) + 5);
+		checkForDisabled();
 	}
 	function decrementDuration() {
 		if (duration >= 5) {
@@ -38,10 +46,14 @@ export function AgendaActivity(props) {
 		} else {
 			setDuration(0);
 		}
+		checkForDisabled();
 	}
 	function changeDuration(e) {
 		setDuration(parseInt(e.target.value));
-		if (duration <= 5) {
+		checkForDisabled();
+	}
+	function checkForDisabled() {
+		if (duration < 5) {
 			setDecrementDisabled(true);
 		} else {
 			setDecrementDisabled(false);
@@ -55,7 +67,7 @@ export function AgendaActivity(props) {
   			<div className="agenda--activity--start-time">{ convertTime(totalTime) }</div>
   			<fieldset className="inline">
   				<button className="btn btn-sm btn-icon" onClick={decrementDuration} disabled={decrementDisabled}><i className="bi-dash-circle"></i></button>
-  				<input type="text" value={duration} onChange={changeDuration} min="0" />
+  				<input type="number" value={duration} onChange={changeDuration} min="0" />
 					<button className="btn btn-sm btn-icon" onClick={incrementDuration}><i className="bi-plus-circle"></i></button>
 				</fieldset>
   		</div>
@@ -64,7 +76,7 @@ export function AgendaActivity(props) {
   			<p>{details.description}</p>
   			<div className="button-group">
 					<button className="btn btn-sm btn-text-secondary"><i className="bi-gear-fill"></i> Edit Settings</button>
-					<button className="btn btn-sm btn-text-danger" onClick={removeActivityFromAgendaDay}><i className="bi-trash"></i> Delete Activity</button>
+					<button className="btn btn-sm btn-text-danger" onClick={deleteActivityFromAgendaDay}><i className="bi-trash"></i> Delete Activity</button>
 				</div>
   		</div>
   	</div>

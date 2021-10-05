@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { gql, useMutation } from "@apollo/client";
+import React, { useState } from 'react';
 
 import { AgendaDay } from '../../Agenda';
 import { ErrorMessage } from '../../General';
@@ -13,7 +12,7 @@ export function AgendaMain(props) {
 	const [ errorMsg, setErrorMsg ] = useState();
 	
 	let variables = { workshopId: workshop._id };
-	const [insertAgendaDayToWorkshop, { data, loading, error }] = AddAgendaDayToWorkshop(variables, function() {});
+	const [addAgendaDayToWorkshop, { data, loading, error }] = AddAgendaDayToWorkshop(variables, function() {});
   
   let days = '';
   if (agenda) {
@@ -40,7 +39,7 @@ export function AgendaMain(props) {
 		  </div>
 		  
 		  <div className="button-group centered">
-		  	<button className="btn btn-lg btn-primary" onClick={insertAgendaDayToWorkshop}><i className="bi-plus-lg margin-r-1x"></i> Add Day</button>
+		  	<button className="btn btn-lg btn-primary" onClick={addAgendaDayToWorkshop}><i className="bi-plus-lg margin-r-1x"></i> Add Day</button>
 		  </div>
 		</main>
   );

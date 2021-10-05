@@ -109,13 +109,13 @@ const typeDefs = gql`
 		addUserPermissionToTeam (teamId: ID!, userId: ID!, permission: String!): Organization
 		addUserPermissionToWorkshop (workshopId: ID!, userId: ID!, permission: String!): Workshop
 		
-		updateWorkshop (_id: ID!, name: String): Workshop
-		updateAgendaDay (_id: ID!, weight: Int, startTime: String): Workshop
-		updateAgendaActivity (agendaDayId: ID!, activityId: ID!, weight: Int, duration: Int): Workshop
+		updateWorkshop (_id: ID!, name: String, status: String): Workshop
+		updateAgendaDay (_id: ID!, weight: Int, startTime: String, status: String): Workshop
+		updateAgendaActivity (agendaDayId: ID!, activityId: ID!, weight: Int, duration: Int, status: String): Workshop
 		
-		deleteWorkshop (_id: ID!): Workshop
-		deleteAgendaDayFromWorkshop (_id: ID!): Workshop
-		deleteActivityFromAgendaDay (agendaDayId: ID!, activityId: ID!): Workshop
+		deleteWorkshop (_id: ID!): ID
+		deleteAgendaDayFromWorkshop (_id: ID!): ID
+		deleteActivityFromAgendaDay (agendaDayId: ID!, activityId: ID!): ID
 		
 		login(email: String!, password: String!): String
   }

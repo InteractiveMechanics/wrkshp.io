@@ -11,6 +11,9 @@ export function CollaboratorsModal(props) {
   function closeModal() {
 		props.setModalVisibility(false);
   }
+  function handleChange(e) {
+	  
+  }
   
   if (users) {
 		userList = users.map((user) => {			
@@ -24,7 +27,7 @@ export function CollaboratorsModal(props) {
 		  			</div>
 		  		</div>
 		  		<div className="collaborator--role">
-		  			<select name="roles" value={ user.permission }>
+		  			<select name="roles" value={ user.permission } onChange={handleChange}>
 		  				<option value="owner">Owner</option>
 							<option value="facilitator">Facilitator</option>
 							<option value="participant">Participant</option>

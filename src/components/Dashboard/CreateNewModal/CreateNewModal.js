@@ -23,9 +23,9 @@ export function CreateNewModal(props) {
 	}
   let AddWorkshopCompleted = function(data) {
 		setWorkshopId(data.addWorkshop._id);
-		insertWorkshopToTeam();
+		addWorkshopToTeam();
 	}
-  const [insertWorkshop, { data, loading, error }] = AddWorkshop(AddWorkshopVariables, AddWorkshopCompleted);
+  const [addWorkshop, { data, loading, error }] = AddWorkshop(AddWorkshopVariables, AddWorkshopCompleted);
   
   
   let AddWorkshopToTeamVariables = {
@@ -33,9 +33,9 @@ export function CreateNewModal(props) {
   	teamId: teamId
   }
   let AddWorkshopToTeamCompleted = function() {
-		insertAgendaDayToWorkshop();
+		addAgendaDayToWorkshop();
 	}
-	const [insertWorkshopToTeam, { data2, loading2, error2 }] = AddWorkshopToTeam(AddWorkshopToTeamVariables, AddWorkshopToTeamCompleted);
+	const [addWorkshopToTeam, { data2, loading2, error2 }] = AddWorkshopToTeam(AddWorkshopToTeamVariables, AddWorkshopToTeamCompleted);
 	
 	
 	let AddAgendaDayToWorkshopVariables = { workshopId: workshopId };
@@ -43,7 +43,7 @@ export function CreateNewModal(props) {
 		const path = "/workshop/" + workshopId + "/agenda";
 		history.push(path)
 	}
-	const [insertAgendaDayToWorkshop, { data3, loading3, error3 }] = AddAgendaDayToWorkshop(AddAgendaDayToWorkshopVariables, AddAgendaDayToWorkshopCompleted);
+	const [addAgendaDayToWorkshop, { data3, loading3, error3 }] = AddAgendaDayToWorkshop(AddAgendaDayToWorkshopVariables, AddAgendaDayToWorkshopCompleted);
   
   
   function handleUpdateName(e) {
@@ -72,7 +72,7 @@ export function CreateNewModal(props) {
 	  	</fieldset>
 			<div className="button-group right">
 				<a className="btn btn-outline" onClick={closeModal}>Cancel</a>
-				<a className="btn btn-primary" onClick={insertWorkshop}>Create</a>
+				<a className="btn btn-primary" onClick={addWorkshop}>Create</a>
 			</div>
 	  </div>
 	</div>

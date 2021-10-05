@@ -1,7 +1,7 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 
 export function GetOrganizationsForUser(variables, onCompleted) {
-	const getOrganizationsForUser = gql`
+	const getOrganizationsForUserGQL = gql`
 		query getOrganizationsForUser($id: ID, $userId: ID, $page: Int, $limit: Int) {
 		  getOrganizations(_id: $id, userId: $userId, page: $page, limit: $limit) {
 		    organizations {
@@ -34,6 +34,7 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		        workshops {
 		          _id
 		          name
+		          status
 		          users {
 								userId {
 	                _id
@@ -59,19 +60,20 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		}
 	`;
 	
-	const { loading, error, data } = useQuery(getOrganizationsForUser, 
+	const { loading, error, data, refetch } = useQuery(
+		getOrganizationsForUserGQL, 
   	{ 
 	  	variables: variables,
 	  	onCompleted: onCompleted,
-	  	pollInterval: 5000,
+	  	pollInterval: 5000
 	  }
   );
   
-  return { loading, error, data };
+  return { loading, error, data, refetch };
 }
 
 export function AddWorkshop(variables, onCompleted) {
-	const addWorkshop = gql`
+	const addWorkshopGQL = gql`
 	  mutation addWorkshop($name: String!, $userId: ID!) {
 	  	addWorkshop(name: $name, userId: $userId) {
 	      _id
@@ -79,19 +81,19 @@ export function AddWorkshop(variables, onCompleted) {
 	  }
 	`;
 	
-	const [insertWorkshop, { data, loading, error }] = useMutation(
-  	addWorkshop,
+	const [addWorkshop, { data, loading, error }] = useMutation(
+  	addWorkshopGQL,
   	{
   		variables: variables,
   		onCompleted: onCompleted
 		}
   );
 	
-	return [insertWorkshop, { data, loading, error }]
+	return [addWorkshop, { data, loading, error }]
 }
 
 export function AddWorkshopToTeam(variables, onCompleted) {
-	const addWorkshopToTeam = gql`
+	const addWorkshopToTeamGQL = gql`
 	  mutation addWorkshopToTeam($workshopId: ID!, $teamId: ID!) {
 	  	addWorkshopToTeam(workshopId: $workshopId, teamId: $teamId) {
 	      _id
@@ -99,16 +101,33 @@ export function AddWorkshopToTeam(variables, onCompleted) {
 	  }
 	`;
 	
-	const [insertWorkshopToTeam, { data, loading, error }] = useMutation(
-  	addWorkshopToTeam,
+	const [addWorkshopToTeam, { data, loading, error }] = useMutation(
+  	addWorkshopToTeamGQL,
   	{
   		variables: variables,
-  		refetchQueries: [
-  			'getOrganizationsForUser'
-  		],
   		onCompleted: onCompleted
 		}
   );
 	
-	return [insertWorkshopToTeam, { data, loading, error }]
+	return [addWorkshopToTeam, { data, loading, error }]
+}
+
+export function DeleteWorkshop(variables, onCompleted) {
+	const deleteWorkshopGQL = gql`
+		mutation deleteWorkshop($_id: ID!) {
+		  deleteWorkshop(_id: $_id)
+		}
+	`;
+	
+	const [deleteWorkshop, { data, loading, error }] = useMutation(
+  	deleteWorkshopGQL,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+	  		'getOrganizationsForUser'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [deleteWorkshop, { data, loading, error }];
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { usePrevious } from '../../utils/usePrevious';
 
 import { GetOrganizationsForUser, LazyGetOrganizationsForUser } from '../../adapters/dashboard';
-import { DashboardHeader, DashboardCard, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
+import { DashboardHeader, DashboardCardList, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
 
 import './Dashboard.css';
 
@@ -20,7 +20,7 @@ export function Dashboard() {
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
   
   useEffect(() => {
-		if(loading === false && data && Object.keys(currentOrg).length === 0){			
+		if(loading === false && data){			
 			setCurrentOrg(data.getOrganizations.organizations[0]);
 		  setCurrentTeam(data.getOrganizations.organizations[0].teams[0]);
 		}
@@ -51,7 +51,7 @@ export function Dashboard() {
 				setCurrentTeam={setCurrentTeam}
 				setModalVisibility={setModalVisibility} />
 				
-			<DashboardCard
+			<DashboardCardList
 				currentTeam={currentTeam}
 				modalVisibility={modalVisibility}
 			

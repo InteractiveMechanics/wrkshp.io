@@ -23,7 +23,6 @@ const workshopQueries = {
       currentPage: page
     }
   },
-
 }
 
 const workshopMutations = {
@@ -112,17 +111,18 @@ const workshopMutations = {
 	},
 	
 	updateWorkshop: async(_, args) => {
-		const { _id, name } = args;
+		const { _id, name, status } = args;
 		
 		const workshop = await Workshop.findOne({ "_id": _id });
 		
 		if (name) { workshop.name = name }
+		if (status) { workshop.status = status }
 		
 		return workshop.save();
 	},
 	
 	updateAgendaDay: async(_, args) => {
-		const { _id, weight, startTime } = args;
+		const { _id, weight, startTime, status } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda._id": _id });
 		const agendaDays = workshop.agenda;
@@ -130,12 +130,13 @@ const workshopMutations = {
 	  	  
 	  if (weight) { day.weight = weight }
 	  if (startTime) { day.startTime = startTime }
+	  if (status) { day.status = status }
 	  		
 		return workshop.save();
 	},
 	
 	updateAgendaActivity: async(_, args) => {
-		const { agendaDayId, activityId, weight, duration } = args;
+		const { agendaDayId, activityId, weight, duration, status } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda.activities._id": activityId });
 		const agendaDays = workshop.agenda;
@@ -144,6 +145,7 @@ const workshopMutations = {
 	  	  
 	  if (weight) { activity.weight = weight }
 	  if (duration) { activity.duration = duration }
+	  if (status) { activity.status = status }
 	  		
 		return workshop.save();
 	},
@@ -152,7 +154,7 @@ const workshopMutations = {
 		const { _id } = args;
 		
 		const workshop = await Workshop.findOneAndDelete({ "_id": _id });
-		return workshop.save();
+		return _id;
 	},
 	
 	deleteAgendaDayFromWorkshop: async(_, args) => {
@@ -163,8 +165,8 @@ const workshopMutations = {
 	  const day = agendaDays.id(_id);
 	  
 	  day.remove();
-		
-		return workshop.save();
+		workshop.save();
+		return _id;
 	},
 	
 	deleteActivityFromAgendaDay: async(_, args) => {
@@ -176,8 +178,8 @@ const workshopMutations = {
 	  const activity = day.activities.id(activityId);
 	  
 	  activity.remove();
-		
-		return workshop.save();
+		workshop.save();
+		return activityId;
 	},
 }
 

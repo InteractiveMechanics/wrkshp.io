@@ -1,0 +1,7 @@
+#dashboard .dashboard--card-list {
+	width: 83%;
+	display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

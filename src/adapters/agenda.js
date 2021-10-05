@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 
 export function AddAgendaDayToWorkshop(variables, onCompleted) {
-	const addAgendaDayToWorkshop = gql`
+	const addAgendaDayToWorkshopGQL = gql`
 	  mutation addAgendaDayToWorkshop($workshopId: ID!) {
 		  addAgendaDayToWorkshop(workshopId: $workshopId) {
 		    _id
@@ -9,8 +9,8 @@ export function AddAgendaDayToWorkshop(variables, onCompleted) {
 		}
 	`;
 	
-	const [insertAgendaDayToWorkshop, { data, loading, error }] = useMutation(
-  	addAgendaDayToWorkshop,
+	const [addAgendaDayToWorkshop, { data, loading, error }] = useMutation(
+  	addAgendaDayToWorkshopGQL,
   	{
   		variables: variables,
   		refetchQueries: [
@@ -19,11 +19,11 @@ export function AddAgendaDayToWorkshop(variables, onCompleted) {
   		onCompleted: onCompleted
 	});
 	
-	return [insertAgendaDayToWorkshop, { data, loading, error }];
+	return [addAgendaDayToWorkshop, { data, loading, error }];
 }
 
 export function AddActivityToAgendaDay(variables, onCompleted) {
-	const addActivityToAgendaDay = gql`
+	const addActivityToAgendaDayGQL = gql`
 		mutation addActivityToAgendaDay($agendaDayId: ID!, $activityId: ID!) {
 		  addActivityToAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
 		    _id
@@ -31,8 +31,8 @@ export function AddActivityToAgendaDay(variables, onCompleted) {
 		}
 	`;
 	
-	const [insertActivityToAgendaDay, { data, loading, error }] = useMutation(
-  	addActivityToAgendaDay,
+	const [addActivityToAgendaDay, { data, loading, error }] = useMutation(
+  	addActivityToAgendaDayGQL,
   	{
   		variables: variables,
   		refetchQueries: [
@@ -41,13 +41,13 @@ export function AddActivityToAgendaDay(variables, onCompleted) {
   		onCompleted: onCompleted
 	});
 	
-	return [insertActivityToAgendaDay, { data, loading, error }];
+	return [addActivityToAgendaDay, { data, loading, error }];
 }
 
 export function UpdateAgendaDay(variables, onCompleted) {
 	const updateAgendaDayGQL = gql`
-		mutation updateAgendaDay($_id: ID!, $weight: Int, $startTime: String) {
-		  updateAgendaDay(_id: $_id, weight: $weight, startTime: $startTime) {
+		mutation updateAgendaDay($_id: ID!, $weight: Int, $startTime: String, $status: String) {
+		  updateAgendaDay(_id: $_id, weight: $weight, startTime: $startTime, status: $status) {
 		    _id
 		  }
 		}
@@ -68,8 +68,8 @@ export function UpdateAgendaDay(variables, onCompleted) {
 
 export function UpdateAgendaActivity(variables, onCompleted) {
 	const updateAgendaActivityGQL = gql`
-		mutation updateAgendaActivity($agendaDayId: ID!, $activityId: ID!, $weight: Int, $duration: Int) {
-		  updateAgendaActivity(agendaDayId: $agendaDayId, activityId: $activityId, weight: $weight, duration: $duration) {
+		mutation updateAgendaActivity($agendaDayId: ID!, $activityId: ID!, $weight: Int, $duration: Int, $status: String) {
+		  updateAgendaActivity(agendaDayId: $agendaDayId, activityId: $activityId, weight: $weight, duration: $duration, status: $status) {
 		    _id
 		  }
 		}
@@ -89,16 +89,14 @@ export function UpdateAgendaActivity(variables, onCompleted) {
 }
 
 export function DeleteAgendaDayFromWorkshop(variables, onCompleted) {
-	const deleteAgendaDayFromWorkshop = gql`
+	const deleteAgendaDayFromWorkshopGQL = gql`
 		mutation deleteAgendaDayFromWorkshop($_id: ID!) {
-		  deleteAgendaDayFromWorkshop(_id: $_id) {
-		    _id
-		  }
+		  deleteAgendaDayFromWorkshop(_id: $_id)
 		}
 	`;
 	
-	const [removeAgendaDayFromWorkshop, { data, loading, error }] = useMutation(
-  	deleteAgendaDayFromWorkshop,
+	const [deleteAgendaDayFromWorkshop, { data, loading, error }] = useMutation(
+  	deleteAgendaDayFromWorkshopGQL,
   	{
   		variables: variables,
   		refetchQueries: [
@@ -107,20 +105,18 @@ export function DeleteAgendaDayFromWorkshop(variables, onCompleted) {
   		onCompleted: onCompleted
 	});
 	
-	return [removeAgendaDayFromWorkshop, { data, loading, error }];
+	return [deleteAgendaDayFromWorkshop, { data, loading, error }];
 }
 
 export function DeleteActivityFromAgendaDay(variables, onCompleted) {
-	const deleteActivityFromAgendaDay = gql`
+	const deleteActivityFromAgendaDayGQL = gql`
 		mutation deleteActivityFromAgendaDay($agendaDayId: ID!, $activityId: ID!) {
-		  deleteActivityFromAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId) {
-		    _id
-		  }
+		  deleteActivityFromAgendaDay(agendaDayId: $agendaDayId, activityId: $activityId)
 		}
 	`;
 	
-	const [removeActivityFromAgendaDay, { data, loading, error }] = useMutation(
-  	deleteActivityFromAgendaDay,
+	const [deleteActivityFromAgendaDay, { data, loading, error }] = useMutation(
+  	deleteActivityFromAgendaDayGQL,
   	{
   		variables: variables,
   		refetchQueries: [
@@ -129,5 +125,5 @@ export function DeleteActivityFromAgendaDay(variables, onCompleted) {
   		onCompleted: onCompleted
 	});
 	
-	return [removeActivityFromAgendaDay, { data, loading, error }];
+	return [deleteActivityFromAgendaDay, { data, loading, error }];
 }

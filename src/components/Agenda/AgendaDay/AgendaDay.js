@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from "@apollo/client";
-import { DragDropContext } from 'react-beautiful-dnd';
 import DatePicker from "react-datepicker";
 
 import { convertDate, convertTime } from '../../../utils/datetime';
@@ -23,18 +22,18 @@ export function AgendaDay(props) {
 	const visibility = popupVisibility ? "activities--popup fade in" : "activities--popup fade";
 	
 	let deleteAgendaDayFromWorkshopVariables = { _id: day._id }
-	const [removeAgendaDayFromWorkshop, { data, loading, error }] = DeleteAgendaDayFromWorkshop(deleteAgendaDayFromWorkshopVariables, function() {});
+	const [deleteAgendaDayFromWorkshop, { data, loading, error }] = DeleteAgendaDayFromWorkshop(deleteAgendaDayFromWorkshopVariables, function() {});
 	
 	let addActivityToAgendaDayVariables = { agendaDayId: day._id, activityId: activityId };
-	const [insertActivityToAgendaDay, { data2, loading2, error2 }] = AddActivityToAgendaDay(addActivityToAgendaDayVariables, function() {});
+	const [addActivityToAgendaDay, { data2, loading2, error2 }] = AddActivityToAgendaDay(addActivityToAgendaDayVariables, function() {});
 	
-	let updateAgendaDayVariables = { _id: day._id, startTime: String(datetime) }
+	let updateAgendaDayVariables = { _id: day._id, startTime: String(datetime), weight: parseInt(weight) }
 	const [updateAgendaDay, { data3, loading3, error3 }] = UpdateAgendaDay(updateAgendaDayVariables, function() {});
 	
 	
 	useEffect(() => {
 		if (activityId != ''){
-			insertActivityToAgendaDay();
+			addActivityToAgendaDay();
 			setActivityId('');
 		}
 	}, [activityId]);
@@ -45,7 +44,7 @@ export function AgendaDay(props) {
 	
 	function checkDaysAndRemove() {
 		if (props.daysTotal > 1) {
-			removeAgendaDayFromWorkshop()
+			deleteAgendaDayFromWorkshop()
 		} else {
 			props.setErrorMsg("Each workshop must have at least one day in the agenda.");
 		}
