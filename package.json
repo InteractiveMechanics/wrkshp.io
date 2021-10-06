@@ -24,7 +24,9 @@
   },
   "scripts": {
 	  "start": "cd server && npm start",
-    "start-client": "react-scripts start",
+	  "start-frontend": "react-scripts start",
+    "start-backend": "node server/index.js",
+    "start-dev": "npm-run-all -p start-frontend start-backend",
 		"build": "react-scripts build && (cd server && npm install)",
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",

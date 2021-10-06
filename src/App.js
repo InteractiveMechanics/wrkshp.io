@@ -1,3 +1,5 @@
+import dotenv  from "dotenv"
+
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
@@ -7,13 +9,15 @@ import { Login, Register, Dashboard, Workshop, Agenda } from "./pages";
 
 import './App.css';
 
+const PORT = process.env.PORT || 4000;
+
 const link = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: `http://localhost:${PORT}/graphql`,
   credentials: 'same-origin'
 });
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: `http://localhost:${PORT}/graphql`,
   cache: new InMemoryCache({
 	  typePolicies: {
 	    Agenda: {
