@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a861078f.chunk.css",
+    "main.js": "/static/js/main.6518782a.chunk.js",
+    "main.js.map": "/static/js/main.6518782a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.53310f68.js",
+    "runtime-main.js.map": "/static/js/runtime-main.53310f68.js.map",
+    "static/css/2.08449caf.chunk.css": "/static/css/2.08449caf.chunk.css",
+    "static/js/2.81c9961d.chunk.js": "/static/js/2.81c9961d.chunk.js",
+    "static/js/2.81c9961d.chunk.js.map": "/static/js/2.81c9961d.chunk.js.map",
+    "static/js/3.cb86dc33.chunk.js": "/static/js/3.cb86dc33.chunk.js",
+    "static/js/3.cb86dc33.chunk.js.map": "/static/js/3.cb86dc33.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.08449caf.chunk.css.map": "/static/css/2.08449caf.chunk.css.map",
+    "static/css/main.a861078f.chunk.css.map": "/static/css/main.a861078f.chunk.css.map",
+    "static/js/2.81c9961d.chunk.js.LICENSE.txt": "/static/js/2.81c9961d.chunk.js.LICENSE.txt",
+    "static/media/Dashboard.css": "/static/media/blob_large-hero.710e8780.svg",
+    "static/media/App.css": "/static/media/bootstrap-icons.dfd0ea12.woff2",
+    "static/media/DashboardCard.css": "/static/media/card_background.851e805a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.53310f68.js",
+    "static/css/2.08449caf.chunk.css",
+    "static/js/2.81c9961d.chunk.js",
+    "static/css/main.a861078f.chunk.css",
+    "static/js/main.6518782a.chunk.js"
+  ]
+}

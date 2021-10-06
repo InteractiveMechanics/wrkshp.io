@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const path = require('path');
 const express = require('express');
 const expressJwt = require('express-jwt');
 const http = require('http');
@@ -15,7 +16,7 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const MONGO_URI = "mongodb+srv://" + process.env.MONGO_USER + ":" + process.env.MONGO_PASSWORD + "@cluster0.hdhdz.mongodb.net/" + process.env.MONGO_DB + "?retryWrites=true&w=majority";
 
 mongoose
@@ -40,6 +41,12 @@ async function startApolloServer() {
 	  })
   );
   */
+  
+  const buildPath = path.join(__dirname, '..', 'build');
+	app.use(express.static(buildPath));
+	app.get('*', (req, res) => {
+	  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+	});
   
   const schema = makeExecutableSchema({ typeDefs, resolvers });
   const server = new ApolloServer({ 
