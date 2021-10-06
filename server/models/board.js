@@ -7,7 +7,7 @@ const BoardSchema = new Schema({
 		required: true,
 		enum: ["not-started", "in-progress", "completed"]
 	},
-	objects: [{
+	widgets: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Widget',
 		required: true

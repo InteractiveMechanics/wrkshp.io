@@ -1,0 +1,14 @@
+.board--wrapper {
+	width: 960px;
+	margin: 0 48px;
+}
+.board--wrapper .board--header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+.board--wrapper .board {
+	width: 100%;
+	height: 600px;
+	background: white;
+}
