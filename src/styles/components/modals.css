@@ -7,6 +7,10 @@
   background: rgba(0,0,0,0.65);
   transition: 0.5s all;
   z-index: 99;
+  transform: scale(1.1);
+}
+.modal.in {
+	transform: scale(1);
 }
 
 .modal .modal--header {

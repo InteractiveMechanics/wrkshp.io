@@ -26,9 +26,11 @@ export function WorkshopHeader(props) {
 		</div>
 
 		<div className="header--group header--group--right">
-			<div className="header--pill">
-				<Link to={ "/workshop/" + workshop._id }><i className="bi-ui-checks-grid"></i> Start Workshop</Link>
-			</div>
+			{ workshop.status == "not-started" ? (
+				<div className="header--pill">
+					<Link to={ "/workshop/" + workshop._id }><i className="bi-ui-checks-grid"></i> Start Workshop</Link>
+				</div>
+			) : null }
 			<div className="header--pill" onClick={triggerCreateModal}>
 				<i className="bi-person-plus margin-r-1x"></i>
 				Share

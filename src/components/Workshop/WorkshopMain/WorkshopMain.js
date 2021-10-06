@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { convertDate, convertTime, compareTimeToNow } from '../../../utils/datetime.js';
 import { UpdateWorkshop } from '../../../adapters/workshop';
+import { BoardList } from '../../Workshop';
+
+import './WorkshopMain.css';
 
 export function WorkshopMain(props) {
 	const workshop = props.workshop;
@@ -23,7 +26,7 @@ export function WorkshopMain(props) {
 	}
 	
   return (
-	  <div>
+	  <div className="workshop--wrapper">
 		  { status == "not-started" ? (
 				<div className="start-workshop">
 					<h1>{workshop.name}</h1>
@@ -34,7 +37,18 @@ export function WorkshopMain(props) {
 					
 					<button className="btn btn-primary btn-lg" onClick={startWorkshop}>Start Workshop</button>
 				</div>
-			) : null}
+			) : null }
+			
+			{ status == "in-progress" ? (
+				<div className="workshop--stage">
+					<div className="board--list--arrow-prev"><i className="bi-arrow-left-circle"></i></div>
+					
+					<BoardList
+						activities={workshop.agenda[0].activities} />
+						
+					<div className="board--list--arrow-next"><i className="bi-arrow-right-circle"></i></div>
+				</div>
+			) : null }
 		</div>
   );
 }

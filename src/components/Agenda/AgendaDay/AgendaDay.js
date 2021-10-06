@@ -42,6 +42,7 @@ export function AgendaDay(props) {
 		updateAgendaDay();
 	}, [datetime, weight]);
 	
+	
 	function checkDaysAndRemove() {
 		if (props.daysTotal > 1) {
 			deleteAgendaDayFromWorkshop()
@@ -102,7 +103,7 @@ export function AgendaDay(props) {
 	      	<DatePicker 
 	      		selected={new Date(parseInt(datetime))} 
 	      		onChange={(date) => setDatetime(date.getTime())} 
-	      		customInput={<Timepicker />} 
+	      		customInput={<Timepicker />}	      		
 	      		showTimeSelect
 						showTimeSelectOnly
 						timeIntervals={15}
