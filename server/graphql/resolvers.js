@@ -80,7 +80,7 @@ const resolvers = {
 			return jwt.sign(
 				{ "http://localhost:4000/graphql": { id } },
 				process.env.JWT_SECRET,
-				{ algorithm: "HS256", subject: id, expiresIn: "1d" }
+				{ algorithm: "RS256", subject: id, expiresIn: "1d" }
 			);
     },
   },

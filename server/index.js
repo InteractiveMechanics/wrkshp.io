@@ -2,7 +2,8 @@ require('dotenv').config({ path: '../.env' });
 
 const path = require('path');
 const express = require('express');
-const expressJwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
+const jwksClient = require('jwks-rsa');
 const http = require('http');
 const mongoose = require('mongoose');
 
@@ -32,15 +33,22 @@ async function startApolloServer() {
   const app = express();
   const httpServer = http.createServer(app);
   
-  /*
-  app.use(
-	  expressJwt({
-		  secret: process.env.JWT_SECRET,
-		  algorithms: ["HS256"],
-		  credentialsRequired: false
-	  })
-  );
-  */
+  const client = jwksClient({
+	  jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+	});
+	
+	function getKey(header, cb){
+	  client.getSigningKey(header.kid, function(err, key) {
+	    var signingKey = key.publicKey || key.rsaPublicKey;
+	    cb(null, signingKey);
+	  });
+	}
+	
+	const options = {
+	  audience: process.env.CLIENT_ID,
+	  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+	  algorithms: ['RS256']
+	};
   
   const buildPath = path.join(__dirname, '..', 'build');
 	app.use(express.static(buildPath));
@@ -52,8 +60,19 @@ async function startApolloServer() {
   const server = new ApolloServer({ 
 	  schema,
 	  context: ({ req }) => {
-		  const user = req.user || null;
-		  return { user };
+	    const token = req.headers.authorization;
+	    const user = new Promise((resolve, reject) => {
+	      jwt.verify(token, getKey, options, (err, decoded) => {
+	        if(err) {
+	          return reject(err);
+	        }
+	        resolve(decoded.email);
+	      });
+	    });
+	
+	    return {
+	      user
+	    }
 	  },
 	  plugins: [
 		  ApolloServerPluginDrainHttpServer({ httpServer }),
