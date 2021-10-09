@@ -56,31 +56,6 @@ async function startApolloServer() {
 		  }
 		  
 		  return { isAuth };
-		  
-		  /*
-		  const header = req.headers.authorization;
-		  if (!header) return { isAuth: false };
-		
-		  const token = header.split(" ");
-		  if (!token) return { isAuth: false };
-		
-		  let decodeToken;
-		  try {
-		    decodeToken = new Promise((resolve, reject) => {		    
-		      jwt.verify(token, getKey, options, (err, decoded) => {
-		        if(err) {
-		          return reject(err);
-		        }
-		        resolve(decoded.email);
-		      });
-		    });
-		  } catch (err) {
-		    return { isAuth: false };
-		  }
-		
-		  if (!!!decodeToken) return { isAuth: false };
-		  return { isAuth: true, userId: decodeToken.userId };
-		  */
 	  },
 	  plugins: [
 		  ApolloServerPluginDrainHttpServer({ httpServer }),
