@@ -27,7 +27,7 @@ export function Dashboard() {
 		}
   }, [loading, data]);
   
-  if (loading) {
+  if (loading || authLoading) {
 		return "Loading...";
   }
   if (error) {
@@ -61,7 +61,7 @@ export function Dashboard() {
 		</main>
 		
 		{ !isAuthenticated && (<button onClick={loginWithRedirect}>Login</button>) }
-		{ isAuthenticated && (<h1>Welcome, {user.email}</h1>) }
+		{ isAuthenticated && (<div><h1>Welcome, {user.email}</h1><button onClick={logout}>Logout</button></div>) }
 		
 		<CreateNewModal
 			currentTeam={currentTeam}

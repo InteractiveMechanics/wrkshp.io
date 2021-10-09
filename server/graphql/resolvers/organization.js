@@ -4,11 +4,9 @@ const { Organization } = require('../../models/organization');
 
 const organizationQueries = {
 	getOrganizations: async (_, args, { isAuth }) => {
-		/*
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
-    */
 		
     const { _id = null, userId = null, page = 1, limit = 20 } = args;
 

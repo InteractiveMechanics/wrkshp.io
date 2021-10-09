@@ -48,7 +48,7 @@ export default function App() {
 		domain="dev-4epe1avp.us.auth0.com"
 		client_id="7evN3Cf0KtjvGezfZdzUxDRkcjbQUA3l"
 		audience="http://workshopio-api"
-		redirect_url="http://localhost:3000/dashboard"
+		redirect_uri="http://localhost:3000"
 		onRedirectCallback={onRedirectCallback}
 		>
 		<ApolloProvider client={client}>
