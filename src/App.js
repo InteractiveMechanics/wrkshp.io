@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import history from './utils/history';
 import ApolloWrapper from './ApolloWrapper';
@@ -16,27 +16,27 @@ const onRedirectCallback = (appState) => {
 	)
 }
 
-export default function App() {
+export default function App() {	
   return (
-	<Auth0Provider
-		domain="dev-4epe1avp.us.auth0.com"
-		client_id="7evN3Cf0KtjvGezfZdzUxDRkcjbQUA3l"
-		audience="http://workshopio-api"
-		redirect_uri="http://localhost:3000"
-		onRedirectCallback={onRedirectCallback}
-		>
-		<ApolloWrapper>
-			<Router>
-				<Route path="/login" component={() => <Login />} />
-				<Route path="/register" component={() => <Register />} />
-				<Route path="/dashboard" render={() => <Dashboard />} />
-				<Switch>
-					<Route path="/workshop/:id/agenda" render={() => <Agenda />} />
-					<Route path="/workshop/:id" render={() => <Workshop />} />
-				</Switch>
-				<Footer />
-			</Router>
-		</ApolloWrapper>
-	</Auth0Provider>
+		<Auth0Provider
+			domain="dev-4epe1avp.us.auth0.com"
+			client_id="7evN3Cf0KtjvGezfZdzUxDRkcjbQUA3l"
+			audience="http://workshopio-api"
+			redirect_uri="http://localhost:3000/dashboard"
+			onRedirectCallback={onRedirectCallback}
+			>
+			<ApolloWrapper>
+				<Router>
+					<Route path="/login" component={() => <Login />} />
+					<Route path="/register" component={() => <Register />} />
+					<Route path="/dashboard" render={() => <Dashboard />} />
+					<Switch>
+						<Route path="/workshop/:id/agenda" render={() => <Agenda />} />
+						<Route path="/workshop/:id" render={() => <Workshop />} />
+					</Switch>
+					<Footer />
+				</Router>
+			</ApolloWrapper>
+		</Auth0Provider>
   );
 }

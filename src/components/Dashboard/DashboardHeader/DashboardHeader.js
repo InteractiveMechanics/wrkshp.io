@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth0 } from '../../../utils/auth';
 
 export function DashboardHeader(props) {
+	const { isAuthenticated, logout, user } = useAuth0();
   const orgs = props.orgs;
   const currentOrg = props.currentOrg;
   let orgList = '';
@@ -55,7 +57,7 @@ export function DashboardHeader(props) {
 				</div>
 				<ul className="dropdown right">
 					<li>My Account</li>
-					<li>Logout</li>
+					{ isAuthenticated && (<li onClick={logout}>Logout</li>) }
 				</ul>
 			</div>
 		</div>

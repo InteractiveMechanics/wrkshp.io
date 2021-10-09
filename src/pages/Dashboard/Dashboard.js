@@ -18,7 +18,7 @@ export function Dashboard() {
   
   let variables = { "id": id, "userId": userId, "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
-  const { isAuthenticated, loading: authLoading, loginWithRedirect, logout, user } = useAuth0();
+  const { isAuthenticated, loading: authLoading, loginWithRedirect, loginWithPopup, logout, user } = useAuth0();
   
   useEffect(() => {
 		if(loading === false && data){			
@@ -59,9 +59,6 @@ export function Dashboard() {
 			
 				setModalVisibility={setModalVisibility} />
 		</main>
-		
-		{ !isAuthenticated && (<button onClick={loginWithRedirect}>Login</button>) }
-		{ isAuthenticated && (<div><h1>Welcome, {user.email}</h1><button onClick={logout}>Logout</button></div>) }
 		
 		<CreateNewModal
 			currentTeam={currentTeam}
