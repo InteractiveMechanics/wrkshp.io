@@ -3,34 +3,33 @@ const { AuthenticationError } = require('apollo-server-express');
 const { Organization } = require('../../models/organization');
 
 const organizationQueries = {
-	getOrganizations: async (_, args) => {
-		//try {
-			//const email = await user;
-	    const { _id = null, userId = null, page = 1, limit = 20 } = args;
-	
-	    let searchQuery = {};
-	    
-			if (_id || userId) { searchQuery.$and = [] }
-	    if (_id) { searchQuery.$and.push({ _id: _id }) }
-	  	if (userId) { searchQuery.$and.push({ "users.userId": userId }) }
-	          
-	    const organizations = await Organization.find(searchQuery)
-	      .limit(limit)
-	      .skip((page - 1) * limit)
-	      .lean();
-	
-	    const count = await Organization.countDocuments(searchQuery);
-	    
-	    return {
-	      organizations,
-	      totalPages: Math.ceil(count / limit),
-	      currentPage: page
-	    }
-	  /*
-	  } catch(e) {
-		  throw new AuthenticationError('You must be logged in to do this');
-	  }
-	  */
+	getOrganizations: async (_, args, { isAuth }) => {
+		/*
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    */
+		
+    const { _id = null, userId = null, page = 1, limit = 20 } = args;
+
+    let searchQuery = {};
+    
+		if (_id || userId) { searchQuery.$and = [] }
+    if (_id) { searchQuery.$and.push({ _id: _id }) }
+  	if (userId) { searchQuery.$and.push({ "users.userId": userId }) }
+          
+    const organizations = await Organization.find(searchQuery)
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .lean();
+
+    const count = await Organization.countDocuments(searchQuery);
+    
+    return {
+      organizations,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page
+    }
   },
 }
 

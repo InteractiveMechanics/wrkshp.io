@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
 import { DashboardHeader, DashboardCardList, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
+import { useAuth0 } from '../../utils/auth';
 
 import './Dashboard.css';
 
@@ -17,6 +18,7 @@ export function Dashboard() {
   
   let variables = { "id": id, "userId": userId, "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
+  const { isAuthenticated, loading: authLoading, loginWithRedirect, logout, user } = useAuth0();
   
   useEffect(() => {
 		if(loading === false && data){			
@@ -29,7 +31,7 @@ export function Dashboard() {
 		return "Loading...";
   }
   if (error) {
-    console.log(error);
+    return String(error);
   }
       
   return (
@@ -42,6 +44,7 @@ export function Dashboard() {
 			setCurrentOrg={setCurrentOrg}
 			setCurrentTeam={setCurrentTeam} />
 			
+
 		<main>
 			<DashboardTeamsList
 				currentOrg={currentOrg}
@@ -56,7 +59,10 @@ export function Dashboard() {
 			
 				setModalVisibility={setModalVisibility} />
 		</main>
-			
+		
+		{ !isAuthenticated && (<button onClick={loginWithRedirect}>Login</button>) }
+		{ isAuthenticated && (<h1>Welcome, {user.email}</h1>) }
+		
 		<CreateNewModal
 			currentTeam={currentTeam}
 			modalVisibility={modalVisibility}

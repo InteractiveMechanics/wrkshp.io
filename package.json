@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.11",
+    "@auth0/auth0-spa-js": "^1.18.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -24,11 +25,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-	  "start": "cd server && npm start",
-	  "start-frontend": "react-scripts start",
+    "start": "cd server && npm start",
+    "start-frontend": "react-scripts start",
     "start-backend": "node server/index.js",
     "start-dev": "npm-run-all -p start-frontend start-backend",
-		"build": "react-scripts build && (cd server && npm install)",
+    "build": "react-scripts build && (cd server && npm install)",
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
     "test": "react-scripts test",

@@ -42,7 +42,7 @@ const workshopMutations = {
 	},
 	
 	addAgendaDayToWorkshop: async (_, args) => {
-	  const { workshopId } = args;
+	  const { workshopId, startTime } = args;
 		
 	  const workshop = await Workshop.findOne({ "_id": workshopId });
 	  const agenda = workshop.agenda;
@@ -52,7 +52,14 @@ const workshopMutations = {
 	  const now = Date.now();
 	  const rounded = count > 0 ? ((Math.round(now / hour) * hour) + (hour * 24 * count)) : ((Math.round(now / hour) * hour) + (hour * 2));
 	  
-	  agenda.push({ "weight": count + 1, "startTime": rounded, "status": "not-started" });
+	  let time;
+	  if (startTime) {
+		  time = startTime;
+	  } else {
+		  time = rounded;
+	  }
+	  
+	  agenda.push({ "weight": count + 1, "startTime": time, "status": "not-started" });
 	  	  
 	  return workshop.save()
 	    .then(savedDoc => {

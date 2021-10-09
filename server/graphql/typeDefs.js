@@ -102,7 +102,7 @@ const typeDefs = gql`
 		addActivity (name: String!, type: String!, description: String!, suggestedDuration: Int!): Activity
 	
 		addWorkshopToTeam (workshopId: ID!, teamId: ID!): Workshop
-		addAgendaDayToWorkshop (workshopId: ID!): Workshop
+		addAgendaDayToWorkshop (workshopId: ID!, startTime: String): Workshop
 		addActivityToAgendaDay (agendaDayId: ID!, activityId: ID!): Workshop
 		
 		addUserPermissionToOrganization (organizationId: ID!, userId: ID!, permission: String!): Organization

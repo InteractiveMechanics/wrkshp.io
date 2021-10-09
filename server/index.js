@@ -1,18 +1,16 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const jwksClient = require('jwks-rsa');
 const http = require('http');
 const mongoose = require('mongoose');
 
 const { ApolloServer } = require('apollo-server-express');
 const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
-
 const { execute, subscribe } = require('graphql');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
+const { verifyToken } = require('./verifyToken');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
@@ -32,24 +30,7 @@ mongoose
 async function startApolloServer() {	
   const app = express();
   const httpServer = http.createServer(app);
-  
-  const client = jwksClient({
-	  jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-	});
-	
-	function getKey(header, cb){
-	  client.getSigningKey(header.kid, function(err, key) {
-	    var signingKey = key.publicKey || key.rsaPublicKey;
-	    cb(null, signingKey);
-	  });
-	}
-	
-	const options = {
-	  audience: process.env.CLIENT_ID,
-	  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-	  algorithms: ['RS256']
-	};
-  
+ 
   const buildPath = path.join(__dirname, '..', 'build');
 	app.use(express.static(buildPath));
 	app.get('*', (req, res) => {
@@ -59,20 +40,47 @@ async function startApolloServer() {
   const schema = makeExecutableSchema({ typeDefs, resolvers });
   const server = new ApolloServer({ 
 	  schema,
-	  context: ({ req }) => {
-	    const token = req.headers.authorization;
-	    const user = new Promise((resolve, reject) => {
-	      jwt.verify(token, getKey, options, (err, decoded) => {
-	        if(err) {
-	          return reject(err);
-	        }
-	        resolve(decoded.email);
-	      });
-	    });
-	
-	    return {
-	      user
-	    }
+	  context: async ({ req }) => {
+		  let isAuth = false;
+		  
+		  try {
+			  const authHeader = req.headers.authorization || "";
+			  if (authHeader) {
+				  const token = authHeader.split(" ")[1];
+				  const payload = await verifyToken(token);
+				  
+				  isAuth = payload && payload.sub ? true : false;
+			  }
+		  } catch(error) {
+			  console.error(error);
+		  }
+		  
+		  return { isAuth };
+		  
+		  /*
+		  const header = req.headers.authorization;
+		  if (!header) return { isAuth: false };
+		
+		  const token = header.split(" ");
+		  if (!token) return { isAuth: false };
+		
+		  let decodeToken;
+		  try {
+		    decodeToken = new Promise((resolve, reject) => {		    
+		      jwt.verify(token, getKey, options, (err, decoded) => {
+		        if(err) {
+		          return reject(err);
+		        }
+		        resolve(decoded.email);
+		      });
+		    });
+		  } catch (err) {
+		    return { isAuth: false };
+		  }
+		
+		  if (!!!decodeToken) return { isAuth: false };
+		  return { isAuth: true, userId: decodeToken.userId };
+		  */
 	  },
 	  plugins: [
 		  ApolloServerPluginDrainHttpServer({ httpServer }),
