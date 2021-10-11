@@ -4,7 +4,7 @@ import { setContext } from "apollo-link-context";
 import { useAuth0 } from "./utils/auth";
 
 export default  function ApolloWrapper({ children }) {
-	const { isAuthenticated, getTokenSilently } = useAuth0();
+	const { isAuthenticated, user, getTokenSilently } = useAuth0();
 	const [ bearerToken, setBearerToken ] = useState("");
 	
 	useEffect(() => {
@@ -16,9 +16,8 @@ export default  function ApolloWrapper({ children }) {
 	}, [isAuthenticated, getTokenSilently]);
 	
 	const PORT = process.env.PORT || 4000;
-	
 	const httpLink = new HttpLink({
-	  uri: `http://localhost:${PORT}/graphql`,
+	  uri: window.location.protocol + '//' + window.location.hostname + ':' + PORT + '/graphql',
 	  credentials: 'same-origin'
 	});
 	
@@ -29,7 +28,8 @@ export default  function ApolloWrapper({ children }) {
 			...rest,
 			headers: {
 				...headers,
-				authorization: `Bearer ${bearerToken}`
+				authorization: `Bearer ${bearerToken}`,
+				user: user.email
 			}
 		}
 	})

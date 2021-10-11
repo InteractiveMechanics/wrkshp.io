@@ -47,14 +47,14 @@ async function startApolloServer() {
 		  
 		  try {
 			  const authHeader = req.headers.authorization || "";
+			  const userHeader = req.headers.user || "";
 			  if (authHeader) {
 				  const token = authHeader.split(" ")[1];
 				  const payload = await verifyToken(token);
 				  
 				  isAuth = payload && payload.sub ? true : false;
 					if (isAuth) {
-						console.log(token);
-						//user = await User.findOne({ "email": payload.email })
+						user = userHeader;
 					}				  
 			  }
 		  } catch(error) {

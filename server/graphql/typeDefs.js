@@ -92,7 +92,7 @@ const typeDefs = gql`
     getWorkshops (_id: ID, page: Int, limit: Int): WorkshopResult
     getActivities (_id: ID, page: Int, limit: Int): ActivityResult
     
-    viewer: User!
+    me: User!
   }
   
   type Mutation {

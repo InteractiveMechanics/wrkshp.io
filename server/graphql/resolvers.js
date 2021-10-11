@@ -61,9 +61,13 @@ const resolvers = {
 	  ...workshopQueries,
 	  ...activityQueries,
 	  
-	  viewer: async (parent, args, { user }) => {
-		  const u = await User.findOne({ _id: user.sub });
-		  return { ...u._doc }
+	  me: async (parent, args, { isAuth, user }) => {
+		  if (!isAuth) {
+	      throw new AuthenticationError('You must be logged in to do this');
+	    }
+	    
+		  const u = await User.findOne({ "email": user });
+		  return { ...u.doc }
 	  },
   },
   
@@ -72,17 +76,6 @@ const resolvers = {
 		...userMutations,
 		...workshopMutations,
 		...activityMutations,
-		
-		login: async (parent, { email, password }) => {			
-			const { _id } = await User.findOne({ email: email, password: password });
-			const id = _id.toString();
-			
-			return jwt.sign(
-				{ "http://localhost:4000/graphql": { id } },
-				process.env.JWT_SECRET,
-				{ algorithm: "RS256", subject: id, expiresIn: "1d" }
-			);
-    },
   },
 };
 

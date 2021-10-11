@@ -3,11 +3,11 @@ const { AuthenticationError } = require('apollo-server-express');
 const { Organization } = require('../../models/organization');
 
 const organizationQueries = {
-	getOrganizations: async (_, args, { isAuth }) => {
+	getOrganizations: async (_, args, { isAuth, user }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
-		
+
     const { _id = null, userId = null, page = 1, limit = 20 } = args;
 
     let searchQuery = {};

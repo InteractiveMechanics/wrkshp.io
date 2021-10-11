@@ -19,10 +19,10 @@ const onRedirectCallback = (appState) => {
 export default function App() {	
   return (
 		<Auth0Provider
-			domain="dev-4epe1avp.us.auth0.com"
-			client_id="7evN3Cf0KtjvGezfZdzUxDRkcjbQUA3l"
-			audience="http://workshopio-api"
-			redirect_uri="http://localhost:3000/dashboard"
+			domain={process.env.REACT_APP_AUTH0_DOMAIN}
+			client_id={process.env.REACT_APP_CLIENT_ID}
+			audience={process.env.REACT_APP_AUDIENCE}
+			redirect_uri={window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/dashboard"}
 			onRedirectCallback={onRedirectCallback}
 			>
 			<ApolloWrapper>
