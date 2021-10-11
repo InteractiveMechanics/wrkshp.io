@@ -14,6 +14,7 @@ const { verifyToken } = require('./verifyToken');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
+const { User } = require('./models/user');
 
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = "mongodb+srv://" + process.env.MONGO_USER + ":" + process.env.MONGO_PASSWORD + "@cluster0.hdhdz.mongodb.net/" + process.env.MONGO_DB + "?retryWrites=true&w=majority";
@@ -42,6 +43,7 @@ async function startApolloServer() {
 	  schema,
 	  context: async ({ req }) => {
 		  let isAuth = false;
+		  let user = null;
 		  
 		  try {
 			  const authHeader = req.headers.authorization || "";
@@ -50,12 +52,16 @@ async function startApolloServer() {
 				  const payload = await verifyToken(token);
 				  
 				  isAuth = payload && payload.sub ? true : false;
+					if (isAuth) {
+						console.log(token);
+						//user = await User.findOne({ "email": payload.email })
+					}				  
 			  }
 		  } catch(error) {
 			  console.error(error);
 		  }
 		  
-		  return { isAuth };
+		  return { isAuth, user };
 	  },
 	  plugins: [
 		  ApolloServerPluginDrainHttpServer({ httpServer }),
