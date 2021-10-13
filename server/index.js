@@ -61,6 +61,8 @@ async function startApolloServer() {
 			  console.error(error);
 		  }
 		  
+		  console.log(user);
+		  
 		  return { isAuth, user };
 	  },
 	  plugins: [
