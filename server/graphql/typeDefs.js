@@ -91,8 +91,6 @@ const typeDefs = gql`
     getUsers (_id: ID, page: Int, limit: Int): UserResult
     getWorkshops (_id: ID, page: Int, limit: Int): WorkshopResult
     getActivities (_id: ID, page: Int, limit: Int): ActivityResult
-    
-    me: User!
   }
   
   type Mutation {
@@ -116,8 +114,6 @@ const typeDefs = gql`
 		deleteWorkshop (_id: ID!): ID
 		deleteAgendaDayFromWorkshop (_id: ID!): ID
 		deleteActivityFromAgendaDay (agendaDayId: ID!, activityId: ID!): ID
-		
-		login(email: String!, password: String!): String
   }
 `;
 

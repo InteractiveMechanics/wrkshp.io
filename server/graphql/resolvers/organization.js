@@ -8,7 +8,7 @@ const organizationQueries = {
       throw new AuthenticationError('You must be logged in to do this');
     }
 
-    const { _id = null, userId = null, page = 1, limit = 20 } = args;
+    const { _id = null, userId = user._id, page = 1, limit = 20 } = args;
 
     let searchQuery = {};
     

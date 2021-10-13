@@ -60,15 +60,6 @@ const resolvers = {
 	  ...userQueries,
 	  ...workshopQueries,
 	  ...activityQueries,
-	  
-	  me: async (parent, args, { isAuth, user }) => {
-		  if (!isAuth) {
-	      throw new AuthenticationError('You must be logged in to do this');
-	    }
-	    
-		  const u = await User.findOne({ "email": user });
-		  return { ...u.doc }
-	  },
   },
   
   Mutation: {

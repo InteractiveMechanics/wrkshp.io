@@ -1,12 +1,10 @@
 import dotenv from "dotenv";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import history from './utils/history';
 import ApolloWrapper from './ApolloWrapper';
 import { Auth0Provider } from './utils/auth';
-import { Footer } from "./components/General";
-import { Login, Register, Dashboard, Workshop, Agenda } from "./pages";
+import { AppWrapper } from "./AppWrapper";
 
 import './App.css';
 
@@ -26,16 +24,7 @@ export default function App() {
 			onRedirectCallback={onRedirectCallback}
 			>
 			<ApolloWrapper>
-				<Router>
-					<Route path="/login" component={() => <Login />} />
-					<Route path="/register" component={() => <Register />} />
-					<Route path="/dashboard" render={() => <Dashboard />} />
-					<Switch>
-						<Route path="/workshop/:id/agenda" render={() => <Agenda />} />
-						<Route path="/workshop/:id" render={() => <Workshop />} />
-					</Switch>
-					<Footer />
-				</Router>
+				<AppWrapper />
 			</ApolloWrapper>
 		</Auth0Provider>
   );

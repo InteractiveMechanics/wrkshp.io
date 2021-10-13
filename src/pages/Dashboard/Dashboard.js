@@ -6,8 +6,6 @@ import { useAuth0 } from '../../utils/auth';
 
 import './Dashboard.css';
 
-const id = '';
-const userId = "614354c98fd4395885f2b145";
 const page = 1;
 const limit = 1000;
 
@@ -16,7 +14,7 @@ export function Dashboard() {
   const [ currentOrg, setCurrentOrg ] = useState({});
   const [ currentTeam, setCurrentTeam ] = useState({});
   
-  let variables = { "id": id, "userId": userId, "page": page, "limit": limit };
+  let variables = { "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
   const { isAuthenticated, loading: authLoading, loginWithRedirect, loginWithPopup, logout, user } = useAuth0();
   
