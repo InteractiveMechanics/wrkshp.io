@@ -1,5 +1,5 @@
-import { CollaboratorsModal } from './CollaboratorsModal/CollaboratorsModal'
 import { ErrorMessage } from './ErrorMessage/ErrorMessage'
 import { Footer } from './Footer/Footer'
+import { Modal, CollaboratorsModal, CreateNewWorkshopModal } from './Modal/Modal';
 
-export { CollaboratorsModal, ErrorMessage, Footer }
+export { CollaboratorsModal, CreateNewWorkshopModal, ErrorMessage, Footer, Modal }

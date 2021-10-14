@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 
 import { GetWorkshops } from '../../adapters/workshop';
-import { CollaboratorsModal } from '../../components/General';
+import { Modal, CollaboratorsModal } from '../../components/General';
 import { WorkshopHeader, WorkshopMain } from '../../components/Workshop';
 
 import './Workshop.css';
@@ -12,6 +12,7 @@ const limit = 1;
 
 export function Workshop() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
+  const [ focusMode, setFocusMode ] = useState(false);
 	
   let { id } = useParams();
   let variables = { "id": id, "page": page, "limit": limit };
@@ -29,16 +30,21 @@ export function Workshop() {
 	  <div id="workshop">
 			<WorkshopHeader
 				workshop={data.getWorkshops.workshops[0]}
+				focusMode={focusMode}
 				setModalVisibility={setModalVisibility} />
 		
 			<WorkshopMain
-				workshop={data.getWorkshops.workshops[0]} />
+				workshop={data.getWorkshops.workshops[0]}
+				focusMode={focusMode}
+				setFocusMode={setFocusMode} />
         
-      <CollaboratorsModal 
-      	users={data.getWorkshops.workshops[0].users}
+      <Modal 
         modalVisibility={modalVisibility}
-        
-				setModalVisibility={setModalVisibility} />
+				setModalVisibility={setModalVisibility}
+				title="Manage Collaborators">
+					<CollaboratorsModal
+						users={data.getWorkshops.workshops[0].users} />
+			</Modal>
 	  </div>
   );
 }

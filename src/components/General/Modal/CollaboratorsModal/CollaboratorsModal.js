@@ -4,17 +4,16 @@ import './CollaboratorsModal.css';
 
 export function CollaboratorsModal(props) {
 	const users = props.users;
-  const visiibility = props.modalVisibility ? "modal fade in" : "modal fade";
-  
-  let userList = '';
-  
-  function closeModal() {
+	
+	function handleChange(e) {
+		
+	}
+	
+	function closeModal() {
 		props.setModalVisibility(false);
   }
-  function handleChange(e) {
 	  
-  }
-  
+  let userList = '';
   if (users) {
 		userList = users.map((user) => {			
 			return (
@@ -40,26 +39,19 @@ export function CollaboratorsModal(props) {
 		  			</div>
 		  		</div>
 	  		</div>
+	  		
 			)
 		})
   }
   
   return (
-		<div className={ visiibility }>
-		  <div className="modal--header">
-				<h2>Manage Collaborators</h2>
-				<button className="modal--close" onClick={closeModal}><i className="bi-x-circle"></i></button>
-		  </div>
-		  <div className="modal--container">
-		  	<div className="collaborators--list">
-		  		{ userList }
-		  	</div>
-		  	
-				<div className="button-group margin-t-2x">
-					<button className="btn btn-primary" onClick={closeModal}>Save</button>
-					<button className="btn btn-outline-primary" onClick={closeModal}>Cancel</button>
-				</div>
-		  </div>
-		</div>
+  	<div className="collaborators--list">
+  		{ userList }
+  		
+  		<div className="button-group margin-t-2x">
+				<button className="btn btn-primary" onClick={closeModal}>Save</button>
+				<button className="btn btn-outline-primary" onClick={closeModal}>Cancel</button>
+			</div>
+  	</div>
   );
 }

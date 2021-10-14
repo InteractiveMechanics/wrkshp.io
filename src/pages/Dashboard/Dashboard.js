@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from '../../utils/auth';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
-import { DashboardHeader, DashboardCardList, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
+import { Modal, CreateNewWorkshopModal } from '../../components/General';
+import { DashboardHeader, DashboardCardList, DashboardTeamsList } from '../../components/Dashboard';
 
 import './Dashboard.css';
 
@@ -60,11 +61,14 @@ export function Dashboard(props) {
 				setModalVisibility={setModalVisibility} />
 		</main>
 		
-		<CreateNewModal
-			currentTeam={currentTeam}
+		<Modal
 			modalVisibility={modalVisibility}
-			
-			setModalVisibility={setModalVisibility} />
+			setModalVisibility={setModalVisibility}
+			title="Create New Workshop">
+				<CreateNewWorkshopModal
+					currentTeam={currentTeam}
+					setModalVisibility={setModalVisibility} />
+		</Modal>
 	</div>
   );
 }

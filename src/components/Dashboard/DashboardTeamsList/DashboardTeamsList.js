@@ -36,13 +36,13 @@ export function DashboardTeamsList(props) {
 		);
   }
   
-  function triggerCreateModal() {
+  function triggerCreateWorkshopModal() {
 		props.setModalVisibility(true);
   }
   
   return (
 	<nav>
-		<button className="btn btn-primary btn-lg margin-b-3x" onClick={triggerCreateModal}><i className="bi-plus-lg margin-r-1x"></i> Create New Workshop</button>
+		<button className="btn btn-primary btn-lg margin-b-3x" onClick={triggerCreateWorkshopModal}><i className="bi-plus-lg margin-r-1x"></i> Create Workshop</button>
 		
 		<h3>Teams <i className="bi-plus-circle margin-l-1x"></i></h3>
 		<ul className="dashboard--team-list margin-t-3x">
