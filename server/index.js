@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
+const webSocketServer = require('websocket').server;
 
 const { ApolloServer } = require('apollo-server-express');
 const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
@@ -17,7 +18,9 @@ const resolvers = require('./graphql/resolvers');
 const { User } = require('./models/user');
 
 const PORT = process.env.PORT || 4000;
+const WS_PORT = 8000;
 const MONGO_URI = "mongodb+srv://" + process.env.MONGO_USER + ":" + process.env.MONGO_PASSWORD + "@cluster0.hdhdz.mongodb.net/" + process.env.MONGO_DB + "?retryWrites=true&w=majority";
+
 
 mongoose
 	.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -29,9 +32,9 @@ mongoose
 	});
 
 async function startApolloServer() {	
-  const app = express();
-  const httpServer = http.createServer(app);
- 
+	const app = express();
+	const httpServer = http.createServer(app);
+
   const buildPath = path.join(__dirname, '..', 'build');
 	app.use(express.static(buildPath));
 	app.get('*', (req, res) => {
@@ -96,4 +99,16 @@ async function startApolloServer() {
   return { server, app };
 }
 
+function startWebSocketServer() {
+	const httpServer = http.createServer();
+	
+	httpServer.listen(WS_PORT);
+	const wsServer = new webSocketServer({
+	  httpServer: httpServer
+	});
+
+	console.log(`🚀  WebSocket Server ready at http://localhost:${PORT}`);
+}
+
 startApolloServer();
+//startWebSocketServer();

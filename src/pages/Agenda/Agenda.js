@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { GetWorkshops } from '../../adapters/workshop';
 import { WorkshopHeader } from '../../components/Workshop';
-import { CollaboratorsModal } from '../../components/General';
+import { Modal, CollaboratorsModal } from '../../components/General';
 import { AgendaMain } from '../../components/Agenda';
 
 import './Agenda.css';
@@ -35,11 +35,13 @@ export function Agenda() {
 			<AgendaMain
 				workshop={data.getWorkshops.workshops[0]} />
         
-      <CollaboratorsModal 
-      	users={data.getWorkshops.workshops[0].users}
+      <Modal 
         modalVisibility={modalVisibility}
-        
-				setModalVisibility={setModalVisibility} />
+				setModalVisibility={setModalVisibility}
+				title="Manage Collaborators">
+					<CollaboratorsModal
+						users={data.getWorkshops.workshops[0].users} />
+			</Modal>
 	  </div>
   );
 }
