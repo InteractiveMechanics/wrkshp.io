@@ -1,6 +1,24 @@
 .board--wrapper {
-	width: 960px;
 	margin: 0 48px;
+}
+.board--wrapper.in-progress,
+.board--wrapper.completed {
+	width: 960px;
+}
+.board--wrapper.not-started {
+	width: 600px;
+}
+
+
+.board--wrapper .overlay {
+	position: absolute;
+	background: rgba(255,255,255,0.5);
+	z-index: 9;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .board--wrapper .board--header {
 	display: flex;
@@ -11,4 +29,29 @@
 	width: 100%;
 	height: 600px;
 	background: white;
+	position: relative;
+}
+.board--wrapper .board--preview {
+	background: white;
+  padding: 24px;
+}
+
+
+.board--wrapper.fullscreen {
+	position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 9;
+}
+.board--wrapper.fullscreen .board--header {
+	display: none;
+}
+.board--wrapper.fullscreen .board {
+	height: 100%;
+	background-color: #f1f2f2;
+	background-image: radial-gradient(circle at 1px 1px, #999 1px, transparent 0);
+  background-size: 50px 50px;
 }

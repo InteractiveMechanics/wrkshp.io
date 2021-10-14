@@ -49,7 +49,6 @@ const typeDefs = gql`
   type User {
 		_id: ID!
 		email: String!
-		password: String!
 		firstName: String
 		lastName: String
 		avatar: String
@@ -91,6 +90,8 @@ const typeDefs = gql`
     getUsers (_id: ID, page: Int, limit: Int): UserResult
     getWorkshops (_id: ID, page: Int, limit: Int): WorkshopResult
     getActivities (_id: ID, page: Int, limit: Int): ActivityResult
+    
+    me: User!
   }
   
   type Mutation {

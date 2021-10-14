@@ -1,3 +1,5 @@
+const { AuthenticationError } = require('apollo-server-express');
+
 const { User } = require('../../models/user');
 
 const userQueries = {
@@ -21,6 +23,14 @@ const userQueries = {
       totalPages: Math.ceil(count / limit),
       currentPage: page
     }
+  },
+  
+  me: async (_, args, { isAuth, user }) => {
+	  if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
+	  return user;
   },
 }
 

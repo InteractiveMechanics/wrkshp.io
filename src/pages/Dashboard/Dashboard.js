@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useAuth0 } from '../../utils/auth';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
 import { DashboardHeader, DashboardCardList, DashboardTeamsList, CreateNewModal } from '../../components/Dashboard';
-import { useAuth0 } from '../../utils/auth';
 
 import './Dashboard.css';
 
 const page = 1;
 const limit = 1000;
 
-export function Dashboard() {
+export function Dashboard(props) {
+	const { isAuthenticated, loading: authLoading } = useAuth0();
+	
   const [ modalVisibility, setModalVisibility ] = useState(false);
   const [ currentOrg, setCurrentOrg ] = useState({});
   const [ currentTeam, setCurrentTeam ] = useState({});
   
   let variables = { "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
-  const { isAuthenticated, loading: authLoading, loginWithRedirect, loginWithPopup, logout, user } = useAuth0();
   
   useEffect(() => {
 		if(loading === false && data){			
@@ -38,6 +39,7 @@ export function Dashboard() {
 			orgs={data.getOrganizations.organizations}
 			currentOrg={currentOrg}
 			currentTeam={currentTeam}
+			activeUser={props.activeUser}
 			
 			setCurrentOrg={setCurrentOrg}
 			setCurrentTeam={setCurrentTeam} />

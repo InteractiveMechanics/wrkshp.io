@@ -54,14 +54,14 @@ async function startApolloServer() {
 				  
 				  isAuth = payload && payload.sub ? true : false;
 					if (isAuth) {
-						user = userHeader;
+						if (userHeader) {
+							user = await User.findOne({ "email": userHeader });
+						}
 					}				  
 			  }
 		  } catch(error) {
 			  console.error(error);
 		  }
-		  
-		  console.log(user);
 		  
 		  return { isAuth, user };
 	  },

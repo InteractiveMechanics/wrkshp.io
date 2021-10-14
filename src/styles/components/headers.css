@@ -4,7 +4,7 @@
 	top: 0;
 	width: 100vw;
 	padding: 16px 24px;
-	z-index: 9;
+	z-index: 99;
 }
 
 .header--group {

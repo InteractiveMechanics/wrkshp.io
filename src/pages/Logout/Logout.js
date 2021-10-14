@@ -1,15 +1,14 @@
-import { useAuth0 } from '../../../utils/auth';
-import { Route, Redirect } from "react-router-dom";
-
+import { useEffect } from "react";
+import { useAuth0 } from '../../utils/auth';
 
 export function Logout() {
-	const { isAuthenticated, logout, user } = useAuth0();
+	const { isAuthenticated, logout } = useAuth0();
   
-  if (isAuthenticated) {
-	  logout();
-  }
+  useEffect(() => {
+	  if (isAuthenticated) logout({ returnTo: window.location.origin + "/login" });
+  }, [])
   
   return (
-		<Redirect to="/login" />
+	  <></>
   );
 }

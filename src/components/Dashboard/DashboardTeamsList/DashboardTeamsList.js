@@ -27,13 +27,13 @@ export function DashboardTeamsList(props) {
   }
   
   function changeTeam(e) {
-	teams.filter(
-		function(team, index) { 
-			if (team._id == e.target.id) {
-				props.setCurrentTeam(teams[index]);
+		teams.filter(
+			function(team, index) { 
+				if (team._id == e.target.id) {
+					props.setCurrentTeam(teams[index]);
+				}
 			}
-		}
-	);
+		);
   }
   
   function triggerCreateModal() {
@@ -44,7 +44,7 @@ export function DashboardTeamsList(props) {
 	<nav>
 		<button className="btn btn-primary btn-lg margin-b-3x" onClick={triggerCreateModal}><i className="bi-plus-lg margin-r-1x"></i> Create New Workshop</button>
 		
-		<h3>TEAMS</h3>
+		<h3>Teams <i className="bi-plus-circle margin-l-1x"></i></h3>
 		<ul className="dashboard--team-list margin-t-3x">
 			{ teamList }
 		</ul>

@@ -39,15 +39,9 @@ export function WorkshopMain(props) {
 				</div>
 			) : null }
 			
-			{ status == "in-progress" ? (
-				<div className="workshop--stage">
-					<div className="board--list--arrow-prev"><i className="bi-arrow-left-circle"></i></div>
-					
-					<BoardList
-						activities={workshop.agenda[0].activities} />
-						
-					<div className="board--list--arrow-next"><i className="bi-arrow-right-circle"></i></div>
-				</div>
+			{ status == "in-progress" ? (				
+				<BoardList
+					activities={workshop.agenda[0].activities} />
 			) : null }
 		</div>
   );

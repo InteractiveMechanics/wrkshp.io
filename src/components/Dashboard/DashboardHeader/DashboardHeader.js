@@ -21,46 +21,44 @@ export function DashboardHeader(props) {
 				if (org._id == e.target.id) {
 					props.setCurrentOrg(orgs[index]);
 					props.setCurrentTeam(orgs[index].teams[0]);
-					
-					console.log(currentOrg);
 				}
 			}
 		);
   }
-  
+      
   return (
-	<header id="dashboard--header" className="header">
-		<div className="header--group">
-			<div className="header--pill">
-				<div className="dashboard--header-logo">workshop.io</div>
-			</div>
-			<div className="header--pill-wrapper">
+		<header id="dashboard--header" className="header">
+			<div className="header--group">
 				<div className="header--pill">
-					<i className="bi-chevron-down margin-r-1x"></i>
-					{ props.currentOrg.name }
+					<div className="dashboard--header-logo">workshop.io</div>
 				</div>
-				<ul className="dropdown">
-					{ orgList }
-				</ul>
-			</div>
-			<div className="header--pill">
-				<i className="bi-gear margin-r-1x"></i>
-				Manage Organization
-			</div>
-		</div>
-		<div className="header--group header--group--right">
-			<div className="header--pill-wrapper">
+				<div className="header--pill-wrapper">
+					<div className="header--pill">
+						<i className="bi-chevron-down margin-r-1x"></i>
+						{ props.currentOrg.name }
+					</div>
+					<ul className="dropdown">
+						{ orgList }
+					</ul>
+				</div>
 				<div className="header--pill">
-					<i className="bi-person-fill margin-r-1x"></i>
-					Michael
-					<i className="bi-three-dots-vertical margin-l-1x"></i>
+					<i className="bi-gear margin-r-1x"></i>
+					Manage Organization
 				</div>
-				<ul className="dropdown right">
-					<li>My Account</li>
-					{ isAuthenticated && (<li onClick={logout}>Logout</li>) }
-				</ul>
 			</div>
-		</div>
-	</header>
+			<div className="header--group header--group--right">
+				<div className="header--pill-wrapper">
+					<div className="header--pill">
+						<i className="bi-person-fill margin-r-1x"></i>
+						REPLACE ME 
+						<i className="bi-three-dots-vertical margin-l-1x"></i>
+					</div>
+					<ul className="dropdown right">
+						<li>My Account</li>
+						{ isAuthenticated && (<li onClick={logout}>Logout</li>) }
+					</ul>
+				</div>
+			</div>
+		</header>
   );
 }

@@ -72,7 +72,7 @@ export const Auth0Provider = ({
 				isAuthenticated,
 				user,
 				loading,
-				popupOpen,
+				popupOpen, 
 				loginWithPopup,
 				handleRedirectCallback,
 				getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),

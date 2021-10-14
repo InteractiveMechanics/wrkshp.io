@@ -10,7 +10,7 @@ import './App.css';
 
 const onRedirectCallback = (appState) => {	 
 	history.push(
-		appState && appState.targetUrl ? appState.targetUrl : window.location.pathname
+		appState && appState.targetUrl ? appState.targetUrl : "/dashboard"
 	)
 }
 
@@ -21,6 +21,7 @@ export default function App() {
 			client_id={process.env.REACT_APP_CLIENT_ID}
 			audience={process.env.REACT_APP_AUDIENCE}
 			redirect_uri={window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/dashboard"}
+			useRefreshTokens={true}
 			onRedirectCallback={onRedirectCallback}
 			>
 			<ApolloWrapper>
