@@ -29,19 +29,39 @@ export function BoardList(props) {
 				const obj = document.getElementById("board--" + activity._id);
 				const pos = obj.getBoundingClientRect();
 				
-				const scrollTo = pos.left + window.scrollX - ((width/2) - (pos.width/2));
-				window.scrollTo(scrollTo, 0);
+				const scrollTo = pos.left + (width/2 - pos.width/2);
+				window.scrollTo({
+					top: 0, 
+					left: scrollTo,
+					behavior: 'smooth'
+				});
 			}
 		})
 	}, []);
 	
+	function scrollLeft() {
+		window.scrollBy({
+			top: 0, 
+			left: -960,
+			behavior: 'smooth'
+		});
+	}
+	
+	function scrollRight() {
+		window.scrollBy({
+			top: 0, 
+			left: 960,
+			behavior: 'smooth'
+		});
+	}
+	
   return (
 	  <div className="workshop--stage">	
-		  <div className="board--list--arrow-prev"><i className="bi-arrow-left-circle"></i></div>
+		  <div className="board--list--arrow-prev" onClick={scrollLeft}><i className="bi-arrow-left-circle"></i></div>
 		  <div className="board--list">
 				{ boards }
 			</div>
-			<div className="board--list--arrow-next"><i className="bi-arrow-right-circle"></i></div>
+			<div className="board--list--arrow-next" onClick={scrollRight}><i className="bi-arrow-right-circle"></i></div>
 		</div>
   );
 }
