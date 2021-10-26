@@ -44,7 +44,6 @@ export function Dashboard(props) {
 			
 			setCurrentOrg={setCurrentOrg}
 			setCurrentTeam={setCurrentTeam} />
-			
 
 		<main>
 			<DashboardTeamsList

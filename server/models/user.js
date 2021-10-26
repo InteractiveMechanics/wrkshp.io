@@ -18,6 +18,11 @@ const UserSchema = new Schema({
 		type: String, 
 		required: false
 	},
+	status: {
+		type: String,
+		required: true,
+		enum: ["invited", "registered", "active", "deactivated"]
+	},
 }, { timestamps: true });
 UserSchema.path('_id');
 UserSchema.index({ createdAt: 1, updatedAt: 1 });

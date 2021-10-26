@@ -52,6 +52,7 @@ const typeDefs = gql`
 		firstName: String
 		lastName: String
 		avatar: String
+		status: String!
   }
 
   type Organization {
@@ -99,6 +100,7 @@ const typeDefs = gql`
 		addTeam (name: String!, visibility: String, organizationId: ID!, userId: ID!): Organization
 		addWorkshop (name: String!, userId: ID!): Workshop
 		addActivity (name: String!, type: String!, description: String!, suggestedDuration: Int!): Activity
+		addUser (email: String!, status: String!): User
 	
 		addWorkshopToTeam (workshopId: ID!, teamId: ID!): Workshop
 		addAgendaDayToWorkshop (workshopId: ID!, startTime: String): Workshop
@@ -108,6 +110,7 @@ const typeDefs = gql`
 		addUserPermissionToTeam (teamId: ID!, userId: ID!, permission: String!): Organization
 		addUserPermissionToWorkshop (workshopId: ID!, userId: ID!, permission: String!): Workshop
 		
+		updateUser (_id: ID!, firstName: String, lastName: String, avatar: String, status: String): User
 		updateWorkshop (_id: ID!, name: String, status: String): Workshop
 		updateAgendaDay (_id: ID!, weight: Int, startTime: String, status: String): Workshop
 		updateAgendaActivity (agendaDayId: ID!, activityId: ID!, weight: Int, duration: Int, status: String): Workshop

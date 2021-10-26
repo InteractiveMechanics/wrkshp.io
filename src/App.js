@@ -1,10 +1,12 @@
 import dotenv from "dotenv";
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import history from './utils/history';
 import ApolloWrapper from './ApolloWrapper';
 import { Auth0Provider } from './utils/auth';
 import { AppWrapper } from "./AppWrapper";
+import { UserProvider } from './hooks/useUser';
 
 import './App.css';
 
@@ -25,7 +27,11 @@ export default function App() {
 			onRedirectCallback={onRedirectCallback}
 			>
 			<ApolloWrapper>
-				<AppWrapper />
+				<UserProvider>
+					<Router>
+						<AppWrapper />
+					</Router>
+				</UserProvider>
 			</ApolloWrapper>
 		</Auth0Provider>
   );

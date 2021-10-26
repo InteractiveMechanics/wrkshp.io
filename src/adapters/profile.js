@@ -9,6 +9,7 @@ export function Me(variables, onCompleted) {
         firstName
         lastName
         email
+        status
 		  }
 		}
 	`;

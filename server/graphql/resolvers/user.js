@@ -35,7 +35,32 @@ const userQueries = {
 }
 
 const userMutations = {
-
+	addUser: async (_, args) => {
+	  const { email, status = "registered" } = args;
+	  
+	  const user = await User.create({ email: email, status: status });
+	  
+	  return user.save()
+	    .then(savedDoc => {
+	  	  return { ...savedDoc._doc }
+	    })
+	    .catch (err => {
+        console.error(err)
+      });
+	},
+	
+	updateUser: async(_, args) => {
+		const { _id, firstName, lastName, avatar, status } = args;
+		
+		const user = await User.findOne({ "_id": _id });
+		
+		if (firstName) { user.firstName = firstName }
+		if (lastName) { user.lastName = lastName }
+		if (avatar) { user.avatar = avatar }
+		if (status) { user.status = status }
+		
+		return user.save();
+	},
 }
 
 module.exports = { userQueries, userMutations };

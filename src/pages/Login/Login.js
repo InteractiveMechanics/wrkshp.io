@@ -13,7 +13,7 @@ export function Login(props) {
 		  { !isAuthenticated ? (
 				<main>
 					<h1>Login</h1>
-					{ !isAuthenticated && (<button onClick={loginWithPopup}>Login</button>) }
+					{ !isAuthenticated && (<button onClick={loginWithRedirect}>Login</button>) }
 					
 				</main>
 			) : (

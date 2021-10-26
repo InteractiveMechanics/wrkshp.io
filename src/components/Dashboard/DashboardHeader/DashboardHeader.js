@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+
 import { useAuth0 } from '../../../utils/auth';
+import { useUser } from '../../../hooks/useUser';
 
 export function DashboardHeader(props) {
+	let history = useHistory();
 	const { isAuthenticated, logout, user } = useAuth0();
+	const { state } = useUser();
+	
   const orgs = props.orgs;
   const currentOrg = props.currentOrg;
   let orgList = '';
@@ -25,7 +31,12 @@ export function DashboardHeader(props) {
 			}
 		);
   }
-      
+  
+  function handleLogout() {
+	  if (isAuthenticated) { logout({ returnTo: window.location.origin + "/login" }) }
+		history.push("/login");
+  }
+        
   return (
 		<header id="dashboard--header" className="header">
 			<div className="header--group">
@@ -50,12 +61,12 @@ export function DashboardHeader(props) {
 				<div className="header--pill-wrapper">
 					<div className="header--pill">
 						<i className="bi-person-fill margin-r-1x"></i>
-						REPLACE ME 
+						{ state.user.firstName } 
 						<i className="bi-three-dots-vertical margin-l-1x"></i>
 					</div>
 					<ul className="dropdown right">
 						<li>My Account</li>
-						{ isAuthenticated && (<li onClick={logout}>Logout</li>) }
+						<li onClick={handleLogout}>Logout</li>
 					</ul>
 				</div>
 			</div>
