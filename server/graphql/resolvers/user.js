@@ -4,6 +4,10 @@ const { User } = require('../../models/user');
 
 const userQueries = {
 	getUsers: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
     const { _id = null, page = 1, limit = 20 } = args;
 
     let searchQuery = {};
@@ -50,6 +54,10 @@ const userMutations = {
 	},
 	
 	updateUser: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 		const { _id, firstName, lastName, avatar, status } = args;
 		
 		const user = await User.findOne({ "_id": _id });

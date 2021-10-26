@@ -12,7 +12,8 @@ const TeamSchema = new Schema({
 	visibility: {
 		type: String,
 		required: true,
-		enum: ['public', 'private']
+		enum: ['public', 'private'],
+		default: "public"
 	},
 	users: {
 		type: [UserPermissionSchema]

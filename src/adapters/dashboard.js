@@ -7,6 +7,7 @@ export function GetOrganizationsForUser(variables, onCompleted) {
 		    organizations {
 		      _id
 		      name
+		      avatar
 		      users {
 		        userId {
 		          _id

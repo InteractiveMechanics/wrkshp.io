@@ -9,6 +9,11 @@ const OrganizationSchema = new Schema({
 		type: String, 
 		required: true 
 	},
+	avatar: {
+		type: String,
+		required: false,
+		default: ""
+	},
 	users: {
 		type: [UserPermissionSchema]
 	},

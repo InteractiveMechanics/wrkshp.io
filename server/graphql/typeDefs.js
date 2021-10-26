@@ -58,6 +58,7 @@ const typeDefs = gql`
   type Organization {
 		_id: ID!
     name: String!
+    avatar: String
     users: [UserPermission]
     teams: [Team]
   }

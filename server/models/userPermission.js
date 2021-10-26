@@ -10,7 +10,8 @@ const UserPermissionSchema = new Schema({
 	permission: {
 		type: String,
 		required: true,
-		enum: ['owner', 'manager', 'facilitator', 'participant', 'readonly']
+		enum: ['owner', 'manager', 'facilitator', 'participant', 'readonly'],
+		default: "readonly"
 	}
 }, { timestamps: true });
 

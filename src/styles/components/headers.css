@@ -21,6 +21,12 @@
 }
 
 
+.header--org-selector,
+.header--org-selector .dropdown {
+	width: 240px;
+}
+
+
 .header--pill-wrapper {
 	position: relative;
 }
@@ -37,7 +43,7 @@
   height: 40px;
   
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .header--pill.square {

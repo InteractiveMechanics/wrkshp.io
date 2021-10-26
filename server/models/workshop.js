@@ -12,7 +12,8 @@ const WorkshopSchema = new Schema({
 	status: {
 		type: String,
 		required: true,
-		enum: ["not-started", "in-progress", "completed", "archived"]
+		enum: ["not-started", "in-progress", "completed", "archived"],
+		default: "not-started"
 	},
 	users: [UserPermissionSchema],
 	agenda: [AgendaDaySchema]

@@ -15,7 +15,8 @@ const AgendaDaySchema = new Schema({
 	status: {
 		type: String,
 		required: true,
-		enum: ["not-started", "in-progress", "completed"]
+		enum: ["not-started", "in-progress", "completed"],
+		default: "not-started"
 	},
 	activities: [AgendaActivitySchema]
 }, { timestamps: true });

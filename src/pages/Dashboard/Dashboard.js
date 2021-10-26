@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { useAuth0 } from '../../utils/auth';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
@@ -21,7 +22,7 @@ export function Dashboard(props) {
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
   
   useEffect(() => {
-		if(loading === false && data){			
+		if(loading === false && authLoading === false && data){			
 			setCurrentOrg(data.getOrganizations.organizations[0]);
 		  setCurrentTeam(data.getOrganizations.organizations[0].teams[0]);
 		}

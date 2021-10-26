@@ -38,13 +38,7 @@ export function AppWrapper() {
 	}
 	
 	
-	function renderPrivateRoutes() {
-		console.log("Loading: " + loading);
-		console.log("authLoading: " + authLoading);
-		console.log("isAuth: " + isAuthenticated);
-		console.log("state.user: " + state.user);
-		if (state.user) console.log("state.user.status: " + state.user.status);
-		
+	function renderPrivateRoutes() {		
 		if ((loading || authLoading) && isAuthenticated) {
 			return <h1>Loading...</h1>
 		} else {

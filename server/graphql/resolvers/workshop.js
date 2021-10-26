@@ -3,6 +3,10 @@ const { Activity } = require('../../models/activity');
 
 const workshopQueries = {
 	getWorkshops: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
     const { _id = null, page = 1, limit = 20 } = args;
 
     let searchQuery = {};
@@ -27,6 +31,10 @@ const workshopQueries = {
 
 const workshopMutations = {
 	addWorkshop: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { name, userId } = args;
 	  
 	  const workshop = await Workshop.create({ name: name, status: "not-started" });
@@ -42,6 +50,10 @@ const workshopMutations = {
 	},
 	
 	addAgendaDayToWorkshop: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { workshopId, startTime } = args;
 		
 	  const workshop = await Workshop.findOne({ "_id": workshopId });
@@ -71,6 +83,10 @@ const workshopMutations = {
 	},
 	
 	addActivityToAgendaDay: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { agendaDayId, activityId } = args;
 	  
 	  const activity = await Activity.findOne({ "_id": activityId });
@@ -93,6 +109,10 @@ const workshopMutations = {
 	},
 	
 	addUserPermissionToWorkshop: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { _id, userId, permission = "readonly" } = args;
 		
 	  const workshop = await Workshop.findOne({ "_id": _id });
@@ -118,6 +138,10 @@ const workshopMutations = {
 	},
 	
 	updateWorkshop: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 		const { _id, name, status } = args;
 		
 		const workshop = await Workshop.findOne({ "_id": _id });
@@ -129,6 +153,10 @@ const workshopMutations = {
 	},
 	
 	updateAgendaDay: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 		const { _id, weight, startTime, status } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda._id": _id });
@@ -143,6 +171,10 @@ const workshopMutations = {
 	},
 	
 	updateAgendaActivity: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 		const { agendaDayId, activityId, weight, duration, status } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda.activities._id": activityId });
@@ -158,6 +190,10 @@ const workshopMutations = {
 	},
 	
 	deleteWorkshop: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 		const { _id } = args;
 		
 		const workshop = await Workshop.findOneAndDelete({ "_id": _id });
@@ -165,6 +201,10 @@ const workshopMutations = {
 	},
 	
 	deleteAgendaDayFromWorkshop: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+
 		const { _id } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda._id": _id });
@@ -177,6 +217,10 @@ const workshopMutations = {
 	},
 	
 	deleteActivityFromAgendaDay: async(_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+
 		const { agendaDayId, activityId } = args;
 		
 		const workshop = await Workshop.findOne({ "agenda.activities._id": activityId });

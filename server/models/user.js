@@ -16,12 +16,14 @@ const UserSchema = new Schema({
 	},
 	avatar: { 
 		type: String, 
-		required: false
+		required: false,
+		default: ""
 	},
 	status: {
 		type: String,
 		required: true,
-		enum: ["invited", "registered", "active", "deactivated"]
+		enum: ["new", "invited", "registered", "active", "deactivated"],
+		default: "new"
 	},
 }, { timestamps: true });
 UserSchema.path('_id');

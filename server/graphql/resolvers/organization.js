@@ -8,7 +8,7 @@ const organizationQueries = {
       throw new AuthenticationError('You must be logged in to do this');
     }
 
-    const { _id = null, userId = user._id, page = 1, limit = 20 } = args;
+    const { _id = null, userId = null, page = 1, limit = 20 } = args;
 
     let searchQuery = {};
     
@@ -33,6 +33,10 @@ const organizationQueries = {
 
 const organizationMutations = {
 	addOrganization: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { name, userId } = args;
 	  
 	  const organization = await Organization.create({ name: name });
@@ -50,6 +54,10 @@ const organizationMutations = {
 	},
 	
 	addTeam: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { name, visibility = "public", organizationId, userId } = args;
 	  
 	  const organization = await Organization.findOne({ _id: organizationId });
@@ -66,6 +74,10 @@ const organizationMutations = {
 	},
 	
 	addWorkshopToTeam: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { workshopId, teamId } = args;
 	  	  
 	  const organization = await Organization.findOne({ "teams._id": teamId });
@@ -83,6 +95,10 @@ const organizationMutations = {
 	},
 		
 	addUserPermissionToOrganization: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { organizationId, userId, permission = "readonly" } = args;
 	
 	  const organization = await Organization.findById(organizationId);
@@ -108,6 +124,10 @@ const organizationMutations = {
 	}, 
 	
 	addUserPermissionToTeam: async (_, args) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
 	  const { teamId, userId, permission = "readonly" } = args;
 		
 	  const organization = await Organization.findOne({ "teams._id": teamId });

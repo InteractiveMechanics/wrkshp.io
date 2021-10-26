@@ -14,6 +14,9 @@
 	padding: 72px 24px 24px;
 }
 #dashboard main nav {
-	width: 15%;
+	width: 240px;
 	margin-right: 2%;
+	background: white;
+	padding: 16px;
+	border-radius: 4px;
 }
