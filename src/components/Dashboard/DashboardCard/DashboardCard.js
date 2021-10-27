@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useUser } from '../../../hooks/useUser';
+
 import { convertDate, convertTime } from '../../../utils/datetime';
 import { DeleteWorkshop } from '../../../adapters/dashboard'; 
+import { getPermsForObj } from '../../../utils/permissions';
 
 import './DashboardCard.css';
 
 export function DashboardCard(props) {
+	const { state } = useUser();
+	
 	const workshop = props.workshop;
 	
 	let dateString;
@@ -16,6 +21,8 @@ export function DashboardCard(props) {
 	
 	let deleteWorkshopVariables = { _id: workshop._id }
 	const [deleteWorkshop, { data, loading, error }] = DeleteWorkshop(deleteWorkshopVariables, function() {});
+	
+	const currentWorkshopPerms = getPermsForObj(state.user._id, workshop);
 	
 	function buildDurationString(minutes) {
 	  if (minutes >= 60) {
@@ -64,14 +71,16 @@ export function DashboardCard(props) {
 	return (
 	  <div key={ workshop._id } id={ workshop._id } className="dashboard--card">
 			<div className="dashboard--card--image-wrapper">
-				<div className="settings">
-					<button className="btn btn-icon"><i className="bi-three-dots-vertical"></i></button>
-					<ul className="dropdown right">
-						<li>Share</li>
-						<li>Archive</li>
-						<li className="text-danger" onClick={deleteWorkshop}>Delete</li>
-					</ul>
-				</div>
+				{(currentWorkshopPerms == "facilitator" || "owner") && (
+					<div className="settings">
+						<button className="btn btn-icon"><i className="bi-three-dots-vertical"></i></button>
+						<ul className="dropdown right">
+							<li>Share</li>
+							<li>Archive</li>
+							<li className="text-danger" onClick={deleteWorkshop}>Delete</li>
+						</ul>
+					</div>
+				)}
 			</div>
 			
 			<div className="dashboard--card--content">

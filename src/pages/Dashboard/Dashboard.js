@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { useAuth0 } from '../../utils/auth';
+import { useUser } from '../../hooks/useUser';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
 import { Modal, CreateNewWorkshopModal } from '../../components/General';
@@ -12,13 +13,14 @@ const page = 1;
 const limit = 1000;
 
 export function Dashboard(props) {
+	const { state } = useUser();
 	const { isAuthenticated, loading: authLoading } = useAuth0();
 	
   const [ modalVisibility, setModalVisibility ] = useState(false);
   const [ currentOrg, setCurrentOrg ] = useState({});
   const [ currentTeam, setCurrentTeam ] = useState({});
   
-  let variables = { "page": page, "limit": limit };
+  let variables = { "userId": state.user._id, "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
   
   useEffect(() => {

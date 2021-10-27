@@ -28,6 +28,7 @@ export function DashboardHeader(props) {
 		))
   }
   
+  
   function changeOrg(e) {
 		orgs.filter(
 			function(org, index) { 
@@ -43,6 +44,7 @@ export function DashboardHeader(props) {
 	  if (isAuthenticated) { logout({ returnTo: window.location.origin + "/login" }) }
 		history.push("/login");
   }
+  
         
   return (
 		<header id="dashboard--header" className="header">
@@ -50,7 +52,7 @@ export function DashboardHeader(props) {
 				<div className="header--pill-wrapper header--org-selector">
 					<div className="header--pill">
 						<i className="bi-three-dots-vertical margin-r-1x"></i>
-						<i className="avatar">{ currentOrgAvatar }</i>
+						<i className="avatar margin-r-1x">{ currentOrgAvatar }</i>
 						{ props.currentOrg.name }
 					</div>
 					<ul className="dropdown">
@@ -65,7 +67,7 @@ export function DashboardHeader(props) {
 			<div className="header--group header--group--right">
 				<div className="header--pill-wrapper">
 					<div className="header--pill">
-						<i className="avatar">{ userAvatar }</i>
+						<i className="avatar margin-r-1x">{ userAvatar }</i>
 						{ state.user.firstName }
 						<i className="bi-three-dots-vertical margin-l-1x"></i>
 					</div>
