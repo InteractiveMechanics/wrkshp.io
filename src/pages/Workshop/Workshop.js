@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 
 import { GetWorkshops } from '../../adapters/workshop';
-import { Modal, CollaboratorsModal } from '../../components/General';
+import { Modal } from '../../components/General';
 import { WorkshopHeader, WorkshopMain } from '../../components/Workshop';
 
 import './Workshop.css';
@@ -12,6 +12,9 @@ const limit = 1;
 
 export function Workshop() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
+  const [ modalTitle, setModalTitle ] = useState('');
+  const [ modalComponent, setModalComponent ] = useState();
+  
   const [ focusMode, setFocusMode ] = useState(false);
 	
   let { id } = useParams();
@@ -30,20 +33,23 @@ export function Workshop() {
 	  <div id="workshop">
 			<WorkshopHeader
 				workshop={data.getWorkshops.workshops[0]}
+				users={data.getWorkshops.workshops[0].users}
 				focusMode={focusMode}
-				setModalVisibility={setModalVisibility} />
+				
+				setModalVisibility={setModalVisibility}
+				setModalTitle={setModalTitle}
+				setModalComponent={setModalComponent} />
 		
 			<WorkshopMain
 				workshop={data.getWorkshops.workshops[0]}
 				focusMode={focusMode}
 				setFocusMode={setFocusMode} />
         
-      <Modal 
-        modalVisibility={modalVisibility}
+			<Modal
+				modalVisibility={modalVisibility}
 				setModalVisibility={setModalVisibility}
-				title="Manage Collaborators">
-					<CollaboratorsModal
-						users={data.getWorkshops.workshops[0].users} />
+				title={modalTitle}>
+					{ modalComponent }
 			</Modal>
 	  </div>
   );

@@ -73,6 +73,62 @@ export function GetOrganizationsForUser(variables, onCompleted) {
   return { loading, error, data, refetch };
 }
 
+export function AddTeam(variables, onCompleted) {
+	const addTeamGQL = gql`
+	  mutation addTeam($name: String!, $visibility: String, $organizationId: ID!, $userId: ID!) {
+	  	addTeam(name: $name, visibility: $visibility, organizationId: $organizationId, userId: $userId) {
+	      _id
+        name
+        visibility
+        users {
+          userId {
+            _id
+            avatar
+            firstName
+            lastName
+            email
+          }
+          permission
+        }
+        workshops {
+          _id
+          name
+          status
+          users {
+						userId {
+              _id
+              avatar
+							firstName
+							lastName
+							email
+            }
+            permission
+          }
+          agenda {
+            startTime
+            activities {
+	          	duration  
+	          }
+          }
+        }
+	    }
+	  }
+	`;
+	
+	const [addTeam, { data, loading, error }] = useMutation(
+  	addTeamGQL,
+  	{
+  		variables: variables,
+  		onCompleted: onCompleted,
+  		refetchQueries: [
+  			'getOrganizationsForUser'
+  		],
+		}
+  );
+	
+	return [addTeam, { data, loading, error }]
+}
+
 export function AddWorkshop(variables, onCompleted) {
 	const addWorkshopGQL = gql`
 	  mutation addWorkshop($name: String!, $userId: ID!) {
@@ -111,6 +167,48 @@ export function AddWorkshopToTeam(variables, onCompleted) {
   );
 	
 	return [addWorkshopToTeam, { data, loading, error }]
+}
+
+export function UpdateTeam(variables, onCompleted) {
+	const updateTeamGQL = gql`
+		mutation updateTeam($_id: ID!, $name: String, $visibility: String) {
+		  updateTeam(_id: $_id, name: $name, visibility: $visibility) {
+		    _id
+		  }
+		}
+	`;
+	
+	const [updateTeam, { data, loading, error }] = useMutation(
+  	updateTeamGQL,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+  			'getWorkshops'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [updateTeam, { data, loading, error }];
+}
+
+export function DeleteTeam(variables, onCompleted) {
+	const deleteTeamGQL = gql`
+		mutation deleteTeam($_id: ID!) {
+		  deleteTeam(_id: $_id)
+		}
+	`;
+	
+	const [deleteTeam, { data, loading, error }] = useMutation(
+  	deleteTeamGQL,
+  	{
+  		variables: variables,
+  		refetchQueries: [
+	  		'getOrganizationsForUser'
+  		],
+  		onCompleted: onCompleted
+	});
+	
+	return [deleteTeam, { data, loading, error }];
 }
 
 export function DeleteWorkshop(variables, onCompleted) {

@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { CollaboratorsModal } from '../../../components/General';
+
 export function WorkshopHeader(props) {
 	const focusMode = props.focusMode;
   const workshop = props.workshop;
   
   function triggerCreateModal() {
 		props.setModalVisibility(true);
+		props.setModalTitle("Manage Collaborators");
+		props.setModalComponent(<CollaboratorsModal
+			setModalVisibility={props.setModalVisibility}
+			users={props.users} />)
   }
   	
   return (

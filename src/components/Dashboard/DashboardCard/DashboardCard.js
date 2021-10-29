@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { CollaboratorsModal } from '../../../components/General';
+
 import { useUser } from '../../../hooks/useUser';
 
 import { convertDate, convertTime } from '../../../utils/datetime';
@@ -53,6 +55,15 @@ export function DashboardCard(props) {
 		durationString = buildDurationString(duration);
 	}
 	
+	function triggerCreateModal() {
+		props.setModalVisibility(true);
+		props.setModalTitle("Manage Collaborators");
+		props.setModalComponent(<CollaboratorsModal
+			setModalVisibility={props.setModalVisibility}
+			users={workshop.users} />)
+  }
+  
+	
 	if (workshop.status == "not-started") {
 		cardButtons = (
 			<div className="button-group margin-t-3x">
@@ -75,8 +86,8 @@ export function DashboardCard(props) {
 					<div className="settings">
 						<button className="btn btn-icon"><i className="bi-three-dots-vertical"></i></button>
 						<ul className="dropdown right">
-							<li>Share</li>
-							<li>Archive</li>
+							<li onClick={triggerCreateModal}>Share</li>
+							<li>Copy Agenda</li>
 							<li className="text-danger" onClick={deleteWorkshop}>Delete</li>
 						</ul>
 					</div>

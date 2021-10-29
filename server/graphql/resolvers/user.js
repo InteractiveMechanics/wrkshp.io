@@ -3,7 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../../models/user');
 
 const userQueries = {
-	getUsers: async (_, args) => {
+	getUsers: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -53,7 +53,7 @@ const userMutations = {
       });
 	},
 	
-	updateUser: async(_, args) => {
+	updateUser: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }

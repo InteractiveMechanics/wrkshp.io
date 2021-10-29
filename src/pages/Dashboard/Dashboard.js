@@ -4,7 +4,7 @@ import { useAuth0 } from '../../utils/auth';
 import { useUser } from '../../hooks/useUser';
 
 import { GetOrganizationsForUser } from '../../adapters/dashboard';
-import { Modal, CreateNewWorkshopModal } from '../../components/General';
+import { Modal, CreateNewWorkshopModal, CreateNewTeamModal } from '../../components/General';
 import { DashboardHeader, DashboardCardList, DashboardTeamsList } from '../../components/Dashboard';
 
 import './Dashboard.css';
@@ -17,18 +17,15 @@ export function Dashboard(props) {
 	const { isAuthenticated, loading: authLoading } = useAuth0();
 	
   const [ modalVisibility, setModalVisibility ] = useState(false);
-  const [ currentOrg, setCurrentOrg ] = useState({});
-  const [ currentTeam, setCurrentTeam ] = useState({});
+  const [ modalTitle, setModalTitle ] = useState('');
+  const [ modalComponent, setModalComponent ] = useState();
+  
+  const [ currentOrg, setCurrentOrg ] = useState(0);
+  const [ currentTeam, setCurrentTeam ] = useState(0);
   
   let variables = { "userId": state.user._id, "page": page, "limit": limit };
   const { loading, error, data } = GetOrganizationsForUser(variables, function() {});
-  
-  useEffect(() => {
-		if(loading === false && authLoading === false && data){			
-			setCurrentOrg(data.getOrganizations.organizations[0]);
-		  setCurrentTeam(data.getOrganizations.organizations[0].teams[0]);
-		}
-  }, [loading, data]);
+ 
   
   if (loading || authLoading) {
 		return "Loading...";
@@ -43,34 +40,46 @@ export function Dashboard(props) {
 			orgs={data.getOrganizations.organizations}
 			currentOrg={currentOrg}
 			currentTeam={currentTeam}
-			activeUser={props.activeUser}
 			
 			setCurrentOrg={setCurrentOrg}
-			setCurrentTeam={setCurrentTeam} />
+			setCurrentTeam={setCurrentTeam}
+			setModalVisibility={setModalVisibility}
+			setModalTitle={setModalTitle}
+			setModalComponent={setModalComponent} />
 
 		<main>
 			<DashboardTeamsList
+				orgs={data.getOrganizations.organizations}
 				currentOrg={currentOrg}
 				currentTeam={currentTeam}
 				
 				setCurrentTeam={setCurrentTeam}
-				setModalVisibility={setModalVisibility} />
+				setModalVisibility={setModalVisibility}
+				setModalTitle={setModalTitle}
+				setModalComponent={setModalComponent} />
 				
 			<DashboardCardList
+				orgs={data.getOrganizations.organizations}
+				currentOrg={currentOrg}
 				currentTeam={currentTeam}
 				modalVisibility={modalVisibility}
 			
-				setModalVisibility={setModalVisibility} />
+				setModalVisibility={setModalVisibility}
+				setModalTitle={setModalTitle}
+				setModalComponent={setModalComponent} />
 		</main>
 		
-		<Modal
-			modalVisibility={modalVisibility}
-			setModalVisibility={setModalVisibility}
-			title="Create New Workshop">
-				<CreateNewWorkshopModal
-					currentTeam={currentTeam}
-					setModalVisibility={setModalVisibility} />
-		</Modal>
+		{ (modalVisibility) && (
+			<Modal
+				title={modalTitle}
+				modalVisibility={modalVisibility}
+				
+				setModalVisibility={setModalVisibility}
+				setModalTitle={setModalTitle}
+				setModalComponent={setModalComponent} >
+					{ modalComponent }
+			</Modal>
+		)}
 	</div>
   );
 }

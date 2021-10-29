@@ -3,7 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { Organization } = require('../../models/organization');
 
 const organizationQueries = {
-	getOrganizations: async (_, args, { isAuth, user }) => {
+	getOrganizations: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -32,7 +32,7 @@ const organizationQueries = {
 }
 
 const organizationMutations = {
-	addOrganization: async (_, args) => {
+	addOrganization: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -53,7 +53,7 @@ const organizationMutations = {
       });
 	},
 	
-	addTeam: async (_, args) => {
+	addTeam: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -73,7 +73,7 @@ const organizationMutations = {
       });
 	},
 	
-	addWorkshopToTeam: async (_, args) => {
+	addWorkshopToTeam: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -94,7 +94,7 @@ const organizationMutations = {
       });
 	},
 		
-	addUserPermissionToOrganization: async (_, args) => {
+	addUserPermissionToOrganization: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -123,7 +123,7 @@ const organizationMutations = {
       });
 	}, 
 	
-	addUserPermissionToTeam: async (_, args) => {
+	addUserPermissionToTeam: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -152,7 +152,40 @@ const organizationMutations = {
 	    .catch (err => {
         console.error(err)
       });
-	}
+	},
+	
+	updateTeam: async(_, args, { isAuth }) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+    
+		const { _id, name, visibility } = args;
+		
+		const organization = await Organization.findOne({ "teams._id": _id });
+		const teams = organization.teams;
+	  const team = teams.id(_id);
+	  	  
+	  if (name) { team.name = name }
+	  if (visibility) { team.visibility = visibility }
+	  		
+		return organization.save();
+	},
+	
+	deleteTeam: async(_, args, { isAuth }) => {
+		if (!isAuth) {
+      throw new AuthenticationError('You must be logged in to do this');
+    }
+
+		const { _id } = args;
+		
+		const organization = await Organization.findOne({ "teams._id": _id });
+		const teams = organization.teams;
+	  const team = teams.id(_id);
+	  
+	  team.remove();
+		organization.save();
+		return _id;
+	},
 }
 
 module.exports = { organizationQueries, organizationMutations };

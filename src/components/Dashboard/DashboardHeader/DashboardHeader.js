@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
+import { CollaboratorsModal } from '../../../components/General';
+
 import { getPermsForObj } from '../../../utils/permissions';
 
 import { useAuth0 } from '../../../utils/auth';
@@ -13,7 +15,7 @@ export function DashboardHeader(props) {
 	const { state } = useUser();
 	
   const orgs = props.orgs;
-  const currentOrg = props.currentOrg;
+  const currentOrg = props.orgs[props.currentOrg];
   const currentOrgAvatar = useAvatar(currentOrg.avatar, currentOrg.name);
 	const currentOrgPerms = getPermsForObj(state.user._id, currentOrg);
 	const userAvatar = useAvatar(state.user.avatar, state.user.firstName + " " + state.user.lastName);
@@ -33,8 +35,8 @@ export function DashboardHeader(props) {
 		orgs.filter(
 			function(org, index) { 
 				if (org._id == e.target.id) {
-					props.setCurrentOrg(orgs[index]);
-					props.setCurrentTeam(orgs[index].teams[0]);
+					props.setCurrentOrg(index);
+					props.setCurrentTeam(0);
 				}
 			}
 		);
@@ -45,6 +47,14 @@ export function DashboardHeader(props) {
 		history.push("/login");
   }
   
+  function triggerCreateModal() {
+		props.setModalVisibility(true);
+		props.setModalTitle("Manage Organization Users");
+		props.setModalComponent(<CollaboratorsModal
+			setModalVisibility={props.setModalVisibility}
+			users={currentOrg.users} />)
+  }
+  
         
   return (
 		<header id="dashboard--header" className="header">
@@ -53,13 +63,13 @@ export function DashboardHeader(props) {
 					<div className="header--pill">
 						<i className="bi-three-dots-vertical margin-r-1x"></i>
 						<i className="avatar margin-r-1x">{ currentOrgAvatar }</i>
-						{ props.currentOrg.name }
+						{ currentOrg.name }
 					</div>
 					<ul className="dropdown">
 						<li className="dropdown--header"><h5>Switch organization</h5></li>
 						{ orgList }
 						<li className="dropdown--divider"></li>
-						{ (currentOrgPerms == "owner" || "manager") && (<li><i className="bi-person-plus-fill margin-r-1x"></i> Invite collaborators</li>) }
+						{ (currentOrgPerms == "owner" || "manager") && (<li onClick={triggerCreateModal}><i className="bi-person-plus-fill margin-r-1x"></i> Invite collaborators</li>) }
 						{ (currentOrgPerms == "owner") && (<li><i className="bi-gear-fill margin-r-1x"></i> Manage organization</li>) }
 					</ul>
 				</div>

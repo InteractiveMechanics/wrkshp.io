@@ -2,7 +2,7 @@ const { Workshop } = require('../../models/workshop');
 const { Activity } = require('../../models/activity');
 
 const workshopQueries = {
-	getWorkshops: async (_, args) => {
+	getWorkshops: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -30,7 +30,7 @@ const workshopQueries = {
 }
 
 const workshopMutations = {
-	addWorkshop: async (_, args) => {
+	addWorkshop: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -49,7 +49,7 @@ const workshopMutations = {
       });
 	},
 	
-	addAgendaDayToWorkshop: async (_, args) => {
+	addAgendaDayToWorkshop: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -82,7 +82,7 @@ const workshopMutations = {
       });
 	},
 	
-	addActivityToAgendaDay: async (_, args) => {
+	addActivityToAgendaDay: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -108,7 +108,7 @@ const workshopMutations = {
       });
 	},
 	
-	addUserPermissionToWorkshop: async (_, args) => {
+	addUserPermissionToWorkshop: async (_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -137,7 +137,7 @@ const workshopMutations = {
       });
 	},
 	
-	updateWorkshop: async(_, args) => {
+	updateWorkshop: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -152,7 +152,7 @@ const workshopMutations = {
 		return workshop.save();
 	},
 	
-	updateAgendaDay: async(_, args) => {
+	updateAgendaDay: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -170,7 +170,7 @@ const workshopMutations = {
 		return workshop.save();
 	},
 	
-	updateAgendaActivity: async(_, args) => {
+	updateAgendaActivity: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -189,7 +189,7 @@ const workshopMutations = {
 		return workshop.save();
 	},
 	
-	deleteWorkshop: async(_, args) => {
+	deleteWorkshop: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -200,7 +200,7 @@ const workshopMutations = {
 		return _id;
 	},
 	
-	deleteAgendaDayFromWorkshop: async(_, args) => {
+	deleteAgendaDayFromWorkshop: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }
@@ -216,7 +216,7 @@ const workshopMutations = {
 		return _id;
 	},
 	
-	deleteActivityFromAgendaDay: async(_, args) => {
+	deleteActivityFromAgendaDay: async(_, args, { isAuth }) => {
 		if (!isAuth) {
       throw new AuthenticationError('You must be logged in to do this');
     }

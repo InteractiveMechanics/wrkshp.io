@@ -1,7 +1,7 @@
 const { Activity } = require('../../models/activity');
 
 const activityQueries = {
-	getActivities: async (_, args) => {
+	getActivities: async (_, args, { isAuth }) => {
     const { _id = null, page = 1, limit = 20 } = args;
 
     let searchQuery = {};
@@ -25,7 +25,7 @@ const activityQueries = {
 }
 
 const activityMutations = {
-	addActivity: async (_, args) => {
+	addActivity: async (_, args, { isAuth }) => {
 	  const { name, type, description, suggestedDuration } = args;
 	  
 	  const activity = await Activity.create({ name: name, type: type, description: description, suggestedDuration: suggestedDuration });

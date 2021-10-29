@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
+import { useUser } from '../../../../hooks/useUser';
 import { AddWorkshop, AddWorkshopToTeam } from '../../../../adapters/dashboard';
 import { AddAgendaDayToWorkshop } from '../../../../adapters/agenda';
 
-const userId = "614354c98fd4395885f2b145";
-
 export function CreateNewWorkshopModal(props) {
+	const { state } = useUser();
+	
   const [ name, setName ] = useState('');
   const [ workshopId, setWorkshopId ] = useState('');
 
@@ -16,7 +17,7 @@ export function CreateNewWorkshopModal(props) {
   
   let AddWorkshopVariables = {
 		name: name,
-		userId: userId
+		userId: state.user._id
 	}
   let AddWorkshopCompleted = function(data) {
 		setWorkshopId(data.addWorkshop._id);
@@ -49,6 +50,8 @@ export function CreateNewWorkshopModal(props) {
   
   function closeModal() {
 		props.setModalVisibility(false);
+		setName('');
+		setWorkshopId('');
   }
 
   
