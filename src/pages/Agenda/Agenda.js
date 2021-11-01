@@ -13,6 +13,8 @@ const limit = 1;
 
 export function Agenda() {
   const [ modalVisibility, setModalVisibility ] = useState(false);
+  const [ modalTitle, setModalTitle ] = useState('');
+  const [ modalComponent, setModalComponent ] = useState();
 	
   let { id } = useParams();
   let variables = { "id": id, "page": page, "limit": limit };
@@ -30,18 +32,26 @@ export function Agenda() {
 	  <div id="workshop">
 			<WorkshopHeader
 				workshop={data.getWorkshops.workshops[0]}
-				setModalVisibility={setModalVisibility} />
+				users={data.getWorkshops.workshops[0].users}
+				
+				setModalVisibility={setModalVisibility}
+				setModalTitle={setModalTitle}
+				setModalComponent={setModalComponent} />
 		
 			<AgendaMain
 				workshop={data.getWorkshops.workshops[0]} />
-        
-      <Modal 
-        modalVisibility={modalVisibility}
-				setModalVisibility={setModalVisibility}
-				title="Manage Collaborators">
-					<CollaboratorsModal
-						users={data.getWorkshops.workshops[0].users} />
-			</Modal>
+      
+      { (modalVisibility) && (
+				<Modal
+					title={modalTitle}
+					modalVisibility={modalVisibility}
+					
+					setModalVisibility={setModalVisibility}
+					setModalTitle={setModalTitle}
+					setModalComponent={setModalComponent} >
+						{ modalComponent }
+				</Modal>
+			)}
 	  </div>
   );
 }

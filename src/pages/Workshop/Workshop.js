@@ -45,12 +45,17 @@ export function Workshop() {
 				focusMode={focusMode}
 				setFocusMode={setFocusMode} />
         
-			<Modal
-				modalVisibility={modalVisibility}
-				setModalVisibility={setModalVisibility}
-				title={modalTitle}>
-					{ modalComponent }
-			</Modal>
+			{ (modalVisibility) && (
+				<Modal
+					title={modalTitle}
+					modalVisibility={modalVisibility}
+					
+					setModalVisibility={setModalVisibility}
+					setModalTitle={setModalTitle}
+					setModalComponent={setModalComponent} >
+						{ modalComponent }
+				</Modal>
+			)}
 	  </div>
   );
 }
